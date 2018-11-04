@@ -1,0 +1,24 @@
+{
+  "name": "geocoding",
+  "version": "1.0.0",
+  "description": "testing geocode",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/latinusveridas/geocoding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/latinusveridas/geocoding/issues"
+  },
+  "homepage": "https://github.com/latinusveridas/geocoding#readme",
+  "dependencies": {
+    "express": "4.16.4",
+    "node-geocoder": "3.22.0",
+    "mysql": "2.16.0"
+  }
+}
