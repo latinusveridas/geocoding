@@ -12,6 +12,29 @@ var pool = mysql.createPool({
 
 module.exports.pool = pool;
 
+function insertinto (table,values) {
 
+    pool.getConnection(function(err,con){
+        if (err) {
+            console.log(err)
+        } else {
+            console.log('Success on connection to the database')
+                //PREPARATION OF THE QUERY
+                var targetQuery = 'INSERT INTO ' + table + ' VALUES ( ' + values + ')';
+                
+                //QUERY
+                con.query(targetQuery,function(err,result,fields){
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log(result)
+                        console.log("Success in insert")
+                    }
 
+                });
+        }
+    });
+};
+
+module.exports.insertinto = insertinto;
 

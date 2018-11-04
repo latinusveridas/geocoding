@@ -19,6 +19,8 @@
   "dependencies": {
     "express": "4.16.4",
     "node-geocoder": "3.22.0",
-    "mysql": "2.16.0"
+    "mysql": "2.16.0",
+    "randomstring": "1.1.5",
+    "node-datetime": "2.1.2"
   }
 }
