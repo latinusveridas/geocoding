@@ -16,12 +16,14 @@ var Options = {
 var geocoder = NodeGeocoder(Options);
 
 // GEOCODING
-function geocodeFunction(userRequest) {
+function geocodeFunction(userRequest,callback) {
 
     var splitted = userRequest.split(" ");
     var resNumberHome = splitted[0];
 
-    var GEO = geocoder.geocode(userRequest, function(err,res) {
+    var result1;
+
+    geocoder.geocode(userRequest, function(err,res) {
 
         //SHOW RESPONSE
         console.log(res);
@@ -58,21 +60,19 @@ function geocodeFunction(userRequest) {
         ]
 
         var result1 = {
-            targetTable: targetTable,
-            eventID:eventID,
-            resLatitude:resLatitude,
-            resLongitude:resLongitude,
-            resState:resState,
-            resCity:resCity,
-            resStreet:resStreet,
-            resNumberHome:resNumberHome
+            'targetTable': targetTable,
+            'eventID':eventID,
+            'resLatitude':resLatitude,
+            'resLongitude':resLongitude,
+            'resState':resState,
+            'resCity':resCity,
+            'resStreet':resStreet,
+            'resNumberHome':resNumberHome
         }
+
+        return callback(result1);
         
-        return result1;
-
     });
-
-    return GEO;
 
 };
 
