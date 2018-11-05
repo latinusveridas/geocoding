@@ -4,7 +4,10 @@ var express = require('express');
 var app = express();
 
 var Pool = require('./Database/database');
-var Geo = require('./Events/events')
+var Geo = require('./Events/events');
+
+//TYPEOF
+var TypeOf = require('type-of-is');
 
 
 
@@ -17,26 +20,24 @@ app.get('/',function(req,res) {
         console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
         //ON DEFINIE targetTable & locationData
-        var targetTable = callback[0]
-        var myEvent = callback[1, 1]
-        var debug2 = callback[1,2]
+        var resTable = JSON.stringify(callback[0])
         var locationData = [
-            callback.eventID,
-            callback.resLatitude,
-            callback.resLongitude,
-            callback.resState,
-            callback.resCity,
-            callback.resStreet,
-            callback.resNumberHome
+            callback[1][0],
+            callback[1][1],
+            callback[1][2],
+            callback[1][3],
+            callback[1][4],
+            callback[1][5],
+            callback[1][6],
         ]
 
-        console.log(targetTable, myEvent,debug2)
+        console.log(resTable)
         console.dir(locationData)
 
     });
 
     //#2 CALL FUNCTION
-    //Pool.insertinto(targetTable,locationData);
+    Pool.insertinto(resTable,locationData);
     
 
 });
