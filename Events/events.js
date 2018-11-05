@@ -44,20 +44,21 @@ function geocodeFunction(userRequest,callback) {
         //GENERATE EVENT ID
         var dt = datetime.create();
         var dt = dt.format('Y_m')
-        var eventID = dt + "_E_" + rdmString.generate(40)
+        var eventID = "'" + dt + "_E_" + rdmString.generate(40) + "'";
         console.log("GENERATED EVENT_ID " + eventID) 
     
         //PUT ALL THE STUFF IN A ARRAY
-        var targetTable = "sampledb.events_location";
+        var targetTable = 'sampledb.events_location';
+
         var locationData = [
-        "'"+ eventID + "'",
-        "'" + resLatitude.toString() + "'",
-        "'" + resLongitude.toString() + "'",
-        "'" + resState + "'",
-        "'" + resCity + "'",
-        "'" + resStreet + "'",
-        "'" + resNumberHome.toString() + "'"
-        ]
+            eventID,
+            "'" + resLatitude.toString() + "'",
+            "'" + resLongitude.toString() + "'",
+            "'" + resState + "'",
+            "'" + resCity + "'",
+            "'" + resStreet + "'",
+            "'" + resNumberHome.toString() + "'"
+        ];
 
         var result1 = [
             targetTable,
