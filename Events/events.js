@@ -44,7 +44,7 @@ function geocodeFunction(userRequest,callback) {
         //GENERATE EVENT ID
         var dt = datetime.create();
         var dt = dt.format('Y_m')
-        var eventID = "'" + dt + '_E_' + rdmString.generate(40) + "'";
+        var eventID = dt + '_E_' + rdmString.generate(40) ;
         console.log("GENERATED EVENT_ID " + eventID) 
     
         //PUT ALL THE STUFF IN A ARRAY
@@ -52,23 +52,17 @@ function geocodeFunction(userRequest,callback) {
 
         var locationData = [
             eventID,
-            "'" + resLatitude.toString() + "'",
-            "'" + resLongitude.toString() + "'",
-            "'" + resState + "'",
-            "'" + resCity + "'",
-            "'" + resStreet + "'",
-            "'" + resNumberHome.toString() + "'"
+            resLatitude.toString(),
+            resLongitude.toString() ,
+            resState ,
+            resCity,
+            resStreet,
+            resNumberHome.toString()
         ];
 
         var result1 = [
             targetTable,
-            eventID,
-            resLatitude,
-            resLongitude,
-            resState,
-            resCity,
-            resStreet,
-            resNumberHome
+            locationData
         ]
 
         console.log("INSIDE EVENTS : ",result1)
