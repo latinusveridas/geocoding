@@ -20,12 +20,11 @@ app.get('/',function(req,res) {
     });
 
     //PARSE targetTable & locationData
-    var tt = clbackGeo.eventID
-    var ld = [
-        clbackGeo.city
-    ]
+    console.log("11-05: ", clbackGeo);
+    var st = JSON.stringify(clbackGeo);
+    console.log("11-05: ", st);
+    var myJson = JSON.parse(st);
 
-    console.log("ADDED DEBUG", tt,ld)
 
 
     //#2 CALL FUNCTION
