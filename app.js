@@ -16,7 +16,7 @@ app.get('/',function(req,res) {
     Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function(callback) {
         var mod = JSON.stringify(callback)
         console.log("RETURNED DATA IS: " + mod);
-        clbackGeo = callback;
+        clbackGeo = JSON.stringify(callback);
     });
 
     //PARSE targetTable & locationData
