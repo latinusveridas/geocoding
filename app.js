@@ -30,6 +30,9 @@ app.get('/',function(req,res) {
             cbParsed.resNumberHome
         ]
 
+        console.log(targetTable)
+        console.log(locationData)
+
     });
 
     //#2 CALL FUNCTION
