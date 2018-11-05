@@ -48,7 +48,7 @@ function geocodeFunction(userRequest,callback) {
         console.log("GENERATED EVENT_ID " + eventID) 
     
         //PUT ALL THE STUFF IN A ARRAY
-        /*var targetTable = "sampledb.events_location";
+        var targetTable = "sampledb.events_location";
         var locationData = [
         "'"+ eventID + "'",
         "'" + resLatitude.toString() + "'",
@@ -57,7 +57,7 @@ function geocodeFunction(userRequest,callback) {
         "'" + resCity + "'",
         "'" + resStreet + "'",
         "'" + resNumberHome.toString() + "'"
-        ]*/
+        ]
 
         var result1 = [
             targetTable,
