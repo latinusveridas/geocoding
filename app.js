@@ -14,10 +14,10 @@ app.get('/',function(req,res) {
     //#1 GEOCODING
     Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function (callback) {
 
-        console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ",callback)
+        console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
         //ON DEFINIE targetTable & locationData
-        var targetTable = callback.targetTable
+        var targetTable = callback[0]
         var locationData = [
             callback.eventID,
             callback.resLatitude,
@@ -29,7 +29,7 @@ app.get('/',function(req,res) {
         ]
 
         console.log(targetTable)
-        console.log(locationData)
+        console.dir(locationData)
 
     });
 
