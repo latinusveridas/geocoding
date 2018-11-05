@@ -8,20 +8,17 @@ var Geo = require('./Events/events')
 
 
 
-app.get('/',function(req,clbackGeo,res) {
+app.get('/',function(req,res) {
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
     Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function(callback) {
         var clbackGeo = JSON.stringify(callback)
-        console.log("RETURNED DATA IS: " + mod);
+        console.log(clbackGeo)
     });
 
     //PARSE targetTable & locationData
-    console.log("11-05: ", clbackGeo);
-    var st = JSON.stringify(clbackGeo);
-    console.log("11-05: ", st);
-    var myJson = JSON.parse(st);
+
 
 
 
