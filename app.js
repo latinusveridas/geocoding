@@ -14,23 +14,18 @@ app.get('/',function(req,res) {
     //#1 GEOCODING
     Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function (callback) {
 
-        //ON STRINGIFY PUIS ON PARSE LE CALLBACK
-        var str = JSON.stringify(callback)
-        var cbParsed = JSON.parse(str)
-
-        console.log("STRINGIFIED:", str)
-        console.log(cbParsed)
+        console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ",callback)
 
         //ON DEFINIE targetTable & locationData
-        var targetTable = cbParsed.targetTable;
+        var targetTable = callback.targetTable
         var locationData = [
-            cbParsed.eventID,
-            cbParsed.resLatitude,
-            cbParsed.resLongitude,
-            cbParsed.resState,
-            cbParsed.resCity,
-            cbParsed.resStreet,
-            cbParsed.resNumberHome
+            callback.eventID,
+            callback.resLatitude,
+            callback.resLongitude,
+            callback.resState,
+            callback.resCity,
+            callback.resStreet,
+            callback.resNumberHome
         ]
 
         console.log(targetTable)
