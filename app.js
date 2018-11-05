@@ -18,6 +18,7 @@ app.get('/',function(req,res) {
 
         //ON DEFINIE targetTable & locationData
         var targetTable = callback[0]
+        var myEvent = callback[1,0]
         var locationData = [
             callback.eventID,
             callback.resLatitude,
@@ -28,7 +29,7 @@ app.get('/',function(req,res) {
             callback.resNumberHome
         ]
 
-        console.log(targetTable)
+        console.log(targetTable, myEvent)
         console.dir(locationData)
 
     });
