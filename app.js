@@ -17,7 +17,7 @@ app.get('/',function(req,res) {
         console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ",callback)
 
         //ON DEFINIE targetTable & locationData
-        var targetTable = callback.targetTable
+        var targetTable = callback.[0]
         var locationData = [
             callback.eventID,
             callback.resLatitude,
@@ -34,7 +34,7 @@ app.get('/',function(req,res) {
     });
 
     //#2 CALL FUNCTION
-    Pool.insertinto(targetTable,locationData);
+    //Pool.insertinto(targetTable,locationData);
     
 
 });
