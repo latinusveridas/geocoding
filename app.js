@@ -18,8 +18,10 @@ app.get('/',function(req,res) {
         var str = JSON.stringify(callback)
         var cbParsed = JSON.parse(str)
 
+        console.log(cbParsed)
+
         //ON DEFINIE targetTable & locationData
-        var targetTable = cbParsed.targetTable
+        var targetTable = cbParsed.targetTable;
         var locationData = [
             cbParsed.eventID,
             cbParsed.resLatitude,
