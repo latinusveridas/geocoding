@@ -12,21 +12,28 @@ app.get('/',function(req,res) {
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
-    Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function(callback) {
-        var clbackGeo = JSON.stringify(callback)
-        console.log(clbackGeo)
-        var parsed = JSON.parse(clbackGeo)
-        console.log(parsed.targetTable)
+    Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function (callback) {
+
+        //ON STRINGIFY PUIS ON PARSE LE CALLBACK
+        var str = JSON.stringify(callback)
+        var cbParsed = JSON.parse(str)
+
+        //ON DEFINIE targetTable & locationData
+        var targetTable = cbParsed.targetTable
+        var locationData = [
+            cbParsed.eventID,
+            cbParsed.resLatitude,
+            cbParsed.resLongitude,
+            cbParsed.resState,
+            cbParsed.resCity,
+            cbParsed.resStreet,
+            cbParsed.resNumberHome
+        ]
 
     });
 
-    //PARSE targetTable & locationData
-
-
-
-
     //#2 CALL FUNCTION
-    //Pool.insertinto(targetTable,locationData);
+    Pool.insertinto(targetTable,locationData);
     
 
 });
