@@ -17,7 +17,7 @@ app.get('/',function(req,res) {
         console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ",callback)
 
         //ON DEFINIE targetTable & locationData
-        var targetTable = callback.[0]
+        var targetTable = callback.targetTable
         var locationData = [
             callback.eventID,
             callback.resLatitude,
