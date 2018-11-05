@@ -18,6 +18,7 @@ app.get('/',function(req,res) {
         var str = JSON.stringify(callback)
         var cbParsed = JSON.parse(str)
 
+        console.log("STRINGIFIED:", str)
         console.log(cbParsed)
 
         //ON DEFINIE targetTable & locationData
