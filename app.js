@@ -40,15 +40,7 @@ app.get('/',function(req,res) {
     });
 
 
-    
-
 });
-
-
-app.get('/as',Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols' {
-
-
-};
 
 
 //=====SERVER LAUNCH========
