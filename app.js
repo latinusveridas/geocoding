@@ -22,13 +22,13 @@ app.get('/',function(req,res) {
         //ON DEFINIE targetTable & locationData
         var resTable = JSON.stringify(callback[0])
         var locationData = [
-            callback[1][0],
-            callback[1][1],
-            callback[1][2],
-            callback[1][3],
-            callback[1][4],
-            callback[1][5],
-            callback[1][6],
+            "'"+callback[1][0]+"'",
+            "'" + callback[1][1] + "'",
+            "'" + callback[1][2] + "'",
+            "'" + callback[1][3] + "'",
+            "'" + callback[1][4] + "'",
+            "'" + callback[1][5] + "'",
+            "'" + callback[1][6] + "'",
         ]
 
         console.log(resTable)
@@ -43,6 +43,12 @@ app.get('/',function(req,res) {
     
 
 });
+
+
+app.get('/as',Geo.geocodeFunction('21 lotissement les peupliers 48100 Marvejols' {
+
+
+};
 
 
 //=====SERVER LAUNCH========
