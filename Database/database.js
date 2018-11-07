@@ -12,7 +12,9 @@ var pool = mysql.createPool({
 
 module.exports.pool = pool;
 
-function insertinto (table,values) {
+function insertinto(table, values) {
+
+    console.log("INSIDE INSERT INTO FUNCTION");
 
     pool.getConnection(function(err,con){
         if (err) {
