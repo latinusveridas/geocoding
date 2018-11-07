@@ -22,13 +22,13 @@ app.get('/',function(req,res) {
         //ON DEFINIE targetTable & locationData
         var resTable = callback[0]
         var locationData = [
-            "'" + callback[1][0] + "'",
-            "'" + callback[1][1] + "'",
-            "'" + callback[1][2] + "'",
-            "'" + callback[1][3] + "'",
-            "'" + callback[1][4] + "'",
-            "'" + callback[1][5] + "'",
-            "'" + callback[1][6] + "'",
+            callback[1][0] ,
+            callback[1][1] ,
+            callback[1][2] ,
+            callback[1][3] ,
+            callback[1][4] ,
+            callback[1][5] ,
+            callback[1][6] ,
         ]
 
         console.log(resTable)
@@ -38,7 +38,6 @@ app.get('/',function(req,res) {
         Pool.insertinto(resTable, locationData);
 
     });
-
 
 });
 
