@@ -20,7 +20,7 @@ app.get('/',function(req,res) {
         console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
         //ON DEFINIE targetTable & locationData
-        var resTable = "'" + JSON.stringify(callback[0]) + "'"
+        var resTable = callback[0]
         var locationData = [
             "'" + callback[1][0] + "'",
             "'" + callback[1][1] + "'",
