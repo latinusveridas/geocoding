@@ -34,10 +34,12 @@ app.get('/',function(req,res) {
         console.log(resTable)
         console.dir(locationData)
 
+        //#2 CALL DATABASE INSERTION
+        Pool.insertinto(resTable, locationData);
+
     });
 
-    //#2 CALL FUNCTION
-    Pool.insertinto(resTable,locationData);
+
     
 
 });
