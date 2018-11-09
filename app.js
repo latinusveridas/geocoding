@@ -11,7 +11,8 @@ var TypeOf = require('type-of-is');
 
 
 
-app.get('/',function(req,res) {
+app.get('/', function (req, res) {
+
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
@@ -34,7 +35,7 @@ app.get('/',function(req,res) {
         console.log(resTable)
         console.dir(locationData)
 
-        //#2 CALL DATABASE INSERTION
+    //#2 CALL DATABASE INSERTION
         Pool.insertinto(resTable, locationData);
 
     });

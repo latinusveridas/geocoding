@@ -16,27 +16,63 @@ function insertinto(table, values) {
 
     console.log("INSIDE INSERT INTO FUNCTION");
 
-    pool.getConnection(function(err,con){
+    pool.getConnection(function (err, con) {
         if (err) {
             console.log(err)
         } else {
             console.log('Success on connection to the database')
-                //PREPARATION OF THE QUERY
-                var targetQuery = 'INSERT INTO ' + table + ' VALUES ( ' + values + ')';
-                
-                //QUERY
-                con.query(targetQuery,function(err,result,fields){
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log(result)
-                        console.log("Success in insert")
-                    }
+            //PREPARATION OF THE QUERY
+            var targetQuery = 'INSERT INTO ' + table + ' VALUES ( ' + values + ')';
 
-                });
+            //QUERY
+            con.query(targetQuery, function (err, result, fields) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(result)
+                    console.log("Success in insert")
+                }
+
+            });
         }
+
+        con.release();
+
     });
-};
+}
 
 module.exports.insertinto = insertinto;
+
+function selectonerow(table, targetcolumn, value) {
+
+    console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
+
+    pool.getConnection(function (err, con) {
+
+        if (err) {
+            console.log(err)
+
+        } else {
+            console.log("Success to get the connection")
+
+            //Preparation of the query
+            var targetQuery = 'SELECT * from ' + table + 'WHERE ' + targetcolumn + ' = ' + value;
+
+            con.query(targetcolumn, function (err, result, fields) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(result)
+                }
+
+            })
+
+        }
+
+        con.release();
+    })
+
+}
+
+module.exports.selectonerow = SelectOneRow;
 
