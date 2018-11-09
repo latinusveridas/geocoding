@@ -74,5 +74,5 @@ function selectonerow(table, targetcolumn, value) {
 
 }
 
-module.exports.selectonerow = SelectOneRow;
+module.exports.selectonerow = selectonerow;
 
