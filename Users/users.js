@@ -52,11 +52,11 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     ]
 
     var values = [
-        userID,
-        userData.first_name,
-        userData.last_name,
-        userData.email,
-        userData.password,
+        "'" + userID + "'",
+        "'" + userData.first_name + "'",
+        "'" + userData.last_name + "'",
+        "'" + userData.email + "'",
+        "'" + userData.password + "'",
         "'" + today + "'",
     ]
 
