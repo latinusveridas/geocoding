@@ -36,7 +36,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "last_name": 'Leconte',
         "email": 'henrileconte@gmail.com',
         "password": '2548',
-        "created": today,
+        "created": now,
         "jwt1": ""
     };
 
