@@ -39,3 +39,5 @@ router.get('/geo', function (req, res) {
 
     res.send('Success !')
 });
+
+module.exports = router;
