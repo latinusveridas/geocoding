@@ -14,14 +14,12 @@ module.exports.pool = pool;
 
 function insertinto(table, values, callback) {
 
-    console.log("INSIDE INSERT INTO FUNCTION");
-
     pool.getConnection(function (err, con) {
         if (err) {
             console.log(err)
             callback('Error')
         } else {
-            console.log('Success on connection to the database')
+            console.log('RT INFO : Success on connection to the database :)')
             //PREPARATION OF THE QUERY
             var targetQuery = 'INSERT INTO ' + table + ' VALUES ( ' + values + ')';
 

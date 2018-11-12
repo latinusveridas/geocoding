@@ -82,7 +82,7 @@ function geocodeFunction(userRequest,callback) {
     geocoder.geocode(userRequest, function(err,res) {
 
         //SHOW RESPONSE
-        console.log(res);
+        //console.log(res);
     
         // RETURNED RESPONSE IS AN ARRAY WITH ONE JSON OBJECT
         var resArray = res[0];
@@ -91,7 +91,7 @@ function geocodeFunction(userRequest,callback) {
         var resStreet = resArray.streetName;
         var resCity = resArray.city;
         var resState = resArray.state;
-        console.log(resNumberHome,resStreet, resCity,resState);
+        //console.log(resNumberHome,resStreet, resCity,resState);
     
         // SELECT LATITUDE & LONGITUDE
         var resLatitude = resArray.latitude;
@@ -121,7 +121,7 @@ function geocodeFunction(userRequest,callback) {
             locationData
         ]
 
-        console.log("INSIDE EVENTS : ",result1)
+        //console.log("INSIDE EVENTS : ",result1)
 
         return callback(result1);
         
