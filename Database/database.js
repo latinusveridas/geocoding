@@ -94,7 +94,7 @@ function selectonerow(table, targetcolumn, value, callback) {
                     console.log(err)
                 } else {
                     console.log(result)
-                    callback();
+                    callback('Success');
                 }
 
             })

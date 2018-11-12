@@ -73,12 +73,20 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     
 });
 
-router.post('/view', function (req, res) {
+router.get('/view', function (req, res) {
 
     //Assumptions : We receive in the req.body the userID of the user
     var reqUserID = req.body.userID
 
-    //Definition of the tables, values and 
+    //Definition of the tables and column
+    var table = 'sampledb_users';
+
+    var column = 'user_id';
+
+    db.selectonerow(table,column,reqUserID,function(callback){
+        res.send(callback)
+    });
+
 
 });
 
