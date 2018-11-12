@@ -6,7 +6,8 @@ var app = express();
 var events = require('./Events/events');
 app.use('/events', events);
 
-
+var users = require('./Users/users');
+app.use('/users', users);
 
 
 //=====SERVER LAUNCH========

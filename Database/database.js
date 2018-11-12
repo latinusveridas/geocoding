@@ -29,8 +29,7 @@ function insertinto(table, values, callback) {
                     console.log(err)
                     callback('Error')
                 } else {
-                    callback('Success');
-                    console.log(callback);
+                    callback('Success'); //<== SUCCESS CALLBACK
                 }
 
             });
@@ -43,7 +42,41 @@ function insertinto(table, values, callback) {
 
 module.exports.insertinto = insertinto;
 
-function selectonerow(table, targetcolumn, value) {
+
+
+
+function insertSpecific(table, columns, values, callback) {
+
+    pool.getConnection(function (err, con) {
+        if (err) {
+            console.log(err)
+            callback('Error')
+        } else {
+            console.log('RT INFO : Success on connection to the database :)')
+            //PREPARATION OF THE QUERY
+            var targetQuery = 'INSERT INTO ' + table + ' (' + columns + ') VALUES ( ' + values + ')';
+            console.log(targetQuery);
+            
+            //QUERY
+            con.query(targetQuery, function (err, result, fields) {
+                if (err) {
+                    console.log(err)
+                    callback('Error')
+                } else {
+                    callback('Success'); //<== SUCCESS CALLBACK
+                }
+
+            });
+        }
+        con.release();
+
+    });
+
+}
+
+module.exports.insertSpecific = insertSpecific;
+
+function selectonerow(table, targetcolumn, value, callback) {
 
     console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 
@@ -63,6 +96,7 @@ function selectonerow(table, targetcolumn, value) {
                     console.log(err)
                 } else {
                     console.log(result)
+                    callback();
                 }
 
             })
