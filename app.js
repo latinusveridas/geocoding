@@ -3,8 +3,8 @@
 var express = require('express');
 var app = express();
 
-var main = require('./Main/main');
-app.use('/main', main);
+var events = require('./Events/events');
+app.use('/events', events);
 
 
 
