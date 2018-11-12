@@ -12,13 +12,14 @@ var pool = mysql.createPool({
 
 module.exports.pool = pool;
 
-function insertinto(table, values) {
+function insertinto(table, values, callback) {
 
     console.log("INSIDE INSERT INTO FUNCTION");
 
     pool.getConnection(function (err, con) {
         if (err) {
             console.log(err)
+            callback(err)
         } else {
             console.log('Success on connection to the database')
             //PREPARATION OF THE QUERY
@@ -28,18 +29,20 @@ function insertinto(table, values) {
             con.query(targetQuery, function (err, result, fields) {
                 if (err) {
                     console.log(err)
+                    callback(err)
                 } else {
                     console.log(result)
                     console.log("Success in insert")
+                    callback('Success');
                 }
 
             });
         }
-
         con.release();
         console.log('CONNECTION RELEASED');
 
     });
+
 }
 
 module.exports.insertinto = insertinto;
