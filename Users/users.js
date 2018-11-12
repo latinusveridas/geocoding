@@ -13,6 +13,8 @@ var datetime = require('node-datetime');
 var express = require('express');
 var router = express.Router();
 
+// ====================================================== MAIN FUNCTIONS ======================================================
+
 router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
 
     //AppData is the status of the process, generally sent back to the user
@@ -23,7 +25,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
 
     //Definition of the User class
     var now = datetime.create();
-    var now2 = now.format('YYYY-MM-DD HH:mm:ss');
+    var now2 = now.format('YYYY/MM/DD HH:mm:ss')
 
     //GENERATE USER ID
     var dt = datetime.create();
