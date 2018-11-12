@@ -55,11 +55,13 @@ router.get('/geo', function (req, res) {
         console.dir(locationData)
 
         //#2 CALL DATABASE INSERTION
-        Pool.insertinto(resTable, locationData);
+        Pool.insertinto(resTable, locationData, function () {
+            res.send('Success !')
+        });
 
     });
 
-    res.send('Success !')
+
 });
 
 
