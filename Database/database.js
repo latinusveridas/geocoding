@@ -43,8 +43,6 @@ function insertinto(table, values, callback) {
 module.exports.insertinto = insertinto;
 
 
-
-
 function insertSpecific(table, columns, values, callback) {
 
     pool.getConnection(function (err, con) {
@@ -55,8 +53,8 @@ function insertSpecific(table, columns, values, callback) {
             console.log('RT INFO : Success on connection to the database :)')
             //PREPARATION OF THE QUERY
             var targetQuery = 'INSERT INTO ' + table + ' (' + columns + ') VALUES ( ' + values + ')';
-            console.log(targetQuery);
-            
+            //console.log(targetQuery);
+
             //QUERY
             con.query(targetQuery, function (err, result, fields) {
                 if (err) {

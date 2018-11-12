@@ -63,7 +63,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "'" + now + "'"
     ]
 
-    console.dir(values)
+    //console.dir(values)
 
     // # Launch the database insertion 
     db.insertSpecific(table, columns, values, function(callback) {
