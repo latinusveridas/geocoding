@@ -29,8 +29,8 @@ function insertinto(table, values, callback) {
                     console.log(err)
                     callback('Error')
                 } else {
-                   // console.log(result)
                     callback('Success');
+                    console.log(callback);
                 }
 
             });
