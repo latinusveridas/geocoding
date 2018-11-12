@@ -57,7 +57,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "'" + userData.last_name + "'",
         "'" + userData.email + "'",
         "'" + userData.password + "'",
-        "'" + today + "'",
+        "'" + today + "'"
     ]
 
     console.dir(values)
