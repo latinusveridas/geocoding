@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Pool = require('../Database/database');
-var Geo = require('..events/Events/events');
+var Geo = require('../Events/events');
 
 //TYPEOF
 var TypeOf = require('type-of-is');
