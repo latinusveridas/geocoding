@@ -31,10 +31,10 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     console.log("GENERATED User_ID: " + userID) 
 
     var userData = {
-        "first_name": req.body.first_name || 'Henri',
-        "last_name": req.body.last_name || 'Leconte',
-        "email": req.body.email || 'henrileconte@gmail.com',
-        "password": req.body.password || '2548',
+        "first_name": 'Henri',
+        "last_name": 'Leconte',
+        "email": 'henrileconte@gmail.com',
+        "password": '2548',
         "created": today,
         "jwt1": ""
     };
@@ -59,6 +59,8 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         userData.password,
         today
     ]
+
+    console.dir(values)
 
     // # Launch the database insertion 
     db.insertSpecific(table, columns, values, function(callback) {
