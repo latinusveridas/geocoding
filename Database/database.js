@@ -37,6 +37,7 @@ function insertinto(table, values) {
         }
 
         con.release();
+        console.log('CONNECTION RELEASED');
 
     });
 }
