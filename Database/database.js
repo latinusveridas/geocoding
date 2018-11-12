@@ -19,7 +19,7 @@ function insertinto(table, values, callback) {
     pool.getConnection(function (err, con) {
         if (err) {
             console.log(err)
-            callback(err)
+            callback('Error')
         } else {
             console.log('Success on connection to the database')
             //PREPARATION OF THE QUERY
@@ -29,17 +29,15 @@ function insertinto(table, values, callback) {
             con.query(targetQuery, function (err, result, fields) {
                 if (err) {
                     console.log(err)
-                    callback(err)
+                    callback('Error')
                 } else {
-                    console.log(result)
-                    console.log("Success in insert")
+                   // console.log(result)
                     callback('Success');
                 }
 
             });
         }
         con.release();
-        console.log('CONNECTION RELEASED');
 
     });
 

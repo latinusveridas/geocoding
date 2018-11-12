@@ -37,7 +37,7 @@ router.get('/geo', function (req, res) {
     //#1 GEOCODING
     geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function (callback) {
 
-        console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
+       // console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
         //ON DEFINIE targetTable & locationData
         var resTable = callback[0]
@@ -56,7 +56,7 @@ router.get('/geo', function (req, res) {
 
         //#2 CALL DATABASE INSERTION
         Pool.insertinto(resTable, locationData, function(callback) {
-            console.log(callback)
+            res.send(callback)
         });
 
 
