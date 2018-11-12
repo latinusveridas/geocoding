@@ -43,20 +43,20 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     var table = 'sampledb.users';
 
     var columns = [
-        user_id,
-        first_name,
-        last_name,
-        email,
-        password,
-        created
+        'user_id',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'created'
     ]
 
     var values = [
         userID,
-        req.body.first_name,
-        req.body.last_name,
-        req.body.email,
-        req.body.password,
+        userData.first_name,
+        userData.last_name,
+        userData.email,
+        userData.password,
         today
     ]
 
