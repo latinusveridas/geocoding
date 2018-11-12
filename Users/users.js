@@ -22,7 +22,8 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     };
 
     //Definition of the User class
-    var today = new Date(year,month,day,hours,minutes,seconds);
+    var now = new datetime.create();
+    var now = now.format('YYYY-MM-DD HH:mm:ss');
 
     //GENERATE USER ID
     var dt = datetime.create();
@@ -57,7 +58,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "'" + userData.last_name + "'",
         "'" + userData.email + "'",
         "'" + userData.password + "'",
-        "'" + today + "'"
+        "'" + now + "'"
     ]
 
     console.dir(values)
