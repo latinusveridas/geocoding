@@ -59,7 +59,9 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         userData.password,
         today
     ]
-
+    
+    console.log(userData.first_name)
+    
     // # Launch the database insertion 
     db.insertSpecific(table, columns, values, function(callback) {
         res.send(callback);
