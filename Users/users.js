@@ -23,7 +23,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
 
     //Definition of the User class
     var now = new datetime.create();
-    var now = now.format('YYYY-MM-DD HH:mm:ss');
+    var now2 = now.format('YYYY-MM-DD HH:mm:ss');
 
     //GENERATE USER ID
     var dt = datetime.create();
@@ -36,7 +36,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "last_name": 'Leconte',
         "email": 'henrileconte@gmail.com',
         "password": '2548',
-        "created": now,
+        "created": now2,
         "jwt1": ""
     };
 
@@ -58,7 +58,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
         "'" + userData.last_name + "'",
         "'" + userData.email + "'",
         "'" + userData.password + "'",
-        "'" + now + "'"
+        "'" + now2 + "'"
     ]
 
     console.dir(values)
