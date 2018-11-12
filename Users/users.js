@@ -10,7 +10,7 @@ var rdmString = require('randomstring');
 var express = require('express');
 var router = express.Router();
 
-router.post('/register', function (req, res) {
+router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
 
     //AppData is the status of the process, generally sent back to the user
     var appData = {
