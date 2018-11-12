@@ -22,7 +22,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     };
 
     //Definition of the User class
-    var today = new Date();
+    var today = new Date(year,month,day,hours,minutes,seconds);
 
     //GENERATE USER ID
     var dt = datetime.create();
