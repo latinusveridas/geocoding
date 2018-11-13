@@ -87,7 +87,7 @@ function selectonerow(table, targetcolumn, value, callback) {
             console.log("Success to get the connection")
 
             //Preparation of the query
-            var targetQuery = 'SELECT * from ' + table + 'WHERE ' + targetcolumn + ' = ' + value;
+            var targetQuery = 'SELECT * from ' + table + ' WHERE ' + targetcolumn + ' = ' + value;
 
 console.log(targetQuery);
 
