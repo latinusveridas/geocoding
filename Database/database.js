@@ -89,6 +89,8 @@ function selectonerow(table, targetcolumn, value, callback) {
             //Preparation of the query
             var targetQuery = 'SELECT * from ' + table + 'WHERE ' + targetcolumn + ' = ' + value;
 
+console.log(targetQuery);
+
             con.query(targetcolumn, function (err, result, fields) {
                 if (err) {
                     console.log(err)
