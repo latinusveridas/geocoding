@@ -78,7 +78,6 @@ function selectonerow(table, targetcolumn, value, callback) {
 
 var value = "'" + value + "'";
 
-
 console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 
     pool.getConnection(function (err, con) {
@@ -92,9 +91,9 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
             //Preparation of the query
             var targetQuery = 'SELECT * FROM ' + table + ' WHERE ' + targetcolumn + ' = ' + value;
 
-console.log(targetQuery);
+            console.log(targetQuery);
 
-            con.query(targetcolumn, function (err, result, fields) {
+            con.query(targetQuery, function (err, result, fields) {
                 if (err) {
                     console.log(err)
                 } else {
