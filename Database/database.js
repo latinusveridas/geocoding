@@ -76,7 +76,6 @@ module.exports.insertSpecific = insertSpecific;
 
 function selectonerow(table, targetcolumn, value, callback) {
 
-    var table = "'" + table + "'";
 var value = "'" + value + "'";
 
 
