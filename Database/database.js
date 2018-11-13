@@ -76,7 +76,11 @@ module.exports.insertSpecific = insertSpecific;
 
 function selectonerow(table, targetcolumn, value, callback) {
 
-    console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
+    var table = "'" + table + "'";
+var value = "'" + value + "'";
+var targetcolumn = "'" + targetcolumn + "'";
+
+console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 
     pool.getConnection(function (err, con) {
 
