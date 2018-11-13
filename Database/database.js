@@ -78,7 +78,7 @@ function selectonerow(table, targetcolumn, value, callback) {
 
     var table = "'" + table + "'";
 var value = "'" + value + "'";
-var targetcolumn = "'" + targetcolumn + "'";
+
 
 console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 
