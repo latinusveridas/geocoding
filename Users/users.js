@@ -79,7 +79,7 @@ router.get('/view', function (req, res) {
     var reqUserID = '2018_11_U_tglNGhK8bavYs6MVHAswuYpiX6gV7mJCy0HSghzO';
 
     //Definition of the tables and column
-    var table = 'sampledb_users';
+    var table = 'sampledb.users';
 
     var column = 'user_id';
 
