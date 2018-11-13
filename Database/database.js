@@ -90,7 +90,7 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
             console.log("Success to get the connection")
 
             //Preparation of the query
-            var targetQuery = 'SELECT * from ' + table + ' WHERE ' + targetcolumn + ' = ' + value;
+            var targetQuery = 'SELECT * FROM ' + table + ' WHERE ' + targetcolumn + ' = ' + value;
 
 console.log(targetQuery);
 
