@@ -98,7 +98,7 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
                     console.log(err)
                 } else {
                     console.log(result)
-                    callback('Success');
+                    callback(result);
                 }
 
             })
@@ -111,4 +111,37 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 }
 
 module.exports.selectonerow = selectonerow;
+
+function selectall(table, callback) {
+
+    pool.getConnection(function (err, con){
+
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+         
+            //Preparation of the query
+            var targetQuery = 'SELECT * FROM ' + table;
+            
+            console.log(targetQuery);
+
+            con.query(targetQuery, function (err,result,fields){
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(result)
+                    callback(result) //<---- SUCCESS
+                }
+
+            });
+
+        }
+
+
+    });
+
+}
+
+module.exports.selectall = selectall;
 

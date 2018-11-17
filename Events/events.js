@@ -30,6 +30,16 @@ var TypeOf = require('type-of-is');
 
 // ====================================================== MAIN FUNCTIONS ======================================================
 
+router.get('/all',function(req,res){
+
+    var targetTable = 'sampledb.events';
+
+    Pool.selectall(targetTable,callback);
+
+    res.send(callback)
+    
+});
+
 router.get('/geo', function (req, res) {
 
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
