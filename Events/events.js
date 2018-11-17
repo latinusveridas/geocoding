@@ -34,10 +34,10 @@ router.get('/all',function(req,res){
 
     var targetTable = 'sampledb.events';
 
-    Pool.selectall(targetTable,callback);
+    Pool.selectall(targetTable, function (callback) {
+        res.send(callback)
+    }
 
-    res.send(callback)
-    
 });
 
 router.get('/geo', function (req, res) {
