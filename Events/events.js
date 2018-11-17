@@ -30,13 +30,14 @@ var TypeOf = require('type-of-is');
 
 // ====================================================== MAIN FUNCTIONS ======================================================
 
-router.get('/all',function(req,res){
+router.get('/all',function(req,res)
+{
 
     var targetTable = 'sampledb.events';
 
     Pool.selectall(targetTable, function (callback) {
         res.send(callback)
-    }
+    })
 
 });
 
