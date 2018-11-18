@@ -48,7 +48,7 @@ router.post('/geo', function (req, res) {
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
-    geocodeFunction('21 lotissement les peupliers 48100 Marvejols', function (callback) {
+    geocodeFunction(req.params.address, function (callback) {
 
        // console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
