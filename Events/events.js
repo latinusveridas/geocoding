@@ -43,6 +43,8 @@ router.get('/all',function(req,res)
 
 router.get('/geo', function (req, res) {
 
+    console.log(req.body.email)
+
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
