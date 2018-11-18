@@ -43,7 +43,7 @@ router.get('/all',function(req,res)
 
 router.post('/geo', function (req, res) {
 
-    console.log(req.body.address)
+    console.log(req.params.address)
 
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
