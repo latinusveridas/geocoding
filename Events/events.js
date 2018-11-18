@@ -41,7 +41,7 @@ router.get('/all',function(req,res)
 
 });
 
-router.get('/geo', function (req, res) {
+router.post('/geo', function (req, res) {
 
     console.log(req.body.address)
 
