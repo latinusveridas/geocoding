@@ -43,12 +43,12 @@ router.get('/all',function(req,res)
 
 router.post('/geo', function (req, res) {
 
-    console.log(req.params.address)
+    console.log(req.body.address)
 
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
 
     //#1 GEOCODING
-    geocodeFunction(req.params.address, function (callback) {
+    geocodeFunction(req.body.address, function (callback) {
 
        // console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
 
