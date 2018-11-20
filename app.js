@@ -9,6 +9,8 @@ app.use('/events', events);
 var users = require('./Users/users');
 app.use('/users', users);
 
+app.use(express.static('public'));
+
 
 //=====SERVER LAUNCH========
 app.listen(3000,function(req,res){
