@@ -9,7 +9,7 @@ app.use('/events', events);
 var users = require('./Users/users');
 app.use('/users', users);
 
-app.use(express.static('public'));
+app.use(express.static('Public'));
 
 
 //=====SERVER LAUNCH========
