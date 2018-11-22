@@ -138,7 +138,8 @@ function selectall(table, callback) {
 
         }
 
-
+    con.release();
+        
     });
 
 }
