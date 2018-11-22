@@ -130,7 +130,7 @@ function selectall(table, callback) {
                 if (err) {
                     console.log(err)
                 } else {
-                    console.log(result.length)
+                    console.log("Real-Time Debug : get/all function success, # of RowDataPacket sent: ", result.length)
                     callback(result) //<---- SUCCESS
                 }
 
