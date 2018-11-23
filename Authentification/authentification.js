@@ -8,7 +8,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 
 // COMPONENTS
-var database = require('../Database/database');
+var pool = require('../Database/database');
 
 //JSON WEB TOKEN
 var jwt = require('jsonwebtoken');
@@ -143,7 +143,7 @@ router.post('/login', function (req, res) {
             
 
         }
-        
+
         conn.release();
 
     }); 
