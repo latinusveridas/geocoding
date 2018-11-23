@@ -106,8 +106,8 @@ router.post('/login', function (req, res) {
                             var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
                             console.log("Token1 long generated correctly");
 
-                            console.log("JWT1 LONG = " + token1);
-                            console.log("JWT2 SHORT = " + token2);
+                            //console.log("JWT1 LONG = " + token1);
+                            //console.log("JWT2 SHORT = " + token2);
 
                             appData.error = 0;
                             appData["JWT1"] = token1;
@@ -120,7 +120,7 @@ router.post('/login', function (req, res) {
 
                             //BUILD QUERY
                             var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + token1 + ' WHERE password = ' + pwreq + ' AND email = ' + emailreq
-                            console.log(strQuery)
+                            //console.log(strQuery)
 
                             conn.query(strQuery, function (err, rows, fields) {
                                 if (err) {
