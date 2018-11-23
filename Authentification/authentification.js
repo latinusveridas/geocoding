@@ -249,6 +249,11 @@ router.use(function (req, res, next) {
     }
 });
 
+router.get('/protectedpage', function (req,res){
+    res.json({Status: 'Success'})
+
+})
+
 
 
 router.get('/getUsers', function (req, res) {
