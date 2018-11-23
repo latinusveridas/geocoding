@@ -115,7 +115,8 @@ router.post('/login', function (req, res) {
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
                             token1 = "'" + token1 + "'"
-                            console.log("DEBUG", token1)
+                            pwreq = "'" + pwreq+ "'"
+                            emailreq = "'" + emailreq + "'"
 
                             //BUILD QUERY
                             var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + token1 + ' WHERE password = ' + pwreq + ' AND email = ' + emailreq
