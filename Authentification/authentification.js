@@ -72,6 +72,8 @@ router.post('/login', function (req, res) {
     console.log(emailreq)
     console.log(pwreq)
 
+    res.send('XXXXXXXXXXX SUCCESS XXXXXXXXX')
+
    /* database.pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
