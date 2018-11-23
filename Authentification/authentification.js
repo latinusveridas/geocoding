@@ -1,9 +1,11 @@
 // ====================================================== MODULES & VARIABLES ======================================================
-var bodyParser = require('body-parser')
 
 // ROUTER
 var express = require('express');
 var router = express.Router();
+
+// BODYPARSE
+var bodyParser = require('body-parser')
 
 // COMPONENTS
 var database = require('../Database/database');
@@ -75,12 +77,7 @@ router.post('/login', function (req, res) {
     var emailreq = req.body.email;
     var pwreq = req.body.password;
 
-    console.log(emailreq)
-    console.log(pwreq)
-
-    res.send('XXXXXXXXXXX SUCCESS XXXXXXXXX')
-
-   /* database.pool.getConnection(function (err, conn) {
+   pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
@@ -143,10 +140,13 @@ router.post('/login', function (req, res) {
             }); //END OF QUERY SELECT EMAIL TO FIND THE USER
 
 
-            conn.release();
+            
 
         }
-    }); */
+        
+        conn.release();
+
+    }); 
 
 });
 
