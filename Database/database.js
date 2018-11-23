@@ -175,3 +175,34 @@ function innerjoin(query, callback) {
 }
 
 module.exports.innerjoin = innerjoin;
+
+
+function basicquery(query, callback) {
+
+    pool.getConnection(function (err,con) {
+
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+
+            con.query(query, function(err,result,fields){
+                if (err) {
+
+                    console.log(err)
+                } else {
+
+                    console.log("Real-Time Debug : basic/query function success, # of RowDataPacket sent: ", result.length)
+                    callback(result)
+                }
+
+            })
+        }
+
+        con.release();
+    })
+
+
+}
+
+module.exports.basicquery = basicquery;

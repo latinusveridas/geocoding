@@ -8,7 +8,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 
 // COMPONENTS
-var pool = require('../Database/database');
+var Pool = require('../Database/database');
 
 //JSON WEB TOKEN
 var jwt = require('jsonwebtoken');
@@ -40,7 +40,7 @@ router.post('/register', function (req, res) {
         "jwt1": ""
     };
 
-    database.pool.getConnection(function (err, conn) {
+    Pool.pool.getConnection(function (err, conn) {
         if (err) {
             appData.error = 1;
             appData["data"] = "Internal Server Error";
@@ -77,7 +77,8 @@ router.post('/login', function (req, res) {
     var emailreq = req.body.email;
     var pwreq = req.body.password;
 
-   pool.getConnection(function (err, conn) {
+
+   Pool.pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
@@ -171,7 +172,7 @@ router.post('/refresh', function (req, res) {
     console.log("REAL TIME INFO : ", JWT1)
 
     // GO IN THE DATABASE
-    database.pool.getConnection(function (err, conn) {
+    pool.getConnection(function (err, conn) {
         if (err) {
             res.status(500).json(err);
         } else {
@@ -246,7 +247,7 @@ router.get('/getUsers', function (req, res) {
 
     var appData = {};
 
-    database.pool.getConnection(function (err, conn) {
+    pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
