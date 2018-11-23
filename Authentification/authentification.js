@@ -15,6 +15,8 @@ var cors = require('cors');
 var token;
 
 router.use(cors())
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: false }));
 
 process.env.SECRET_KEY = 'test';
 
