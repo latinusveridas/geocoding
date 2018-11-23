@@ -8,7 +8,6 @@ var router = express.Router();
 var database = require('../Database/database');
 
 //JSON WEB TOKEN
-var cors = require('cors');
 var jwt = require('jsonwebtoken');
 
 var token;
