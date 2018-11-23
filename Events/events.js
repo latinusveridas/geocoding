@@ -30,8 +30,7 @@ var TypeOf = require('type-of-is');
 
 // ====================================================== MAIN FUNCTIONS ======================================================
 
-router.get('/all',function(req,res)
-{
+router.get('/all',function(req,res) {
 
     var targetTable = 'sampledb.events';
 
@@ -40,6 +39,17 @@ router.get('/all',function(req,res)
     })
 
 });
+
+router.get('/innerjoin', function(req,res) {
+
+    var targetQuery = 'SELECT events.*,users.first_name FROM events INNER JOIN users ON users.organizer_id = events.organizer_id'
+
+    Pool.innerjoin(targetQuery, function (callback) {
+        res.send(callback)
+    })
+
+});
+
 
 router.post('/geo', function (req, res) {
 

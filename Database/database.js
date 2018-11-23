@@ -146,3 +146,32 @@ function selectall(table, callback) {
 
 module.exports.selectall = selectall;
 
+function innerjoin(query, callback) {
+
+    pool.getConnection(function (err,con) {
+
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+
+            con.query(query, function(err,result,fields){
+                if (err) {
+
+                    console.log(err)
+                } else {
+
+                    console.log("Real-Time Debug : get/innerjoin function success, # of RowDataPacket sent: ", result.length)
+                    callback(result)
+                }
+
+            })
+        }
+
+        con.release();
+    })
+
+
+}
+
+module.exports.innerjoin = innerjoin;
