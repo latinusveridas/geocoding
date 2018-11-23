@@ -3,6 +3,8 @@
 var express = require('express');
 var app = express();
 
+var bodyParser = require("body-parser");
+
 var events = require('./Events/events');
 app.use('/events', events);
 
@@ -13,6 +15,9 @@ var authentification = require('./Authentification/authentification');
 app.use('/auth', authentification);
 
 app.use(express.static('Public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //=====SERVER LAUNCH========
