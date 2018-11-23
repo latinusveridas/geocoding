@@ -1,4 +1,5 @@
 // ====================================================== MODULES & VARIABLES ======================================================
+var bodyParser = require('body-parser')
 
 // ROUTER
 var express = require('express');
