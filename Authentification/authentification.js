@@ -141,11 +141,11 @@ router.post('/login', function (req, res) {
             }); //END OF QUERY SELECT EMAIL TO FIND THE USER
 
 
-            
+            conn.release();
 
         }
 
-        conn.release();
+        
 
     }); 
 
