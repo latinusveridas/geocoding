@@ -115,11 +115,15 @@ router.post('/login', function (req, res) {
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
                             console.log("DEBUG", token1)
-                            conn.query('UPDATE sampledb.users SET jwt1 = ? WHERE password = ? AND email = ?', [token1, pwreq, emailreq], function (err, rows, fields) {
+
+                            //BUILD QUERY
+                            var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + token1 + ' WHERE password = ' + pwreq + ' AND email = ' + emailreq
+                            console.log(strQuery)
+
+                            conn.query(strQuery, function (err, rows, fields) {
                                 if (err) {
                                     res.json(err);
                                 } else {
-                                    console.log("DEBUG", token1)
                                     console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
                                     appData["errorDescription"] = rows;
                                     res.status(200).json(appData);
