@@ -1,16 +1,24 @@
+// ====================================================== MODULES & VARIABLES ======================================================
+
+// ROUTER
 var express = require('express');
-var users = express.Router();
+var router = express.Router();
+
+// COMPONENTS
 var database = require('../Database/database');
+
+//JSON WEB TOKEN
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
 
 var token;
 
-users.use(cors());
 
 process.env.SECRET_KEY = 'test';
 
-users.post('/register', function (req, res) {
+// ====================================================== MAIN FUNCTIONS ======================================================
+
+router.post('/register', function (req, res) {
     var today = new Date();
     var appData = {
         "error": 1,
@@ -50,7 +58,7 @@ users.post('/register', function (req, res) {
 });
 
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
-users.post('/login', function (req, res) {
+router.post('/login', function (req, res) {
 
     var appData = {
         "error": "0",
@@ -62,7 +70,10 @@ users.post('/login', function (req, res) {
     var emailreq = req.body.email;
     var pwreq = req.body.password;
 
-    database.pool.getConnection(function (err, conn) {
+    console.log(emailreq)
+    console.log(pwreq)
+
+   /* database.pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
@@ -128,14 +139,14 @@ users.post('/login', function (req, res) {
             conn.release();
 
         }
-    });
+    }); */
 
 });
 
 
 
 // ============================REFRESH THE JWT 2 THROUGH THE JWT 1 POSTED AND COMPARED TO THOSE STORED IN THE DATABASE============================================================
-users.post('/refresh', function (req, res) {
+router.post('/refresh', function (req, res) {
 
     //==========DATABASE INFORMATION=============
     //      jwt1 field name is : jwt1
@@ -202,7 +213,7 @@ users.post('/refresh', function (req, res) {
 
 
 // =============================================CHECKPOINT USED TO CHECK THE TOKEN 2 TO OBTAIN ACCESS TO PROTECTED AREAS =======================================================
-users.use(function (req, res, next) {
+router.use(function (req, res, next) {
     var token = req.body.jwt2 || req.headers['jwt2'];
     var appData = {};
     if (token) {
@@ -224,7 +235,7 @@ users.use(function (req, res, next) {
 
 
 
-users.get('/getUsers', function (req, res) {
+router.get('/getUsers', function (req, res) {
 
     var appData = {};
 
@@ -252,4 +263,4 @@ users.get('/getUsers', function (req, res) {
 
 
 
-module.exports = users;
+module.exports = router;

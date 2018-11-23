@@ -9,6 +9,9 @@ app.use('/events', events);
 var users = require('./Users/users');
 app.use('/users', users);
 
+var authentification = require('./Authentification/authentification');
+app.use('/auth', authentification);
+
 app.use(express.static('Public'));
 
 
