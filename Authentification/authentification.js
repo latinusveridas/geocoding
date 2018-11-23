@@ -10,8 +10,11 @@ var database = require('../Database/database');
 //JSON WEB TOKEN
 var jwt = require('jsonwebtoken');
 
+var cors = require('cors');
+
 var token;
 
+router.use(cors())
 
 process.env.SECRET_KEY = 'test';
 

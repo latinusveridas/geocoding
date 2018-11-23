@@ -24,6 +24,7 @@
     "node-datetime": "2.1.2",
     "type-of-is": "3.5.1",
     "jsonwebtoken": "8.4.0",
-    "body-parser": "1.18.3"
+    "body-parser": "1.18.3",
+    "cors": "2.8.5"
   }
 }
