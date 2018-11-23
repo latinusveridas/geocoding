@@ -180,7 +180,7 @@ router.post('/refresh', function (req, res) {
     console.log("REAL TIME INFO : ", JWT1)
 
     // GO IN THE DATABASE
-    pool.getConnection(function (err, conn) {
+    Pool.pool.getConnection(function (err, conn) {
         if (err) {
             res.status(500).json(err);
         } else {
