@@ -188,11 +188,13 @@ router.post('/refresh', function (req, res) {
             // LAUNCH THE QUERY
             conn.query('SELECT * FROM sampledb.users WHERE jwt1 = ?', [JWT1], function (err, rows, field) {
                 if (err) {
+                    console.log("in err 1")
                     // ERROR ON QUERY
                     res.status(400).json(err);
                 } else {
                     // SUCCESS ON QUERY
                     if (rows[0].jwt1 == JWT1) {
+                        console.log("in success")
                         //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
@@ -200,6 +202,7 @@ router.post('/refresh', function (req, res) {
                         res.status(200).json(result);
                     } else {
                         // FAIL ON THE SEARCH OF JWT2
+                        console.log("in err 2 (fail of search")
                         result["error"] = 1;
                         result["jwt2"] = "";
                         result["errorDescription"] = "No token JWT found in the DB";
