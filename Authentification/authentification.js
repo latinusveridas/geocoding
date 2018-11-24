@@ -180,9 +180,12 @@ router.post('/refresh', function (req, res) {
         "jwt1": ""
     };
 
+    console.log("AFTER THE RESULT")
+
     // GO IN THE DATABASE
     Pool.pool.getConnection(function (err, conn) {
         if (err) {
+            console.log("IN error 0")
             res.status(500).json(err);
         } else {
             // LAUNCH THE QUERY
