@@ -67,6 +67,8 @@ router.post('/register', function (req, res) {
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
 router.post('/login', function (req, res) {
 
+    var emailreq = req.body.email;
+    var pwreq = req.body.password;
 
     var resMain = {
         "error": "0",
@@ -81,11 +83,7 @@ router.post('/login', function (req, res) {
         "errorDescription": "",
         "JWT1": "",
         "JWT2": ""
-    };
-
-    var emailreq = req.body.email;
-    var pwreq = req.body.password;
-*/
+    };*/
 
    Pool.pool.getConnection(function (err, conn) {
         if (err) {
