@@ -67,7 +67,16 @@ router.post('/register', function (req, res) {
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
 router.post('/login', function (req, res) {
 
-    var appData = {
+
+    var resMain = {
+        "error": "0",
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+/*  var appData = {
         "error": "0",
         "errorDescription": "",
         "JWT1": "",
@@ -76,20 +85,20 @@ router.post('/login', function (req, res) {
 
     var emailreq = req.body.email;
     var pwreq = req.body.password;
-
+*/
 
    Pool.pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
-            appData["data"] = "Internal Server Error";
-            res.status(500).json(appData);
+            appData["error_description"] = "Internal Server Error";
+            res.status(500).json(resMain);
         } else {
             conn.query('SELECT * FROM sampledb.users WHERE email = ?', [emailreq], function (err, rows, fields) {
                 console.log("DEBUG EMAIL RECEIVED FROM THE CLIENT : " + emailreq);
                 if (err) {
-                    appData["error"] = 1;
-                    appData["data"] = "Error occured";
-                    res.status(400).json(appData);
+                    resMain["error"] = 1;
+                    resMain["error_description"] = "Error occured";
+                    res.status(400).json(resMain);
                 } else {
                     if (rows.length > 0) {
                         console.log("ONE EMAIL ADRESS FOUND IN THE DB AND PASSWORD WILL BE TESTED NOW");
@@ -109,9 +118,9 @@ router.post('/login', function (req, res) {
                             //console.log("JWT1 LONG = " + token1);
                             //console.log("JWT2 SHORT = " + token2);
 
-                            appData.error = 0;
-                            appData["JWT1"] = token1;
-                            appData["JWT2"] = token2;
+                            resMain.error = 0;
+                            resMain.data["JWT1"] = token1;
+                            resMain.data["JWT2"] = token2;
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
                             token1 = "'" + token1 + "'"
@@ -124,26 +133,31 @@ router.post('/login', function (req, res) {
 
                             conn.query(strQuery, function (err, rows, fields) {
                                 if (err) {
-                                    res.json(err);
+                                    resMain.error = 1
+                                    resMain.error_description = err
+                                    res.json(resMain);
                                 } else {
                                     console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
-                                    appData["errorDescription"] = rows;
-                                    res.status(200).json(appData);
+                                    resMain["error"] = 0;
+                                    resMain["success"] = 1
+                                    resMain.data = rows
+                                    resMain.type_data = "RowDataPackets"
+                                    res.status(200).json(resMain);
                                 }
                             });
 
                             
 
                         } else {
-                            appData["error"] = 1;
-                            appData["data"] = "PW does not match";
-                            res.status(204).json(appData);
+                            resMain["error"] = 1;
+                            resMain.error_description = "PW does not match";
+                            res.status(204).json(resMain);
                         }
                     }
                     else {
-                        appData["error"] = 1;
-                        appData["data"] = "email does not exists";
-                        res.status(204).json(appData);
+                        resMain["error"] = 1;
+                        resMain.error_description = "email does not exists";
+                        res.status(204).json(resMain);
                     }
                 }
             }); //END OF QUERY SELECT EMAIL TO FIND THE USER
