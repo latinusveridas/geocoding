@@ -167,8 +167,11 @@ router.post('/refresh', function (req, res) {
     //==========DATABASE INFORMATION=============
     //      jwt1 field name is : jwt1
 
-    // COLLECT THE JWT2
+    // COLLECT THE JWT1
     var JWT1 = req.body.token1 || req.headers['jwt1'];
+
+    // == DEBUG
+    console.log("RECEIVED JWT1: ",JWT1)
 
     // PREPARE THE RESULT
     var result = {
@@ -176,8 +179,6 @@ router.post('/refresh', function (req, res) {
         "errorDescription": "",
         "jwt1": ""
     };
-
-    console.log("REAL TIME INFO : ", JWT1)
 
     // GO IN THE DATABASE
     Pool.pool.getConnection(function (err, conn) {
