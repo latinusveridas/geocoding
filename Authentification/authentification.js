@@ -178,7 +178,7 @@ router.post('/refresh', function (req, res) {
     var JWT1 = req.body.token1 || req.headers['jwt1'];
 
     // == DEBUG
-    //console.log("RECEIVED JWT1: ",JWT1)
+    console.log("RECEIVED JWT1: ",JWT1)
 
     // PREPARE THE RESULT
     var result = {
