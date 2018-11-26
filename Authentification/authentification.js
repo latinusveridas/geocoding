@@ -221,7 +221,7 @@ router.post('/refresh', function (req, res) {
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
                         resMain.success = 1
-                        resMain["jwt2"] = token2;
+                        resMain.data["jwt2"] = token2;
                         res.status(200).json(resMain);
                     } else {
                         // FAIL ON THE SEARCH OF JWT2
