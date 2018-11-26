@@ -78,13 +78,6 @@ router.post('/login', function (req, res) {
         "data" : {}
     }
 
-/*  var appData = {
-        "error": "0",
-        "errorDescription": "",
-        "JWT1": "",
-        "JWT2": ""
-    };*/
-
    Pool.pool.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
@@ -185,7 +178,7 @@ router.post('/refresh', function (req, res) {
     var JWT1 = req.body.token1 || req.headers['jwt1'];
 
     // == DEBUG
-    console.log("RECEIVED JWT1: ",JWT1)
+    //console.log("RECEIVED JWT1: ",JWT1)
 
     // PREPARE THE RESULT
     var result = {
@@ -194,36 +187,49 @@ router.post('/refresh', function (req, res) {
         "jwt1": ""
     };
 
-    console.log("AFTER THE RESULT")
+    var resMain = {
+        "error": "0",
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+    //console.log("AFTER THE RESULT")
 
     // GO IN THE DATABASE
     Pool.pool.getConnection(function (err, conn) {
         if (err) {
             console.log("IN error 0")
-            res.status(500).json(err);
+            resMain.error = 1
+            resMain.error_description = err
+            res.status(500).json(resMain);
         } else {
             // LAUNCH THE QUERY
             conn.query('SELECT * FROM sampledb.users WHERE jwt1 = ?', [JWT1], function (err, rows, field) {
                 if (err) {
                     console.log("in err 1")
+                    resMain.error = 1
+                    resMain.error_description = err
                     // ERROR ON QUERY
-                    res.status(400).json(err);
+                    res.status(400).json(resMain);
                 } else {
                     // SUCCESS ON QUERY
                     if (rows[0].jwt1 == JWT1) {
-                        console.log("in success")
+                        //console.log("in success")
                         //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
-                        result["jwt2"] = token2;
-                        res.status(200).json(result);
+                        resMain.success = 1
+                        resMain["jwt2"] = token2;
+                        res.status(200).json(resMain);
                     } else {
                         // FAIL ON THE SEARCH OF JWT2
                         console.log("in err 2 (fail of search")
-                        result["error"] = 1;
-                        result["jwt2"] = "";
-                        result["errorDescription"] = "No token JWT found in the DB";
-                        res.status(204).json(result)
+                        resMain["error"] = 1;
+                        resMain["jwt2"] = "";
+                        resMain.error_description = "No token JWT found in the DB";
+                        res.status(204).json(resMain)
 
                     }
 
