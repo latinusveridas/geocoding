@@ -114,7 +114,7 @@ router.post('/login', function (req, res) {
                             resMain.data["JWT2"] = token2;
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
-                            token1 = "'" + token1 + "'"
+                            //token1 = "'" + token1 + "'"
                             pwreq = "'" + pwreq+ "'"
                             emailreq = "'" + emailreq + "'"
 
