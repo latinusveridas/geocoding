@@ -114,12 +114,12 @@ router.post('/login', function (req, res) {
                             resMain.data["JWT2"] = token2;
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
-                            //token1 = "'" + token1 + "'"
-                            pwreq = "'" + pwreq+ "'"
-                            emailreq = "'" + emailreq + "'"
+                            SQLtoken1 = "'" + token1 + "'"
+                            SQLpwreq = "'" + pwreq+ "'"
+                            SQLemailreq = "'" + emailreq + "'"
 
                             //BUILD QUERY
-                            var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + token1 + ' WHERE password = ' + pwreq + ' AND email = ' + emailreq
+                            var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + SQLtoken1 + ' WHERE password = ' + SQLpwreq + ' AND email = ' + SQLemailreq
                             //console.log(strQuery)
 
                             conn.query(strQuery, function (err, rows, fields) {
