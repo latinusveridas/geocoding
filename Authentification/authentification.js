@@ -139,6 +139,8 @@ router.post('/login', function (req, res) {
                                     resMain["error"] = 0;
                                     resMain["success"] = 1
                                     resMain.data = rows
+                                    resMain.data["JWT1"] = token1
+                                    resMain.data["JWT2"] = "" 
                                     resMain.type_data = "RowDataPackets"
                                     res.status(200).json(resMain);
                                 }
