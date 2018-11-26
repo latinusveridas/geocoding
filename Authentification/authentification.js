@@ -71,7 +71,7 @@ router.post('/login', function (req, res) {
     var pwreq = req.body.password;
 
     var resMain = {
-        "error": "0",
+        "error": 0,
         "error_description": "",
         "success" : "",
         "type_data" : "",
@@ -188,7 +188,7 @@ router.post('/refresh', function (req, res) {
     };
 
     var resMain = {
-        "error": "0",
+        "error": 0,
         "error_description": "",
         "success" : "",
         "type_data" : "",
