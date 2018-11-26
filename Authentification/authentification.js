@@ -141,7 +141,7 @@ router.post('/login', function (req, res) {
                                     resMain.data = rows
                                     resMain.data["JWT1"] = token1
                                     resMain.data["JWT2"] = "" 
-                                    resMain.type_data = "RowDataPackets"
+                                    resMain.type_data = "RowDataPackets + data"
                                     res.status(200).json(resMain);
                                 }
                             });
