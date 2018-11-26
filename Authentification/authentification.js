@@ -227,7 +227,7 @@ router.post('/refresh', function (req, res) {
                         // FAIL ON THE SEARCH OF JWT2
                         console.log("in err 2 (fail of search")
                         resMain["error"] = 1;
-                        resMain["jwt2"] = "";
+                        resMain.data["jwt2"] = "";
                         resMain.error_description = "No token JWT found in the DB";
                         res.status(204).json(resMain)
 
