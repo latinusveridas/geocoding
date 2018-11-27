@@ -321,6 +321,15 @@ router.get('/getUsers', function (req, res) {
 
 });
 
+router.get('/all',function(req,res) {
 
+    var targetTable = 'sampledb.events';
+
+    Pool.selectall(targetTable, function (callback) {
+        res.send(callback)
+    })
+
+});
 
 module.exports = router;
+
