@@ -276,8 +276,20 @@ router.use(function (req, res, next) {
     }
 });
 
-router.get('/protectedpage', function (req,res){
-    res.json({Status: 'Success'})
+router.get('/protectedpage', function (req,res) {
+
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+resMain.success = 1
+resMain.data = {}
+
+    res.json(resMain)
 
 })
 
