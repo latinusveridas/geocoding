@@ -221,13 +221,13 @@ router.post('/refresh', function (req, res) {
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
                         resMain.success = 1
-                        resMain.data["jwt2"] = token2;
+                        resMain.data["JWT2"] = token2;
                         res.status(200).json(resMain);
                     } else {
                         // FAIL ON THE SEARCH OF JWT2
                         console.log("in err 2 (fail of search")
                         resMain["error"] = 1;
-                        resMain.data["jwt2"] = "";
+                        resMain.data["JWT2"] = "";
                         resMain.error_description = "No token JWT found in the DB";
                         res.status(204).json(resMain)
 
