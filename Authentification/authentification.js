@@ -40,21 +40,32 @@ router.post('/register', function (req, res) {
         "jwt1": ""
     };
 
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
     Pool.pool.getConnection(function (err, conn) {
         if (err) {
-            appData.error = 1;
-            appData["data"] = "Internal Server Error";
-            res.status(500).json(appData);
+            resMain.error = 1;
+            resMain.error_description = "Internal Server Error";
+            res.status(500).json(resMain);
         } else {
             conn.query('INSERT INTO users SET ?', userData, function (err, rows, fields) {
                 if (!err) {
-                    appData.error = 0;
-                    appData["data"] = "User registered successfully !!!";
+                    resMain.error = 0;
+                    resMain.data = rows
+                    resMain.success = 1
+                    resMain.type_data = "SQL response"
                     console.log("REAL TIME INFORMATION : NEW USER SUCCESSFULLY REGISTERED !!");
-                    res.status(201).json(appData);
+                    res.status(201).json(resMain)
                 } else {
-                    appData["data"] = "Error occured";
-                    res.status(400).json(err);
+                    resMain.error = 1
+                    resMain.error_description = "Query failed"
+                    res.status(400).json(resMain);
                     console.log(err);
                 }
             });
