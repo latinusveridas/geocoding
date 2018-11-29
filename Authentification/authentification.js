@@ -41,8 +41,6 @@ router.post('/register', function (req, res) {
         "jwt1": ""
     };
 
-    console.log(userData)
-
     var resMain = {
         "error": 0,
         "error_description": "",
