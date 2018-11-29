@@ -125,6 +125,8 @@ function geocodeFunction(userRequest,callback) {
     
         // RETURNED RESPONSE IS AN ARRAY WITH ONE JSON OBJECT
         var resArray = res[0];
+
+        console.log(resArray)
     
         // SELECT OUR KEYS
         var resStreet = resArray.streetName;
