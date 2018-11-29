@@ -47,7 +47,9 @@ router.get('/all',function(req,res) {
 
 router.get('/innerjoin', function(req,res) {
 
-    var targetQuery = 'SELECT events.*,users.first_name FROM events INNER JOIN users ON users.organizer_id = events.organizer_id'
+    //var targetQuery = 'SELECT events.*,users.first_name FROM events INNER JOIN users ON users.organizer_id = events.organizer_id'
+
+    var targetQuery = 'SELECT events.*, users.first_name, events_location.latitude, events_location.longitude FROM events INNER JOIN users ON users.organizer_id = events.organizer_id INNER JOIN events_location ON events_location.event_id = events.event_id'
 
     Pool.innerjoin(targetQuery, function (callback) {
         res.send(callback)
