@@ -94,7 +94,7 @@ router.post('/geo', function (req, res) {
         Pool.insertinto(resTable, locationData, function(callback) {
 
             resMain.success = 1
-            resMain.data["localdata"] = callback
+            resMain.data = callback
             res.json(resMain)
         });
 
