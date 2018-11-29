@@ -29,7 +29,7 @@ function insertinto(table, values, callback) {
                     console.log(err)
                     callback('Error')
                 } else {
-                    callback('Success'); //<== SUCCESS CALLBACK
+                    callback(result); //<== SUCCESS CALLBACK
                 }
 
             });
