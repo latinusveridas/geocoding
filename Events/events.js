@@ -160,7 +160,7 @@ function geocodeFunction(userRequest,callback) {
             locationData
         ]
 
-        //console.log("INSIDE EVENTS : ",result1)
+        console.log("INSIDE EVENTS :",result1)
 
         return callback(result1);
         
