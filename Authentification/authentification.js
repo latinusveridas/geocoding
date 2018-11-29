@@ -269,22 +269,31 @@ router.post('/refresh', function (req, res) {
 
 // =============================================CHECKPOINT USED TO CHECK THE TOKEN 2 TO OBTAIN ACCESS TO PROTECTED AREAS =======================================================
 router.use(function (req, res, next) {
+
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
     var token = req.body.jwt2 || req.headers['jwt2'];
-    var appData = {};
+
     if (token) {
         jwt.verify(token, process.env.SECRET_KEY, function (err) {
             if (err) {
-                appData.error = 1;
-                appData["data"] = "Token is invalid";
-                res.status(500).json(appData);
+                resMain.error = 1;
+                resMain.error_description = "Token is invalid";
+                res.status(500).json(resMain);
             } else {
                 next();
             }
         });
     } else {
-        appData.error = 1;
-        appData["data"] = "No token";
-        res.status(403).json(appData);
+        resMain.error = 1;
+        resMain.error_description = "No token";
+        res.status(403).json(resMain);
     }
 });
 
