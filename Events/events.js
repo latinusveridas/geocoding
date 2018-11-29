@@ -58,6 +58,14 @@ router.get('/innerjoin', function(req,res) {
 
 router.post('/geo', function (req, res) {
 
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
     console.log(req.body.address)
 
     //THIS IS THE FUNCTION THAT TRANSLATE THE REQ BODY TO A GEOCODED DATA,AND FILL IT THE DATABASE
@@ -85,17 +93,9 @@ router.post('/geo', function (req, res) {
         //#2 CALL DATABASE INSERTION
         Pool.insertinto(resTable, locationData, function(callback) {
 
-            var resMain = {
-                "error": 0,
-                "error_description": "",
-                "success" : "",
-                "type_data" : "",
-                "data" : {}
-            }
-
             resMain.success = 1
             resMain.data = callback
-            res.send(resMain)
+            res.json(resMain)
         });
 
 
