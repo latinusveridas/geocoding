@@ -84,7 +84,18 @@ router.post('/geo', function (req, res) {
 
         //#2 CALL DATABASE INSERTION
         Pool.insertinto(resTable, locationData, function(callback) {
-            res.send(callback)
+
+            var resMain = {
+                "error": 0,
+                "error_description": "",
+                "success" : "",
+                "type_data" : "",
+                "data" : {}
+            }
+
+            resMain.success = 1
+            resMain.data = callback
+            res.send(resMain)
         });
 
 
