@@ -31,6 +31,7 @@ router.post('/register', function (req, res) {
         "error": 1,
         "data": ""
     };
+
     var userData = {
         "first_name": req.body.first_name,
         "last_name": req.body.last_name,
@@ -39,6 +40,8 @@ router.post('/register', function (req, res) {
         "created": today,
         "jwt1": ""
     };
+
+    console.log(userData)
 
     var resMain = {
         "error": 0,
