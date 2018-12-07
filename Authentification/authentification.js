@@ -15,6 +15,9 @@ var jwt = require('jsonwebtoken');
 
 var cors = require('cors');
 
+var events = require('../Events/events');
+
+
 var token;
 
 router.use(cors())
@@ -314,6 +317,8 @@ resMain.data = {}
 
 })
 
+
+router.use('/experlogin', events)
 
 
 router.get('/getUsers', function (req, res) {
