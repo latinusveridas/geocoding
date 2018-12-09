@@ -288,7 +288,7 @@ router.use(function (req, res, next) {
             if (err) {
                 resMain.error = 1;
                 resMain.error_description = "Token is invalid";
-                res.status(500).json(resMain);
+                res.status(401).json(resMain);
             } else {
                 next();
             }
@@ -296,7 +296,7 @@ router.use(function (req, res, next) {
     } else {
         resMain.error = 1;
         resMain.error_description = "No token";
-        res.status(403).json(resMain);
+        res.status(401).json(resMain);
     }
 });
 
