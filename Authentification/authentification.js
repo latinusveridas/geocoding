@@ -299,7 +299,7 @@ router.use(function (req, res, next) {
         res.status(401).json(resMain);
     }
 });
-
+///////
 router.get('/protectedpage', function (req,res) {
 
     var resMain = {
