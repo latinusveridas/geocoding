@@ -253,6 +253,9 @@ router.post('/refresh', function (req, res) {
                         } 
                     } else { 
                         console.log("Rows < 0")
+                        resMain.error = 1
+                        resMain.error_description = "No token found in the DB"
+                        res.status(401).json(resMain)
                     }
 
                 }
