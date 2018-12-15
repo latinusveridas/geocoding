@@ -129,6 +129,7 @@ function selectall(table, callback) {
 
             con.query(targetQuery, function (err,result,fields){
                 if (err) {
+                    console.log("SELECTONEROW FUNCTION :  ON ERROR NO JWT1 FOUND")
                     console.log(err)
                 } else {
                     console.log("Real-Time Debug : get/all function success, # of RowDataPacket sent: ", result.length)
