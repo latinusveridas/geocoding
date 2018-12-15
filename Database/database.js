@@ -117,6 +117,7 @@ function selectall(table, callback) {
     pool.getConnection(function (err, con){
 
         if (err) {
+            console.log("SELECTONEROW FUNCTION :  ON ERROR")
             console.log(err)
         } else {
             console.log("Success to retrieve the connection")
