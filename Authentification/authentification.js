@@ -221,6 +221,9 @@ router.post('/refresh', function (req, res) {
             res.status(500).json(resMain);
         } else {
             // LAUNCH THE QUERY
+            console.log("Connection retrieved !")
+            var targetQuery = 'SELECT * FROM sampledb.users WHERE jwt1 = ' + JWT1
+            console.log("CONSOLE; TargetQuery is", targetQuery)
             conn.query('SELECT * FROM sampledb.users WHERE jwt1 = ?', [JWT1], function (err, rows, field) {
                 if (err) {
                     console.log("in err 1")
@@ -230,6 +233,7 @@ router.post('/refresh', function (req, res) {
                     res.status(400).json(resMain);
                 } else {
                     // SUCCESS ON QUERY
+                    if (rows.length > 0) {
                     if (rows[0].jwt1 == JWT1) {
                         //console.log("in success")
                         //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
@@ -247,6 +251,8 @@ router.post('/refresh', function (req, res) {
                         res.status(204).json(resMain)
 
                     }
+
+                }
 
                 }
 
