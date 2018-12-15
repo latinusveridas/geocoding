@@ -83,6 +83,7 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
     pool.getConnection(function (err, con) {
 
         if (err) {
+            console.log("SELECTONEROW FUNCTION :  ON ERROR")
             console.log(err)
 
         } else {
@@ -95,6 +96,7 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
 
             con.query(targetQuery, function (err, result, fields) {
                 if (err) {
+                    console.log("SELECTONEROW FUNCTION :  ON ERROR NO JWT1 FOUND")
                     console.log(err)
                 } else {
                     console.log(result)
@@ -117,7 +119,7 @@ function selectall(table, callback) {
     pool.getConnection(function (err, con){
 
         if (err) {
-            console.log("SELECTONEROW FUNCTION :  ON ERROR")
+            
             console.log(err)
         } else {
             console.log("Success to retrieve the connection")
@@ -129,7 +131,7 @@ function selectall(table, callback) {
 
             con.query(targetQuery, function (err,result,fields){
                 if (err) {
-                    console.log("SELECTONEROW FUNCTION :  ON ERROR NO JWT1 FOUND")
+                    
                     console.log(err)
                 } else {
                     console.log("Real-Time Debug : get/all function success, # of RowDataPacket sent: ", result.length)
