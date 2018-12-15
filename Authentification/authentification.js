@@ -300,6 +300,7 @@ router.use(function (req, res, next) {
                 resMain.error = 1;
                 resMain.error_description = "Token is invalid";
                 res.status(401).json(resMain);
+                console.log("Invalid Token, access refused")
             } else {
                 next();
             }
@@ -308,6 +309,7 @@ router.use(function (req, res, next) {
         resMain.error = 1;
         resMain.error_description = "No token";
         res.status(401).json(resMain);
+        console.log("No token provided")
     }
 });
 ///////
