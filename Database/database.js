@@ -98,7 +98,7 @@ console.log("INSIDE SELECT ONE ROW WITH ONE VALUE");
                 if (err) {
                     console.log("SELECTONEROW FUNCTION :  ON ERROR NO JWT1 FOUND")
                     console.log(err)
-                } else {
+                } else if (rows.length > 0) {
                     console.log(result)
                     callback(result);
                 }
