@@ -235,7 +235,7 @@ router.post('/refresh', function (req, res) {
                     // SUCCESS ON QUERY
                     if (rows.length > 0) {
                     if (rows[0].jwt1 == JWT1) {
-                        //console.log("in success")
+                        console.log("in success") /////////////
                         //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
@@ -243,7 +243,7 @@ router.post('/refresh', function (req, res) {
                         resMain.data["JWT2"] = token2;
                         res.status(200).json(resMain);
                     } else {
-                        // FAIL ON THE SEARCH OF JWT2
+                        // FAIL ON THE SEARCH OF JWT1
                         console.log("in err 2 (fail of search")
                         resMain["error"] = 1;
                         resMain.data["JWT2"] = "";
