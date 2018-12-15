@@ -234,27 +234,29 @@ router.post('/refresh', function (req, res) {
                 } else {
                     // SUCCESS ON QUERY
                     if (rows.length > 0) {
-                    if (rows[0].jwt1 == JWT1) {
-                        console.log("in success") /////////////
-                        //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
-                        //CREATION OF token2 (SHORT)
-                        var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
-                        resMain.success = 1
-                        resMain.data["JWT2"] = token2;
-                        res.status(200).json(resMain);
-                    } else {
-                        // FAIL ON THE SEARCH OF JWT1
-                        console.log("in err 2 (fail of search")
-                        resMain["error"] = 1;
-                        resMain.data["JWT2"] = "";
-                        resMain.error_description = "No token JWT found in the DB";
-                        res.status(204).json(resMain)
-
+                        if (rows[0].jwt1 == JWT1) {
+                            console.log("in success") /////////////
+                            //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
+                            //CREATION OF token2 (SHORT)
+                            var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
+                            console.log("CONSOLE TOKEN 2 IS ", token2)
+                            resMain.success = 1
+                            resMain.data["JWT2"] = token2;
+                            res.status(200).json(resMain);
+                        } else {
+                            // FAIL ON THE SEARCH OF JWT1
+                            console.log("in err 2 (fail of search")
+                            resMain["error"] = 1;
+                            resMain.data["JWT2"] = "";
+                            resMain.error_description = "No token JWT found in the DB";
+                            res.status(204).json(resMain)
+                        } 
+                    } else { 
+                        console.log("Rows < 0")
                     }
 
                 }
 
-                }
 
             });
 
