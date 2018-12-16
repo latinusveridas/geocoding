@@ -113,8 +113,8 @@ router.post('/login', function (req, res) {
                             console.log("PASSWORD MATCHING ! :)");
 
                             //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
-                            var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
-                            console.log("token2 short generated correctly");
+                            //var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
+                            //console.log("token2 short generated correctly");
 
                             // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
                             var salt = { "password": rows[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
@@ -126,7 +126,7 @@ router.post('/login', function (req, res) {
 
                             resMain.error = 0;
                             resMain.data["JWT1"] = token1;
-                            resMain.data["JWT2"] = token2;
+                            //resMain.data["JWT2"] = token2;
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
                             SQLtoken1 = "'" + token1 + "'"
