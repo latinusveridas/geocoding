@@ -58,6 +58,26 @@ router.get('/innerjoin', function(req,res) {
 });
 
 
+router.post('/createevent', function (req,res) {
+
+        var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+    var sport = req.body.sport
+    var organizer_id = req.body.organizer_id
+    var price = req.body.price
+    var part_max = req.body.part_max
+    var date = req.body.date
+    var addressString = req.body.addressString
+
+}
+
+
 router.post('/geo', function (req, res) {
 
     var resMain = {
