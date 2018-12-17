@@ -57,21 +57,6 @@ router.get('/innerjoin', function(req,res) {
 
 });
 
-router.post('/createevent', function (req, res) {
-
-        var resMain = {
-        "error": 0,
-        "error_description": "",
-        "success" : "",
-        "type_data" : "",
-        "data" : {}
-    }
-        
-        
-
-}
-
-
 router.post('/geo', function (req, res) {
 
     var resMain = {
