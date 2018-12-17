@@ -75,6 +75,37 @@ router.post('/createevent', function (req,res) {
     var date = req.body.date
     var addressString = req.body.addressString
 
+    // Launching geocoding to collect geoData
+    geocodeFunction(req.body.address, function (callback) {
+
+       // console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
+
+        //ON DEFINIE targetTable & locationData
+        var resTable = callback[0]
+        var locationData = [
+            "'" + callback[1][0] + "'",
+            "'" + callback[1][1] + "'",
+            "'" + callback[1][2] + "'",
+            "'" + callback[1][3] + "'",
+            "'" + callback[1][4] + "'",
+            "'" + callback[1][5] + "'",
+            "'" + callback[1][6] + "'",
+        ]
+
+        //console.log(resTable)
+        //console.dir(locationData)
+
+        //#2 CALL DATABASE INSERTION
+        Pool.insertinto(resTable, locationData, function(callback) {
+
+            resMain.success = 1
+            resMain.data = callback
+            res.json(resMain)
+        });
+
+
+    });
+    
 }
 
 
