@@ -73,12 +73,10 @@ router.post('/createevent', function (req,res) {
     var price = req.body.price
     var part_max = req.body.part_max
     var date = req.body.date
-    var addressString = req.body.addressString
+    var addressStr = req.body.addressString
 
-    // Launching geocoding to collect geoData
-    geocodeFunction(req.body.address, function (callback) {
-
-       // console.log("DEBUG IN APP AFTER CALLBACK. ARRAY IS : ", callback)
+    // Geocoding closure to obtain geocoding data which will be saved in the db
+    geocodeFunction(addressStr, function (callback) {
 
         //ON DEFINIE targetTable & locationData
         var resTable = callback[0]
@@ -92,21 +90,17 @@ router.post('/createevent', function (req,res) {
             "'" + callback[1][6] + "'",
         ]
 
-        //console.log(resTable)
-        //console.dir(locationData)
-
-        //#2 CALL DATABASE INSERTION
+        //On sauve la data location dans la table events_location
         Pool.insertinto(resTable, locationData, function(callback) {
 
             resMain.success = 1
             resMain.data = callback
             res.json(resMain)
-        });
-
-
-    });
+        }); // fin de pool.inserinto
     
-}
+    });// fin de geocodeFunction
+    
+} // fin de createevent
 
 
 router.post('/geo', function (req, res) {
