@@ -121,6 +121,12 @@ router.post('/createevent', function (req,res) {
     "'" + organizer_id + "'",
     ]
     
+    //On sauve la data events dans la table events
+    Pool.insertinto(targetTable, eventData, function(callback) {
+    
+    
+    }
+    
 } // fin de createevent
 
 
