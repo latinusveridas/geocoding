@@ -216,13 +216,14 @@ function deleterow(table, column, value, callback) {
     pool.getConnection( function (err,con) {
     
          if (err) {
-            
             console.log(err)
         } else {
+            
             console.log("Success to retrieve the connection")
          
             //Preparation of the query
-            var targetQuery = 'SELECT * FROM ' + table;
+            var valuesql = "'" + value + "'" // putting ' before value for syntax
+            var targetQuery = 'DELETE FROM ' + table + ' WHERE ' + column + ' = ' + valuesql;
             
             console.log(targetQuery);
 
