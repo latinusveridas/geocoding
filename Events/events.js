@@ -150,9 +150,12 @@ router.post('/createevent', function (req,res) {
                     
     // Verification des success et renvoie de la reponse
     if isSuccessTableLocation = true & isSuccessTableEvents = true {
-    res.json(resMain)
+        resMain.success = 1
+    res.status(201).json(resMain)
     } else {
-    res.json(resMain)
+        resMain.error = 1
+        resMain.error_description = "posting failed"
+    res.status(500).json(resMain)
     }
     
 } // fin de createevent
