@@ -82,6 +82,10 @@ router.post('/createevent', function (req,res) {
     var dt = dt.format('Y_m')
     var eventID = dt + '_E_' + rdmString.generate(40) ;
     console.log("GENERATED EVENT_ID " + eventID) 
+    
+    // Define boolean value to assess the success of each query
+    var isSuccessTableEvents = false
+    var isSuccessTableLocation = false
 
     // Geocoding closure to obtain geocoding data which will be saved in the db
     geocodeFunction(addressStr, function (callback) {
@@ -102,6 +106,8 @@ router.post('/createevent', function (req,res) {
         //On sauve la data location dans la table events_location
         Pool.insertinto(resTable, locationData, function(callback) {
 
+            
+            
             resMain.success = 1
             resMain.data = callback
             res.json(resMain)
