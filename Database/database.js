@@ -210,3 +210,29 @@ function basicquery(query, callback) {
 }
 
 module.exports.basicquery = basicquery;
+
+function deleterow(table, column, value, callback) {
+    
+    pool.getConnection( function (err,con) {
+    
+         if (err) {
+            
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+         
+            //Preparation of the query
+            var targetQuery = 'SELECT * FROM ' + table;
+            
+            console.log(targetQuery);
+
+            con.query(targetQuery, function (err,result,fields){
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("Real-Time Debug : delete 1 row function success, # of RowDataPacket sent: ", result.length)
+                    callback(result) //<---- SUCCESS
+                }
+        
+    }
+}
