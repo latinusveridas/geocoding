@@ -112,10 +112,13 @@ router.post('/createevent', function (req,res) {
     var targetTable = "events"
     var eventData = [
     "'" + eventID + "'",
-        "'" + date + "'",
-        "'" + location + + "'",
-        
-    
+    "'" + date + "'",
+    "'" + location + "'",
+    "'" + sport + "'",
+    "'" + 0 + "'",
+    "'" + part_max + "'",
+    "'" + price + "'",
+    "'" + organizer_id + "'",
     ]
     
 } // fin de createevent
