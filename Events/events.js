@@ -106,11 +106,14 @@ router.post('/createevent', function (req,res) {
         //On sauve la data location dans la table events_location
         Pool.insertinto(resTable, locationData, function(callback) {
 
+            if callback.affectedRows = 1 {
+            isSuccessTableLocation = true
+            } else {
+            isSuccessTableLocation = false
+            }
             
+        console.log("Success posting of location data : ", isSuccessTableLocation)
             
-            resMain.success = 1
-            resMain.data = callback
-            res.json(resMain)
         }); // fin de pool.inserinto
     
         // Populate location_city for events table
@@ -135,7 +138,21 @@ router.post('/createevent', function (req,res) {
     //On sauve la data events dans la table events
     Pool.insertinto(targetTable, eventData, function(callback) {
     
+        if callback.affectedRows = 1 {
+        isSuccessTableEvents = true
+        } else {
+        isSuccessTableEvents = false
+        }
+
+        console.log("Success posting of events data : ", isSuccessTableEvents)
     
+    }); // Fin de pool.insertinto
+                    
+    // Verification des success et renvoie de la reponse
+    if isSuccessTableLocation = true & isSuccessTableEvents = true {
+    res.json(resMain)
+    } else {
+    res.json(resMain)
     }
     
 } // fin de createevent
