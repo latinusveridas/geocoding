@@ -193,10 +193,11 @@ function geocodeFunction(userRequest,callback) {
         var resLongitude = resArray.longitude;
 
         //GENERATE EVENT ID
-        var dt = datetime.create();
-        var dt = dt.format('Y_m')
-        var eventID = dt + '_E_' + rdmString.generate(40) ;
-        console.log("GENERATED EVENT_ID " + eventID) 
+        //var dt = datetime.create();
+        //var dt = dt.format('Y_m')
+        //var eventID = dt + '_E_' + rdmString.generate(40) ;
+        //console.log("GENERATED EVENT_ID " + eventID) 
+        var eventID = ""
     
         //PUT ALL THE STUFF IN A ARRAY
         var targetTable = 'sampledb.events_location';
