@@ -88,7 +88,8 @@ router.post('/createevent', function (req,res) {
         //ON DEFINIE targetTable & locationData
         var resTable = callback[0]
         var locationData = [
-            "'" + callback[1][0] + "'",
+            // on geocodeFunction, the eventID is put as nil, so now its loaded is the values loaded is the db
+            "'" + eventID + "'",
             "'" + callback[1][1] + "'",
             "'" + callback[1][2] + "'",
             "'" + callback[1][3] + "'",
@@ -105,7 +106,17 @@ router.post('/createevent', function (req,res) {
             res.json(resMain)
         }); // fin de pool.inserinto
     
-    });// fin de geocodeFunction
+    }); // fin de geocodeFunction
+    
+    // updating data in events 
+    var targetTable = "events"
+    var eventData = [
+    "'" + eventID + "'",
+        "'" + date + "'",
+        "'" + location + + "'",
+        
+    
+    ]
     
 } // fin de createevent
 
