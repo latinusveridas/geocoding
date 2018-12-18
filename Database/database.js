@@ -240,6 +240,6 @@ function deleterow(table, column, value, callback) {
     }); //getconnection   
 }
         
-        
+module.exports.deleterow = deleterow;        
                       
                       
