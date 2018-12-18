@@ -75,6 +75,7 @@ router.post('/createevent', function (req,res) {
     var part_max = req.body.part_max
     var date = req.body.date
     var addressStr = req.body.addressString
+    var location_city = "" // Will be feeded during geocoding and sent to events table
     
     // Generate the event_id
     var dt = datetime.create();
@@ -106,6 +107,10 @@ router.post('/createevent', function (req,res) {
             res.json(resMain)
         }); // fin de pool.inserinto
     
+        // Populate location_city for events table
+        location_city = callback[0][4]
+        console.log("Location city is ", location_city)
+        
     }); // fin de geocodeFunction
     
     // updating data in events 
@@ -113,7 +118,7 @@ router.post('/createevent', function (req,res) {
     var eventData = [
     "'" + eventID + "'",
     "'" + date + "'",
-    "'" + location + "'",
+    "'" + location_city + "'",
     "'" + sport + "'",
     "'" + 0 + "'",
     "'" + part_max + "'",
