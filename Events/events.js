@@ -67,13 +67,20 @@ router.post('/createevent', function (req,res) {
         "type_data" : "",
         "data" : {}
     }
-
+    
+    // Define the variables    
     var sport = req.body.sport
     var organizer_id = req.body.organizer_id
     var price = req.body.price
     var part_max = req.body.part_max
     var date = req.body.date
     var addressStr = req.body.addressString
+    
+    // Generate the event_id
+    var dt = datetime.create();
+    var dt = dt.format('Y_m')
+    var eventID = dt + '_E_' + rdmString.generate(40) ;
+    console.log("GENERATED EVENT_ID " + eventID) 
 
     // Geocoding closure to obtain geocoding data which will be saved in the db
     geocodeFunction(addressStr, function (callback) {
