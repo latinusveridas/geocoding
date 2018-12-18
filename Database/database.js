@@ -213,7 +213,7 @@ module.exports.basicquery = basicquery;
 
 function deleterow(table, column, value, callback) {
     
-    pool.getConnection( function (err,con) {
+    pool.getConnection(function (err,con) {
     
          if (err) {
             console.log(err)
@@ -234,6 +234,12 @@ function deleterow(table, column, value, callback) {
                     console.log("Real-Time Debug : delete 1 row function success, # of RowDataPacket sent: ", result.length)
                     callback(result) //<---- SUCCESS
                 }
-        
-    }
+                      
+            }); //query
+        } // else
+    }); //getconnection   
 }
+        
+        
+                      
+                      
