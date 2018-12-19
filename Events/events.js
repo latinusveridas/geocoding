@@ -104,9 +104,9 @@ router.post('/createevent', function (req,res) {
         ]
 
         //On sauve la data location dans la table events_location
-        Pool.insertinto(resTable, locationData, function(callback) {
+        Pool.insertinto(resTable, locationData, function (callback) {
 
-            if callback.affectedRows = 1 {
+            if (callback.affectedRows = 1) {
             isSuccessTableLocation = true
             } else {
             isSuccessTableLocation = false
@@ -136,9 +136,9 @@ router.post('/createevent', function (req,res) {
     ]
     
     //On sauve la data events dans la table events
-    Pool.insertinto(targetTable, eventData, function(callback) {
+    Pool.pool.insertinto(targetTable, eventData, function (callback) {
     
-        if callback.affectedRows = 1 {
+        if (callback.affectedRows = 1) {
         isSuccessTableEvents = true
         } else {
         isSuccessTableEvents = false

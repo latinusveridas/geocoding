@@ -27,7 +27,7 @@ function insertinto(table, values, callback) {
             con.query(targetQuery, function (err, result, fields) {
                 if (err) {
                     console.log(err)
-                    callback('Error')
+                    callback(err)
                 } else {
                     callback(result); //<== SUCCESS CALLBACK
                     console.log("debug du 19/12, callback brut est ",result)
