@@ -111,7 +111,7 @@ router.post('/login', function (req, res) {
                         if (rows[0].password == pwreq) {
 
                             console.log("PASSWORD MATCHING ! :)");
-                            console.log(rows[0].organizer_id)
+                            console.log("ORGANIZER_ID IS ", rows[0].organizer_id)
 
                             //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
                             //var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
