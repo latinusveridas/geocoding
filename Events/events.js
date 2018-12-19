@@ -104,9 +104,9 @@ router.post('/createevent', function (req,res) {
         ]
 
         //On sauve la data location dans la table events_location
-        Pool.insertinto(resTable, locationData, function(rows) {
+        Pool.insertinto(resTable, locationData, function(callback) {
 
-            if rows.affectedRows = 1 {
+            if callback.affectedRows = 1 {
             isSuccessTableLocation = true
             } else {
             isSuccessTableLocation = false
