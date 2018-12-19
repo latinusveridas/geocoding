@@ -30,6 +30,7 @@ function insertinto(table, values, callback) {
                     callback('Error')
                 } else {
                     callback(result); //<== SUCCESS CALLBACK
+                    console.log("debug du 19/12, callback brut est ",result)
                 }
 
             });
