@@ -127,6 +127,7 @@ router.post('/login', function (req, res) {
 
                             resMain.error = 0;
                             resMain.data["JWT1"] = token1;
+                            resMain.data["organizer_id"] = rows[0].organizer_id
                             //resMain.data["JWT2"] = token2;
 
                             // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
