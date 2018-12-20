@@ -158,7 +158,7 @@ router.post('/createevent', function (req,res) {
     res.status(500).json(resMain)
     }
     
-} // fin de createevent
+}); // fin de createevent
 
 
 router.post('/geo', function (req, res) {
