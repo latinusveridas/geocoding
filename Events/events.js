@@ -149,7 +149,7 @@ router.post('/createevent', function (req,res) {
     }); // Fin de pool.insertinto
                     
     // Verification des success et renvoie de la reponse
-    if isSuccessTableLocation = true && isSuccessTableEvents = true {
+    if (isSuccessTableLocation = true && isSuccessTableEvents = true) {
         resMain.success = 1
     res.status(201).json(resMain)
     } else {
