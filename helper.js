@@ -21,6 +21,7 @@ var possibleSports = [
 ]
 
 app.get('/sports',function(req, res) {
+    console.log("in sports !")
 res.status(204).json(possibleSports)
 });
 
