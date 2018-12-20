@@ -26,7 +26,7 @@ var myJson = {
 
 app.get('/sports',function(req, res) {
     console.log("in sports !")
-res.status(204).json(myJson)
+res.status(204).json(JSON.stringify(possibleSports))
 });
 
 /*func nbSportsAvailable() {
