@@ -74,7 +74,7 @@ router.post('/createevent', function (req,res) {
     var price = req.body.price
     var part_max = req.body.part_max
     var date = req.body.date
-    var addressStr = req.body.addressString
+    var addressStr = req.body.address_string
     var location_city = "" // Will be feeded during geocoding and sent to events table
     
     // Generate the event_id
