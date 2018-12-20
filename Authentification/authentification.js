@@ -100,18 +100,18 @@ router.post('/login', function (req, res) {
             res.status(500).json(resMain);
         } else {
             conn.query('SELECT * FROM sampledb.users WHERE email = ?', [emailreq], function (err, rows, fields) {
-                console.log("DEBUG EMAIL RECEIVED FROM THE CLIENT : " + emailreq);
+                //console.log("DEBUG EMAIL RECEIVED FROM THE CLIENT : " + emailreq);
                 if (err) {
                     resMain["error"] = 1;
                     resMain["error_description"] = "Error occured";
                     res.status(400).json(resMain);
                 } else {
                     if (rows.length > 0) {
-                        console.log("ONE EMAIL ADRESS FOUND IN THE DB AND PASSWORD WILL BE TESTED NOW");
+                        //console.log("ONE EMAIL ADRESS FOUND IN THE DB AND PASSWORD WILL BE TESTED NOW");
                         if (rows[0].password == pwreq) {
 
-                            console.log("PASSWORD MATCHING ! :)");
-                            console.log("ORGANIZER_ID IS ", rows[0].organizer_id)
+                           // console.log("PASSWORD MATCHING ! :)");
+                           // console.log("ORGANIZER_ID IS ", rows[0].organizer_id)
 
                             //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
                             //var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
@@ -120,7 +120,7 @@ router.post('/login', function (req, res) {
                             // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
                             var salt = { "password": rows[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
                             var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
-                            console.log("Token1 long generated correctly");
+                           // console.log("Token1 long generated correctly");
 
                             //console.log("JWT1 LONG = " + token1);
                             //console.log("JWT2 SHORT = " + token2);
@@ -145,7 +145,7 @@ router.post('/login', function (req, res) {
                                     resMain.error_description = err
                                     res.json(resMain);
                                 } else {
-                                    console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
+                                   // console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
                                     resMain["error"] = 0;
                                     resMain["success"] = 1
                                     resMain.data = rows
