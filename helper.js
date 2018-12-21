@@ -24,7 +24,12 @@ app.get('/sports',function(req, res) {
         "crossfit",
         ];
 
-res.status(204).send(possibleSports)
+        var myJson = {
+            "thesports": possibleSports
+        }
+
+res.status(204).json(myJson)
+
 });
 
 /*func nbSportsAvailable() {
