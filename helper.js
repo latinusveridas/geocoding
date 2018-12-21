@@ -9,15 +9,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 var possibleSports = [
-    "yoga",
-    "running",
-    "tracking",
-    "canoe",
-    "sailing",
-    "bowling",
-    "snooker",
-    "zumba",
-    "crossfit",
+    "Yoga",
+    "Running",
+    "Tracking",
+    "Canoe",
+    "Sailing",
+    "Bowling",
+    "Snooker",
+    "Zumba",
+    "Crossfit",
     ];
 
  
