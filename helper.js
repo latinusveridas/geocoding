@@ -8,24 +8,25 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var possibleSports = [
+    "yoga",
+    "running",
+    "tracking",
+    "canoe",
+    "sailing",
+    "bowling",
+    "snooker",
+    "zumba",
+    "crossfit",
+    ];
+
+    var myJson = {
+        "thesports": possibleSports
+    };
+
+
 app.get('/sports',function(req, res) {
     console.log("in sports !")
-
-    var possibleSports = [
-        "yoga",
-        "running",
-        "tracking",
-        "canoe",
-        "sailing",
-        "bowling",
-        "snooker",
-        "zumba",
-        "crossfit",
-        ];
-
-        var myJson = {
-            "thesports": possibleSports
-        };
 
 res.status(200).send(myJson)
 
