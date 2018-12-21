@@ -20,15 +20,11 @@ var possibleSports = [
     "crossfit",
     ];
 
-    var myJson = {
-        "thesports": possibleSports
-    };
-
-
+ 
 app.get('/sports',function(req, res) {
     console.log("in sports !")
 
-res.status(200).send(myJson)
+res.status(200).send(possibleSports)
 
 });
 
