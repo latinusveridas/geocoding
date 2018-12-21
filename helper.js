@@ -18,7 +18,7 @@ var possibleSports = [
 "snooker",
 "zumba",
 "crossfit",
-]
+];
 
 var myJson = {
     "av_sport": possibleSports
@@ -26,7 +26,7 @@ var myJson = {
 
 app.get('/sports',function(req, res) {
     console.log("in sports !")
-res.status(204).json(JSON.stringify(possibleSports))
+res.status(204).json(myJson)
 });
 
 /*func nbSportsAvailable() {
