@@ -8,7 +8,6 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.get('/sports',function(req, res) {
     console.log("in sports !")
 
@@ -26,9 +25,9 @@ app.get('/sports',function(req, res) {
 
         var myJson = {
             "thesports": possibleSports
-        }
+        };
 
-res.status(204).json(myJson)
+res.status(200).send(myJson)
 
 });
 
