@@ -8,17 +8,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var possibleSports = [
-"yoga",
-"running",
-"tracking",
-"canoe",
-"sailing",
-"bowling",
-"snooker",
-"zumba",
-"crossfit",
-];
+
 
 var myJson = {
     "av_sport": possibleSports
@@ -26,7 +16,18 @@ var myJson = {
 
 app.get('/sports',function(req, res) {
     console.log("in sports !")
-res.status(204).json(myJson)
+    var possibleSports = [
+        "yoga",
+        "running",
+        "tracking",
+        "canoe",
+        "sailing",
+        "bowling",
+        "snooker",
+        "zumba",
+        "crossfit",
+        ];
+res.status(204).send(possibleSports)
 });
 
 /*func nbSportsAvailable() {
