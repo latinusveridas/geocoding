@@ -9,13 +9,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
-var myJson = {
-    "av_sport": possibleSports
-}
-
 app.get('/sports',function(req, res) {
     console.log("in sports !")
+
     var possibleSports = [
         "yoga",
         "running",
@@ -27,6 +23,7 @@ app.get('/sports',function(req, res) {
         "zumba",
         "crossfit",
         ];
+
 res.status(204).send(possibleSports)
 });
 
