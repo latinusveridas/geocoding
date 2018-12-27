@@ -126,7 +126,7 @@ router.post('/createevent', function (req,res) {
                 var eventData = [
                 "'" + eventID + "'",
                 "'" + date + "'",
-                "'" + location_city + "'",
+                location_city,
                 "'" + sport + "'",
                 "'" + 0 + "'",
                 "'" + part_max + "'",
