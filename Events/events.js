@@ -138,8 +138,8 @@ router.post('/createevent', function (req,res) {
     ]
     
     //On sauve la data events dans la table events
-    Pool.pool.insertinto(targetTable, eventData, function (callback) {
-    
+    Pool.insertinto(targetTable, eventData, function (callback) {
+  
         if (callback.affectedRows = 1) {
         isSuccessTableEvents = true
         } else {
