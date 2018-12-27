@@ -117,51 +117,51 @@ router.post('/createevent', function (req,res) {
             
         console.log("Success posting of location data : ", isSuccessTableLocation)
             
-        }); // fin de pool.inserinto
+                // Populate location_city for events table
+                var location_city = callback[1][4]
+                console.log("Location city is ",location_city)
+
+                // updating data in events table
+                var targetTable = 'sampledb.events'
+                var eventData = [
+                "'" + eventID + "'",
+                "'" + date + "'",
+                "'" + location_city + "'",
+                "'" + sport + "'",
+                "'" + 0 + "'",
+                "'" + part_max + "'",
+                "'" + price + "'",
+                "'" + organizer_id + "'",
+                ]
+
+                //On sauve la data events dans la table events
+                Pool.insertinto(targetTable, eventData, function (callback2) {
+            
+                    if (callback2.affectedRows = 1) {
+                    isSuccessTableEvents = true
+                    } else {
+                    isSuccessTableEvents = false
+                    }
+
+                    console.log("Success posting of events data : ", isSuccessTableEvents)
+                
+                }); // Fin de pool.insertinto
+                                
+                // Verification des success et renvoie de la reponse
+                if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
+                    resMain.success = 1
+                res.status(201).json(resMain)
+                } else {
+                    resMain.error = 1
+                    resMain.error_description = "posting failed"
+                res.status(500).json(resMain)
+                }
+
+        }); // fin de pool.insertinto table_location
     
-        // Populate location_city for events table
-        //console.log("FOR DEBUG 20:55", callback)
-        var location_city = callback[1][4]
-        console.log("Location city is ",location_city)
         
     }); // fin de geocodeFunction
-    
-    // updating data in events 
-    var targetTable = 'sampledb.events'
-    var eventData = [
-    "'" + eventID + "'",
-    "'" + date + "'",
-    "'" + location_city + "'",
-    "'" + sport + "'",
-    "'" + 0 + "'",
-    "'" + part_max + "'",
-    "'" + price + "'",
-    "'" + organizer_id + "'",
-    ]
-    
-    //On sauve la data events dans la table events
-    Pool.insertinto(targetTable, eventData, function (callback) {
-  
-        if (callback.affectedRows = 1) {
-        isSuccessTableEvents = true
-        } else {
-        isSuccessTableEvents = false
-        }
-
-        console.log("Success posting of events data : ", isSuccessTableEvents)
-    
-    }); // Fin de pool.insertinto
-                    
-    // Verification des success et renvoie de la reponse
-    if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
-        resMain.success = 1
-    res.status(201).json(resMain)
-    } else {
-        resMain.error = 1
-        resMain.error_description = "posting failed"
-    res.status(500).json(resMain)
-    }
-    
+        
 }); ////// fin de createevent
 
 
