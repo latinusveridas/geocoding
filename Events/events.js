@@ -119,7 +119,7 @@ router.post('/createevent', function (req,res) {
         }); // fin de pool.inserinto
     
         // Populate location_city for events table
-        location_city = callback[0][4]
+        location_city = callback[1][4]
         console.log("Location city is ", location_city)
         
     }); // fin de geocodeFunction
