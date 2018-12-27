@@ -119,6 +119,7 @@ router.post('/createevent', function (req,res) {
         }); // fin de pool.inserinto
     
         // Populate location_city for events table
+        console.log("FOR DEBUG 20:55", callback)
         location_city = callback[1][4]
         console.log("Location city is ", location_city)
         
