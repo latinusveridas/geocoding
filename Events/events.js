@@ -118,7 +118,7 @@ router.post('/createevent', function (req,res) {
         console.log("Success posting of location data : ", isSuccessTableLocation)
             
                 // Populate location_city for events table
-                var location_city = callback[1][4]
+                var location_city = locationData[4]
                 console.log("Location city is ",location_city)
 
                 // updating data in events table
