@@ -76,6 +76,8 @@ router.post('/createevent', function (req,res) {
     var date = req.body.date
     var addressStr = req.body.address_string
     var location_city = "" // Will be feeded during geocoding and sent to events table
+
+    console.log(sport,organizer_id,price,part_max,date,addressStr,location_city)
     
     // Generate the event_id
     var dt = datetime.create();
