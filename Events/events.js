@@ -83,7 +83,7 @@ router.post('/createevent', function (req,res) {
     var dt = datetime.create();
     var dt = dt.format('Y_m')
     var eventID = dt + '_E_' + rdmString.generate(40) ;
-    console.log("GENERATED EVENT_ID " + eventID) 
+    //console.log("GENERATED EVENT_ID " + eventID) 
     
     // Define boolean value to assess the success of each query
     var isSuccessTableEvents = false
@@ -106,6 +106,7 @@ router.post('/createevent', function (req,res) {
         ]
 
         //On sauve la data location dans la table events_location
+        //var resTable = "events_location"
         Pool.insertinto(resTable, locationData, function (callback) {
 
             if (callback.affectedRows = 1) {
@@ -119,14 +120,14 @@ router.post('/createevent', function (req,res) {
         }); // fin de pool.inserinto
     
         // Populate location_city for events table
-        console.log("FOR DEBUG 20:55", callback)
-        location_city = callback[1][4]
-        console.log("Location city is ", location_city)
+        //console.log("FOR DEBUG 20:55", callback)
+        var location_city = callback[1][4]
+        console.log("Location city is ",location_city)
         
     }); // fin de geocodeFunction
     
     // updating data in events 
-    var targetTable = "events"
+    var targetTable = 'sampledb.events'
     var eventData = [
     "'" + eventID + "'",
     "'" + date + "'",
@@ -161,7 +162,8 @@ router.post('/createevent', function (req,res) {
     res.status(500).json(resMain)
     }
     
-}); // fin de createevent
+}); ////// fin de createevent
+
 
 
 router.post('/geo', function (req, res) {

@@ -30,7 +30,7 @@ function insertinto(table, values, callback) {
                     callback(err)
                 } else {
                     callback(result); //<== SUCCESS CALLBACK
-                    console.log("debug du 19/12, callback brut est ",result)
+                    console.log("function insertinto - result is ",result)
                 }
 
             });
