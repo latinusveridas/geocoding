@@ -100,17 +100,17 @@ router.post('/login', function (req, res) {
             res.status(500).json(resMain);
         } else {
             conn.query('SELECT * FROM sampledb.users WHERE email = ?', [emailreq], function (err, rows, fields) {
-                //console.log("DEBUG EMAIL RECEIVED FROM THE CLIENT : " + emailreq);
+                console.log("log: Request for login for email: ", emailreq);
                 if (err) {
                     resMain["error"] = 1;
                     resMain["error_description"] = "Error occured";
                     res.status(400).json(resMain);
                 } else {
                     if (rows.length > 0) {
-                        //console.log("ONE EMAIL ADRESS FOUND IN THE DB AND PASSWORD WILL BE TESTED NOW");
+                        console.log("log: Email founded in the DB OK");
                         if (rows[0].password == pwreq) {
 
-                           // console.log("PASSWORD MATCHING ! :)");
+                           console.log("log: Password verification OK");
                            // console.log("ORGANIZER_ID IS ", rows[0].organizer_id)
 
                             //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
@@ -120,24 +120,18 @@ router.post('/login', function (req, res) {
                             // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
                             var salt = { "password": rows[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
                             var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
-                           // console.log("Token1 long generated correctly");
-
-                            //console.log("JWT1 LONG = " + token1);
-                            //console.log("JWT2 SHORT = " + token2);
+                            console.log("log: Token1 long generated correctly");
 
                             resMain.error = 0;
                             resMain.data["JWT1"] = token1;
                             var org_id = rows[0].organizer_id
                             //resMain.data["JWT2"] = token2;
 
-                            // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
+                            // Preparation of the query in the database
                             SQLtoken1 = "'" + token1 + "'"
                             SQLpwreq = "'" + pwreq+ "'"
                             SQLemailreq = "'" + emailreq + "'"
-
-                            //BUILD QUERY
                             var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + SQLtoken1 + ' WHERE password = ' + SQLpwreq + ' AND email = ' + SQLemailreq
-                            //console.log(strQuery)
 
                             conn.query(strQuery, function (err, rows, fields) {
                                 if (err) {
@@ -145,7 +139,7 @@ router.post('/login', function (req, res) {
                                     resMain.error_description = err
                                     res.json(resMain);
                                 } else {
-                                   // console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
+                                   console.log("log: Update JWT1 OK");
                                     resMain["error"] = 0;
                                     resMain["success"] = 1
                                     resMain.data = rows
