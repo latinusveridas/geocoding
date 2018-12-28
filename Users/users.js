@@ -92,7 +92,7 @@ router.get('/view', function (req, res) {
 
     var column = 'user_id';
 
-    db.selectonerow(table,column,reqUserID,function(callback){
+    db.selectonerow(table,column,user_id,function(callback){
         res.send(callback)
     });
 
