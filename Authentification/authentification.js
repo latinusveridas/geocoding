@@ -135,7 +135,7 @@ router.post('/login', function (req, res) {
                                     resMain.error_description = err
                                     res.json(resMain);
                                 } else {
-                                    console.log("QUERY LOAD JWT1 / IN SUCCESS BRACES :)");
+                                    console.log("log: updating JWT1 OK)");
                                     resMain["error"] = 0;
                                     resMain["success"] = 1
                                     resMain.data = rows
@@ -207,7 +207,7 @@ router.post('/refresh', function (req, res) {
     // GO IN THE DATABASE
     Pool.pool.getConnection(function (err, conn) {
         if (err) {
-            console.log("IN error 0")
+            console.log("log: impossible to retrieve connection")
             resMain.error = 1
             resMain.error_description = err
             res.status(500).json(resMain);
@@ -215,7 +215,7 @@ router.post('/refresh', function (req, res) {
             // LAUNCH THE QUERY
             conn.query('SELECT * FROM sampledb.users WHERE jwt1 = ?', [JWT1], function (err, rows, field) {
                 if (err) {
-                    console.log("in err 1")
+                    console.log("log: error on query")
                     resMain.error = 1
                     resMain.error_description = err
                     // ERROR ON QUERY
@@ -223,7 +223,6 @@ router.post('/refresh', function (req, res) {
                 } else {
                     // SUCCESS ON QUERY
                     if (rows[0].jwt1 == JWT1) {
-                        //console.log("in success")
                         //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                         //CREATION OF token2 (SHORT)
                         var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
