@@ -83,8 +83,10 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
 router.get('/view', function (req, res) {
 
     //Assumptions : We receive in the req.body the userID of the user
-    var reqUserID = '2018_11_U_tglNGhK8bavYs6MVHAswuYpiX6gV7mJCy0HSghzO';
+    //var reqUserID = '2018_11_U_tglNGhK8bavYs6MVHAswuYpiX6gV7mJCy0HSghzO';
 
+    var user_id = req.body.user_id
+    
     //Definition of the tables and column
     var table = 'sampledb.users';
 
