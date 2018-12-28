@@ -97,43 +97,38 @@ router.post('/login', function (req, res) {
             res.status(500).json(resMain);
         } else {
             conn.query('SELECT * FROM sampledb.users WHERE email = ?', [emailreq], function (err, rows, fields) {
-                console.log("DEBUG EMAIL RECEIVED FROM THE CLIENT : " + emailreq);
+                console.log("log: Request for login with this email: ",emailreq);
                 if (err) {
                     resMain["error"] = 1;
                     resMain["error_description"] = "Error occured";
                     res.status(400).json(resMain);
                 } else {
                     if (rows.length > 0) {
-                        console.log("ONE EMAIL ADRESS FOUND IN THE DB AND PASSWORD WILL BE TESTED NOW");
+                        console.log("log: Check mail address OK");
                         if (rows[0].password == pwreq) {
 
-                            console.log("PASSWORD MATCHING ! :)");
+                            console.log("log: Check password OK");
 
                             //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
                             var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
-                            console.log("token2 short generated correctly");
+                            console.log("log: Token2 - short - generated correctly");
 
                             // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
                             var salt = { "password": rows[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
                             var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
-                            console.log("Token1 long generated correctly");
-
-                            //console.log("JWT1 LONG = " + token1);
-                            //console.log("JWT2 SHORT = " + token2);
-
+                            console.log("log: Token1 - long - generated correctly");
+                            
                             resMain.error = 0;
                             resMain.data["JWT1"] = token1;
                             resMain.data["JWT2"] = token2;
+                            resMain.data["userID"] = rows[0].user_id
 
-                            // STARTING THE QUERY TO LOAD THE JWT1 IN THE DATABASE
+                            // Query preparation
                             SQLtoken1 = "'" + token1 + "'"
                             SQLpwreq = "'" + pwreq+ "'"
                             SQLemailreq = "'" + emailreq + "'"
-
-                            //BUILD QUERY
                             var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + SQLtoken1 + ' WHERE password = ' + SQLpwreq + ' AND email = ' + SQLemailreq
-                            //console.log(strQuery)
-
+                            
                             conn.query(strQuery, function (err, rows, fields) {
                                 if (err) {
                                     resMain.error = 1
