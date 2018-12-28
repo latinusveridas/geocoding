@@ -16,6 +16,13 @@ var router = express.Router();
 // ====================================================== MAIN FUNCTIONS ======================================================
 
 router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
+    
+    var first_name = req.body.first_name
+    var last_name = req.body.last_name
+    var email = req.body.email
+    var password = req.body.password
+    var date_time_creation = ""
+    var jwt1 = ""
 
     //AppData is the status of the process, generally sent back to the user
     var appData = {
@@ -34,10 +41,10 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     console.log("GENERATED User_ID: " + userID) 
 
     var userData = {
-        "first_name": 'Henri',
-        "last_name": 'Leconte',
-        "email": 'henrileconte@gmail.com',
-        "password": '2548',
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email,
+        "password": password,
         "created": now,
         "jwt1": ""
     };
