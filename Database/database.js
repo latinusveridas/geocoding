@@ -19,7 +19,7 @@ function insertinto(table, values, callback) {
             console.log(err)
             callback('Error')
         } else {
-            console.log('RT INFO : Success on connection to the database :)')
+            console.log('log db: Success on connection to db')
             //PREPARATION OF THE QUERY
             var targetQuery = 'INSERT INTO ' + table + ' VALUES ( ' + values + ')';
 
