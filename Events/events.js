@@ -156,17 +156,21 @@ router.post('/createevent', function (req,res) {
 
                     console.log("Success posting of events data : ", isSuccessTableEvents)
                 
+                    // Verification des success et renvoie de la reponse
+                    if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
+                        resMain.success = 1
+                    res.status(200).json(resMain)
+                    } else {
+                        resMain.error = 1
+                        resMain.error_description = "posting failed"
+                    res.status(500).json(resMain)
+                    }
+
+
+
                 }); // Fin de pool.insertinto
                                 
-                // Verification des success et renvoie de la reponse
-                if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
-                    resMain.success = 1
-                res.status(201).json(resMain)
-                } else {
-                    resMain.error = 1
-                    resMain.error_description = "posting failed"
-                res.status(500).json(resMain)
-                }
+
 
         }); // fin de pool.insertinto table_location
     
