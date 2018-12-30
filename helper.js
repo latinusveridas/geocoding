@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var possibleSports = [
     "Yoga",
     "Running",
-    "Tracking",
     "Canoe",
     "Sailing",
     "Bowling",
