@@ -134,8 +134,19 @@ router.post('/createevent', function (req,res) {
                 "'" + organizer_id + "'",
                 ]
 
+                var events_col = [
+                    'event_id',
+                    'date',
+                    'location',
+                    'sport',
+                    'nb_part_sub',
+                    'nb_part_max',
+                    'price_per_part',
+                    'organizer_id'
+                ]
+
                 //On sauve la data events dans la table events
-                Pool.insertinto(targetTable, eventData, function (callback2) {
+                Pool.insertSpecific(targetTable, events_col, eventData, function (callback2) {
             
                     if (callback2.affectedRows = 1) {
                     isSuccessTableEvents = true
