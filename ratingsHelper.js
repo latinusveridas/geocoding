@@ -20,6 +20,16 @@ app.get('/ratings', function(req, res) {
     
     var coach_id = req.body.coach_id
     
+    // Define table name
+    var rat_table = "RAT_"+ coach_id
+    
+    // Define column
+    var target_col = "mark"
+    
+    //Calling database
+    selectonecolumn(rat_table,target_col, function (feedback) {
+    
+    });
     
 
 res.status(200).send(xxxxx)
