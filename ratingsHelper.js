@@ -56,6 +56,10 @@ var resMain = {
         console.log(global_rat)
         console.log(trgQuery)
         
+        pool.basicquery(trgQuery, function (callback) {
+        console.log(callback)
+        });
+        
     });
     
 
