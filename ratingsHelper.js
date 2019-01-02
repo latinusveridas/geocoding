@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 
 // DEFINE POOLING
-var pool = mysql.createPool({
+var pool_rat = mysql.createPool({
     connectionLimit: 10,
     host: "83.217.132.102",
     port: '3306',
@@ -11,7 +11,7 @@ var pool = mysql.createPool({
     database: "ratings_db"
 });
 
-module.exports.pool = pool;
+module.exports.pool_rat = pool_rat;
 
 // =====================================================
 
@@ -64,7 +64,7 @@ res.status(200).send(xxxxx)
 
 function selectonecolumn(table, col1, callback) {
 
-    pool.getConnection(function (err, con){
+    pool_rat.getConnection(function (err, con){
         if (err) {
             console.log(err)
         } else {
