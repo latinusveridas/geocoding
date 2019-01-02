@@ -18,6 +18,14 @@ module.exports.pool = pool;
 app.get('/ratings', function(req, res) {
     console.log("in ratings !")
     
+var resMain = {
+    "error": 0,
+    "error_description": "",
+    "success" : "",
+    "type_data" : "",
+    "data" : {}
+}
+    
     var coach_id = req.body.coach_id
     
     // Define table name
@@ -40,6 +48,8 @@ app.get('/ratings', function(req, res) {
         
         // Calcul of rating
         var global_rat = sumMarks/count
+        
+        // Update of global rating in coach table
         console.log(global_rat)
         
     });
