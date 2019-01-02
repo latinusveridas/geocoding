@@ -63,6 +63,12 @@ res.status(200).send(xxxxx)
 
 });
 
+//=====SERVER LAUNCH========
+// Helper on port 3001
+app.listen(3002,function(req,res){
+    console.log('RATING HELPER ON GOING');
+});
+
 
 // ============ HELPERS FUNCTIONS ====================
 
