@@ -11,16 +11,6 @@ var pool_rat = mysql.createPool({
     database: "ratings_db"
 });
 
-var pool = mysql.createPool({
-    connectionLimit: 10,
-    host: "83.217.132.102",
-    port: '3306',
-    user: "root",
-    password: "Miroslava326356$$$$$",
-    database: "sampledb"
-});
-
-module.exports.pool = pool;
 module.exports.pool_rat = pool_rat;
 
 // =====================================================
@@ -60,7 +50,11 @@ var resMain = {
         var global_rat = sumMarks/count
         
         // Update of global rating in coach table
+        // Define query
+        
+        var trgQuery = 'UPDATE ' + rat_table + ' SET ' + target_col + ' = ' + global_rat + ' WHERE ' organizer_id = ' coach_id
         console.log(global_rat)
+        console.log(trgQuery)
         
     });
     
@@ -97,6 +91,34 @@ function selectonecolumn(table, col1, callback) {
         }
     con.release();        
     });
+}
+
+function basicquery(query, callback) {
+
+    pool.getConnection(function (err,con) {
+
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+
+            con.query(query, function(err,result,fields){
+                if (err) {
+
+                    console.log(err)
+                } else {
+
+                    console.log("Real-Time Debug : basic/query function success, # of RowDataPacket sent: ", result.length)
+                    callback(result)
+                }
+
+            })
+        }
+
+        con.release();
+    })
+
+
 }
 
 function sum(input){       
