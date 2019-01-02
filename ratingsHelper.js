@@ -12,6 +12,18 @@ var pool = mysql.createPool({
 
 module.exports.pool = pool;
 
+// =====================================================
+
+app.get('/ratings', function(req, res) {
+    console.log("in ratings !")
+
+res.status(200).send(xxxxx)
+
+});
+
+
+// ============ HELPERS FUNCTIONS ====================
+
 function selectonecolumn(table, col1, callback) {
 
     pool.getConnection(function (err, con){
