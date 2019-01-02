@@ -1,6 +1,7 @@
+// VARIABLES
 var mysql = require('mysql');
 
-//DEFINE POOLING
+// DEFINE POOLING
 var pool = mysql.createPool({
     connectionLimit: 10,
     host: "83.217.132.102",
@@ -16,6 +17,10 @@ module.exports.pool = pool;
 
 app.get('/ratings', function(req, res) {
     console.log("in ratings !")
+    
+    var coach_id = req.body.coach_id
+    
+    
 
 res.status(200).send(xxxxx)
 
@@ -27,9 +32,7 @@ res.status(200).send(xxxxx)
 function selectonecolumn(table, col1, callback) {
 
     pool.getConnection(function (err, con){
-
         if (err) {
-            
             console.log(err)
         } else {
             console.log("Success to retrieve the connection")
@@ -40,8 +43,7 @@ function selectonecolumn(table, col1, callback) {
             console.log(targetQuery);
 
             con.query(targetQuery, function (err,result,fields){
-                if (err) {
-                    
+                if (err) {  
                     console.log(err)
                 } else {
                     console.log("log: Result length is ", result.length)
@@ -49,11 +51,7 @@ function selectonecolumn(table, col1, callback) {
                 }
 
             });
-
         }
-
-    con.release();
-        
+    con.release();        
     });
-
 }
