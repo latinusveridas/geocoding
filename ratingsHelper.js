@@ -7,12 +7,12 @@ var pool = mysql.createPool({
     port: '3306',
     user: "root",
     password: "Miroslava326356$$$$$",
-    database: "sampledb"
+    database: "ratings_db"
 });
 
 module.exports.pool = pool;
 
-function selectall(table, callback) {
+function selectonecolumn(table, col1, callback) {
 
     pool.getConnection(function (err, con){
 
@@ -23,7 +23,7 @@ function selectall(table, callback) {
             console.log("Success to retrieve the connection")
          
             //Preparation of the query
-            var targetQuery = 'SELECT * FROM ' + table;
+            var targetQuery = 'SELECT ' + col1 + ' FROM ' + table;
             
             console.log(targetQuery);
 
@@ -32,7 +32,7 @@ function selectall(table, callback) {
                     
                     console.log(err)
                 } else {
-                    console.log("Real-Time Debug : get/all function success, # of RowDataPacket sent: ", result.length)
+                    console.log("log, result.length)
                     callback(result) //<---- SUCCESS
                 }
 
