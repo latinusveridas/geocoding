@@ -29,6 +29,19 @@ app.get('/ratings', function(req, res) {
     //Calling database
     selectonecolumn(rat_table,target_col, function (feedback) {
     
+        var arr_result = JSON.stringify(feedback)
+        console.log(arr_result)
+        
+        // Counting elements in array
+        var count = arr_result.lenght
+        
+        // Sum of elements
+        var sumMarks = sum(arr_result)
+        
+        // Calcul of rating
+        var global_rat = sumMarks/count
+        console.log(global_rat)
+        
     });
     
 
