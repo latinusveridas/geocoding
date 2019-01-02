@@ -52,7 +52,7 @@ var resMain = {
         // Update of global rating in coach table
         // Define query
         
-        var trgQuery = 'UPDATE ' + rat_table + ' SET ' + target_col + ' = ' + global_rat + ' WHERE ' organizer_id = ' coach_id
+        var trgQuery = 'UPDATE ' + rat_table + ' SET ' + target_col + ' = ' + global_rat + ' WHERE ' +  'organizer_id = ' + coach_id
         console.log(global_rat)
         console.log(trgQuery)
         
