@@ -32,7 +32,7 @@ function selectonecolumn(table, col1, callback) {
                     
                     console.log(err)
                 } else {
-                    console.log("log, result.length)
+                    console.log("log: Result length is ", result.length)
                     callback(result) //<---- SUCCESS
                 }
 
