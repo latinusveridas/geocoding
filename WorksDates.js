@@ -44,6 +44,11 @@ app.get('/dates', function(req, res) {
     console.log("Current week is ", curr_week)
 });
 
+//================ SERVER LAUNCH ======================
+// Helper on port 3001
+app.listen(3002,function(req,res){
+    console.log('WORKS DATES ON GOING');
+});
 
 // ================ HELPERS =========================
 
