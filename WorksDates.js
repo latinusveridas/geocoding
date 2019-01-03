@@ -37,9 +37,11 @@ app.get('/dates', function(req, res) {
     
     // Obtain current year
     var curr_year = Date().getFullYear();
+    console.log("Current Year is ", curr_year)
     
     // Obtain current week
     var curr_week = mydate.getWeek()
+    console.log("Current week is ", curr_week)
 });
 
 
