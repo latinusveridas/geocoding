@@ -33,7 +33,7 @@ var resMain = {
 // =====================================================
 
 app.get('/dates', function(req, res) {
-    console.log("log : Laucnh of Date debug for databases")
+    console.log("log : Launch of Date debug for databases")
 
     
 // PRELIMINARY WORKS
@@ -47,8 +47,9 @@ app.get('/dates', function(req, res) {
     console.log("Current week is ", curr_week)
     
     // Collected tables in events db
+    var coll_tables = 'SHOW tables in events'
     basicquery(coll_tables, function (callback) {
-        
+        console.log(callback)
         
     });
     
