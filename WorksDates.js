@@ -47,10 +47,12 @@ app.get('/dates', function(req, res) {
     console.log("Current week is ", curr_week)
     
     // Collected tables in events db
-    var coll_tables = 'SHOW tables in events'
+    var coll_tables = 'SHOW TABLES'
+    var collection_tables = []
     basicquery(coll_tables, function (callback) {
         console.log(callback)
-        
+        collection_table = callback
+        console.log(collection_table)
     });
     
 });
