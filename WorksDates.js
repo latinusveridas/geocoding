@@ -34,6 +34,9 @@ var resMain = {
 
 app.get('/dates', function(req, res) {
     console.log("log : Laucnh of Date debug for databases")
+
+    
+// PRELIMINARY WORKS
     
     // Obtain current year
     var curr_year = Date().getFullYear();
@@ -42,6 +45,9 @@ app.get('/dates', function(req, res) {
     // Obtain current week
     var curr_week = mydate.getWeek()
     console.log("Current week is ", curr_week)
+    
+    
+    
 });
 
 //================ SERVER LAUNCH ======================
