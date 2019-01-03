@@ -46,7 +46,11 @@ app.get('/dates', function(req, res) {
     var curr_week = mydate.getWeek()
     console.log("Current week is ", curr_week)
     
-    
+    // Collected tables in events db
+    basicquery(coll_tables, function (callback) {
+        
+        
+    });
     
 });
 
@@ -76,4 +80,33 @@ Date.prototype.getWeekYear = function() {
   var date = new Date(this.getTime());
   date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
   return date.getFullYear();
+}
+
+// =================== DATABASES FUNCTIONS ==============================
+
+function basicquery(query, callback) {
+
+    pool_events.getConnection(function (err,con) {
+
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Success to retrieve the connection")
+
+            con.query(query, function(err,result,fields){
+                if (err) {
+
+                    console.log(err)
+                } else {
+
+                    console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
+                    callback(result)
+                }
+
+            })
+        }
+
+        con.release();
+    })
+
 }
