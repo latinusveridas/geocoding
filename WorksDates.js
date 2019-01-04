@@ -81,7 +81,6 @@ app.get('/dates', function(req, res) {
             // On loop dans les annees
             if (parseInt(tabl_year) < curr_year) {
                 // = Paste year, we check all tables
-            console.log("// 1 table year inferior to current year")
                 
                 // organizer_id = "debug_organizer_id_1"
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
@@ -95,7 +94,6 @@ app.get('/dates', function(req, res) {
 				
                 if (parseInt(tabl_year) == curr_year) {
                     // = Current Year, we check the weeks
-                console.log("table year equal current year")
                     
                     if (parseInt(tabl_week) < curr_week) {
                         // = Previous week, we test the table
@@ -106,18 +104,19 @@ app.get('/dates', function(req, res) {
                 basicquery(selec_query, function (callback) {
                 collected_events.push(callback)
                 }); // table year = curr year + table_week < curr_week
-			    
-                    console.log("Table to be check is ",elem)
-                        
+			                            
                     } else {
 						
                         if (parseInt(tabl_week) == curr_week) {
                             // = We are in present events tables
+
+			basicquery(selec_query, function (callback) {
+			collected_events.push(callback)
+			}); 
                             
                         } else {
                         
                         }
-                    console.log("table week superior of current week")
                         
                     }
                     
