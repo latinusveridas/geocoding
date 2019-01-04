@@ -61,7 +61,6 @@ app.get('/dates', function(req, res) {
         
     res = callback.map(v => v.Tables_in_events);
     console.log(res);
-    }
                
     });
     
