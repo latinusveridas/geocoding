@@ -51,15 +51,34 @@ app.get('/dates', function(req, res) {
     var curr_week = isoWeek();
     console.log("Current week is ", curr_week)
     
-    // Collected tables in events db
+    // Collect tables in events db
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
     basicquery(coll_tables, function (callback) {
-        
     collection_tables = callback.map(v => v.Tables_in_events);
     console.log(collection_tables);
-               
+        
+     // ! Now we know the tables to check ! 
+        
+     // We loop through each element of the collection_table to obtain year and week
+        
+        const arr = ['cat', 'dog', 'fish'];
+        for (i = 0; i < arr.length; i++) { 
+        console.log(arr[i])
+       
+        for (i = 0; i < collection_tables.length; i++) {
+            
+            var elem = collection_tables[i]
+            // Split text pour obtenir Year et Week
+            var tablYear = elem.substring(0,4);
+            
+            
+        }
+            
+}
+      
+        
     });
     
 });
