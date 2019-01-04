@@ -37,9 +37,11 @@ var resMain = {
 // =====================================================
 
 app.get('/dates', function(req, res) {
+   
+async function collAllEvents() {
+
     console.log("log : Launch of Date debug for databases")
 
-    
 // PRELIMINARY WORKS
     
     var collected_events = [] 
@@ -142,7 +144,11 @@ app.get('/dates', function(req, res) {
         
     });
     
-            
+ 
+}  // end of function
+
+collAllEvents()
+
 function sendResponse() {    
     console.log("end of dates function, result is ", collected_events)
     res.status(200).send("OK")
