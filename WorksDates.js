@@ -101,7 +101,7 @@ app.get('/dates', function(req, res) {
                     console.log("Table to be check is ",elem)
                         
                     } else {
-                        if (parseInt(table_week) == curr_week) {
+                        if (parseInt(tabl_week) == curr_week) {
                             // = We are in present events tables
                             
                         } else {
