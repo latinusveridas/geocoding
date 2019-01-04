@@ -59,6 +59,11 @@ app.get('/dates', function(req, res) {
         console.log(callback)
         collection_table = JSON.stringify(JSON.stringify(callback))
         console.log(collection_table)
+        
+    for (var i = 0; i < callback.length; i++) {
+    var row = callback[i]
+    console.log(row.Tables_in_events)
+}
     });
     
 });
