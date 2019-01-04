@@ -43,6 +43,7 @@ app.get('/dates', function(req, res) {
 // PRELIMINARY WORKS
     
     var collected_events = [] 
+    var organizer_id = "debug_organizer_id_1"
     
     // Obtain current year
     let now = new Date();
