@@ -76,15 +76,15 @@ app.get('/dates', function(req, res) {
             console.log("item ", elem, tabl_week)
             
             // On loop dans les annees
-            if parseInt(tabl_year) < curr_year {
+            if (parseInt(tabl_year) < curr_year) {
             console.log("table year inferior to current year")
                 
             } else {
             
-                if parseInt(tabl_year) = curr_year {
+                if (parseInt(tabl_year) = curr_year) {
                 console.log("table year equal current year")
                     
-                    if tabl_week < curr_week {
+                    if (parseInt(tabl_week) < curr_week) {
                     
                     } else {
                     console.log("table week inforior of current week")
