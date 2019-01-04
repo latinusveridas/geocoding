@@ -56,13 +56,15 @@ app.get('/dates', function(req, res) {
     var collection_tables = []
     
     basicquery(coll_tables, function (callback) {
-        console.log(callback)
-        collection_table = JSON.stringify(JSON.stringify(callback))
-        console.log(collection_table)
+    
+    console.log(callback)
         
     for (var i = 0; i < callback.length; i++) {
     var row = callback[i]
     console.log(row.Tables_in_events)
+        
+    res = row.map(v => v.RowDataPacket.Tables_in_events);
+    console.log(res);
 }
     });
     
