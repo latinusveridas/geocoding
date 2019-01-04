@@ -73,10 +73,10 @@ app.get('/dates', function(req, res) {
             
             // Split text pour obtenir Year et Week
             var tabl_year = elem.substring(0,4);
-            console.log("item ", elem, tablYear)
+            console.log("item ", elem, tabl_year)
             
             var tabl_week = elem.substring(6,2)
-            console.log("item ", elem, table_week)
+            console.log("item ", elem, tabl_week)
             
         }
             
