@@ -61,7 +61,7 @@ async function collAllEvents() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    basicquery(coll_tables, function (callback) {
+    await basicquery(coll_tables, function (callback) {
     collection_tables = callback.map(v => v.Tables_in_events);
     console.log(collection_tables);
         
@@ -108,7 +108,7 @@ async function collAllEvents() {
 			    
                     var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                     
-                    basicquery(selec_query, function (callback) {
+                    await basicquery(selec_query, function (callback) {
                     collected_events.push(callback)
                     console.log(callback)
                     }); 
@@ -119,7 +119,7 @@ async function collAllEvents() {
                             // = We are in present events tables
                             console.log("We start to check the table because its in the same year and same week")
 
-                        basicquery(selec_query, function (callback) {
+                        await basicquery(selec_query, function (callback) {
                         collected_events.push(callback)
                         console.log(callback)
                         }); 
