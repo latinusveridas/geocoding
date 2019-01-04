@@ -81,38 +81,41 @@ app.get('/dates', function(req, res) {
             // On loop dans les annees
             if (parseInt(tabl_year) < curr_year) {
                 // = Paste year, we check all tables
+                console.log("log: We start to check the table because previous year",elem)
                 
                 // organizer_id = "debug_organizer_id_1"
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
                 basicquery(selec_query, function (callback) {
                 collected_events.push(callback)
-                }); // 1 table year inferior to current year
+                }); 
                 
             } else {
 				// means its not inferior to current year 
 				
                 if (parseInt(tabl_year) == curr_year) {
                     // = Current Year, we check the weeks
-                    
+                    console.log("log: We start to check the table because it's the same year",elem)
+
                     if (parseInt(tabl_week) < curr_week) {
                         // = Previous week, we test the table
+                        console.log("We start to check the table because same year but previous week",elem)
 			    
-		// organizer_id = "debug_organizer_id_1"
-                var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
-                
-                basicquery(selec_query, function (callback) {
-                collected_events.push(callback)
-                }); // table year = curr year + table_week < curr_week
+                    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+                    
+                    basicquery(selec_query, function (callback) {
+                    collected_events.push(callback)
+                    }); 
 			                            
                     } else {
 						
                         if (parseInt(tabl_week) == curr_week) {
                             // = We are in present events tables
+                            console.log("We start to check the table because its in the same year and same week")
 
-			basicquery(selec_query, function (callback) {
-			collected_events.push(callback)
-			}); 
+                        basicquery(selec_query, function (callback) {
+                        collected_events.push(callback)
+                        }); 
                             
                         } else {
                         
