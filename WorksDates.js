@@ -7,7 +7,10 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// VARIABLES
+//DATES
+var isoWeek = require('iso-week');
+
+// DB
 var mysql = require('mysql');
 
 // DEFINE POOLING
@@ -43,7 +46,7 @@ app.get('/dates', function(req, res) {
     console.log("Current Year is ", curr_year)
     
     // Obtain current week
-    var curr_week = mydate.getWeek()
+    var curr_week = isoWeek();
     console.log("Current week is ", curr_week)
     
     // Collected tables in events db
