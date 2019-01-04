@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //DATES
 var isoWeek = require('iso-week');
+var dateModule = require('date-and-time');
 
 // DB
 var mysql = require('mysql');
@@ -42,7 +43,8 @@ app.get('/dates', function(req, res) {
 // PRELIMINARY WORKS
     
     // Obtain current year
-    var curr_year = Date().getFullYear();
+    let now = new Date();
+    var curr_year = dateModule.format(now, 'YYYY');
     console.log("Current Year is ", curr_year)
     
     // Obtain current week
