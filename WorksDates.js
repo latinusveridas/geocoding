@@ -83,6 +83,13 @@ app.get('/dates', function(req, res) {
                 // = Paste year, we check all tables
             console.log("table year inferior to current year")
                 
+                // organizer_id = "debug_organizer_id_1"
+                var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+                
+                basicquery(select_query, function (callback) {
+                collected_events.push(callback)
+                });
+                
             } else {
             
                 if (parseInt(tabl_year) == curr_year) {
