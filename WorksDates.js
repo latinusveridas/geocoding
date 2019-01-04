@@ -54,9 +54,11 @@ app.get('/dates', function(req, res) {
     // Collected tables in events db
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
+    
     basicquery(coll_tables, function (callback) {
         console.log(callback)
-        collection_table = JSON.stringify(JSON.stringify(callback))
+        //collection_table = JSON.stringify(JSON.stringify(callback))
+        collection_table = arr.map(v => v.RowDataPacket.Tables_in_events);
         console.log(collection_table)
     });
     
