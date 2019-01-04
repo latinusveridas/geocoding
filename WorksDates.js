@@ -81,14 +81,14 @@ app.get('/dates', function(req, res) {
             // On loop dans les annees
             if (parseInt(tabl_year) < curr_year) {
                 // = Paste year, we check all tables
-            console.log("table year inferior to current year")
+            console.log("// 1 table year inferior to current year")
                 
                 // organizer_id = "debug_organizer_id_1"
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
                 basicquery(select_query, function (callback) {
                 collected_events.push(callback)
-                });
+                
                 
             } else {
             
@@ -121,6 +121,8 @@ app.get('/dates', function(req, res) {
         }
         
     });
+    
+            }); // 1 table year inferior to current year
     
     console.log("end of dates function, result is ",collected_events)
     res.status(200).send("OK")
