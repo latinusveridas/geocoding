@@ -88,6 +88,7 @@ app.get('/dates', function(req, res) {
                 
                 basicquery(selec_query, function (callback) {
                 collected_events.push(callback)
+                console.log(callback)
                 }); 
                 
             } else {
@@ -105,6 +106,7 @@ app.get('/dates', function(req, res) {
                     
                     basicquery(selec_query, function (callback) {
                     collected_events.push(callback)
+                    console.log(callback)
                     }); 
 			                            
                     } else {
@@ -115,6 +117,7 @@ app.get('/dates', function(req, res) {
 
                         basicquery(selec_query, function (callback) {
                         collected_events.push(callback)
+                        console.log(callback)
                         }); 
                             
                         } else {
@@ -143,7 +146,7 @@ function sendResponse() {
     res.status(200).send("OK")
 }
 	
-setTimeout(sendResponse, 3000);
+//setTimeout(sendResponse, 3000);
 	
 });
 
