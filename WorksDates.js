@@ -42,6 +42,8 @@ app.get('/dates', function(req, res) {
     
 // PRELIMINARY WORKS
     
+    var collected_events = [] 
+    
     // Obtain current year
     let now = new Date();
     var curr_year = dateModule.format(now, 'YYYY');
