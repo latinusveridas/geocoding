@@ -88,10 +88,11 @@ app.get('/dates', function(req, res) {
                 
                 basicquery(select_query, function (callback) {
                 collected_events.push(callback)
-                
+                }); // 1 table year inferior to current year
                 
             } else {
-            
+				// means its not inferior to current year 
+				
                 if (parseInt(tabl_year) == curr_year) {
                     // = Current Year, we check the weeks
                 console.log("table year equal current year")
@@ -101,6 +102,7 @@ app.get('/dates', function(req, res) {
                     console.log("Table to be check is ",elem)
                         
                     } else {
+						
                         if (parseInt(tabl_week) == curr_week) {
                             // = We are in present events tables
                             
@@ -112,11 +114,11 @@ app.get('/dates', function(req, res) {
                     }
                     
                 } else {
-                
+                // means its not current year
+				
                 }
                 
-                
-				}); // 1 table year inferior to current year
+			
 				
             }
 
