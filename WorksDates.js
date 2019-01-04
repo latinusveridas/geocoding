@@ -56,7 +56,7 @@ app.get('/dates', function(req, res) {
     var collection_tables = []
     basicquery(coll_tables, function (callback) {
         console.log(callback)
-        collection_table = Object.values(JSON.stringify(callback))
+        collection_table = JSON.stringify(JSON.stringify(callback))
         console.log(collection_table)
     });
     
