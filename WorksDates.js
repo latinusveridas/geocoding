@@ -88,7 +88,7 @@ app.get('/dates', function(req, res) {
                 // organizer_id = "debug_organizer_id_1"
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
-                basicquery(selec_query, function (callback) {
+                await basicquery(selec_query, function (callback) {
                 collected_events.push(callback)
                 console.log(callback)
                 }); 
