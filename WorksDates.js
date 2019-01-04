@@ -49,6 +49,7 @@ app.get('/dates', function(req, res) {
     
     // Obtain current week
     var curr_week = isoWeek();
+    curr_week = 3 // DEBUG <-------------------------------------------
     console.log("Current week is ", curr_week)
     
     // Collect tables in events db
@@ -80,13 +81,13 @@ app.get('/dates', function(req, res) {
     
 });
 
-//================ SERVER LAUNCH ======================
+// ================ SERVER LAUNCH ======================
 // Helper on port 3001
 app.listen(3002,function(req,res){
     console.log('WORKS DATES ON GOING');
 });
 
-// ================ HELPERS =========================
+// ================ HELPERS ==========================
 
 
 
