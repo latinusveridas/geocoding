@@ -87,9 +87,7 @@ app.get('/dates', function(req, res) {
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
                 basicquery(selec_query, function (callback) {
-			console.log(callback)
                 collected_events.push(callback)
-		console.log(collected_events)
                 }); // 1 table year inferior to current year
                 
             } else {
@@ -106,9 +104,7 @@ app.get('/dates', function(req, res) {
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
                 basicquery(selec_query, function (callback) {
-			console.log(callback)
                 collected_events.push(callback)
-		console.log(collected_events)
                 }); // table year = curr year + table_week < curr_week
 			    
                     console.log("Table to be check is ",elem)
