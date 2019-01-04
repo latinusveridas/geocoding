@@ -62,11 +62,7 @@ app.get('/dates', function(req, res) {
      // ! Now we know the tables to check ! 
         
      // We loop through each element of the collection_table to obtain year and week
-        
-        const arr = ['cat', 'dog', 'fish'];
-        for (i = 0; i < arr.length; i++) { 
-        console.log(arr[i])
-       
+              
         for (i = 0; i < collection_tables.length; i++) {
             
             var elem = collection_tables[i]
@@ -75,7 +71,7 @@ app.get('/dates', function(req, res) {
             var tabl_year = elem.substring(0,4);
             console.log("item ", elem, tabl_year)
             
-            var tabl_week = elem.substring(6,2)
+            var tabl_week = elem.substring(7,8)
             console.log("item ", elem, tabl_week)
             
         }
