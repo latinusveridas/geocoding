@@ -101,6 +101,16 @@ app.get('/dates', function(req, res) {
                     
                     if (parseInt(tabl_week) < curr_week) {
                         // = Previous week, we test the table
+			    
+		// organizer_id = "debug_organizer_id_1"
+                var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+                
+                basicquery(selec_query, function (callback) {
+			console.log(callback)
+                collected_events.push(callback)
+		console.log(collected_events)
+                }); // table year = curr year + table_week < curr_week
+			    
                     console.log("Table to be check is ",elem)
                         
                     } else {
