@@ -56,11 +56,9 @@ app.get('/dates', function(req, res) {
     var collection_tables = []
     
     basicquery(coll_tables, function (callback) {
-    
-    console.log(callback)
         
-    res = callback.map(v => v.Tables_in_events);
-    console.log(res);
+    collection_tables = callback.map(v => v.Tables_in_events);
+    console.log(collection_tables);
                
     });
     
