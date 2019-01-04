@@ -71,6 +71,8 @@ app.get('/dates', function(req, res) {
             
             var elem = collection_tables[i]
             
+            console.log("We start element", elem)
+
             // Split text pour obtenir Year et Week
             var tabl_year = elem.substring(0,4);
             //console.log("item ", elem, tabl_year)
