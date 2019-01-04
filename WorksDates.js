@@ -128,10 +128,13 @@ app.get('/dates', function(req, res) {
     });
     
             
-    
-    console.log("end of dates function, result is ",collected_events)
+function sendResponse() {    
+    console.log("end of dates function, result is ", collected_events)
     res.status(200).send("OK")
-    
+}
+	
+setTimeout(sendResponse, 3000);
+	
 });
 
 // ================ SERVER LAUNCH ======================
