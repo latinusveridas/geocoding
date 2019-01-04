@@ -78,10 +78,19 @@ app.get('/dates', function(req, res) {
             // On loop dans les annees
             if tabl_year < curr_year {
             console.log("table year inferior to current year")
+                
             } else {
             
-                if table_year = curr_year {
-                
+                if tabl_year = curr_year {
+                console.log("table year equal current year")
+                    
+                    if tabl_week < curr_week {
+                    
+                    } else {
+                    console.log("table week inforior of current week")
+                        
+                    }
+                    
                 } else {
                 
                 }
