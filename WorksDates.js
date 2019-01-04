@@ -88,7 +88,7 @@ app.get('/dates', function(req, res) {
                 
                 basicquery(select_query, function (callback) {
                 collected_events.push(callback)
-                
+                }); // 1 table year inferior to current year
                 
             } else {
             
@@ -122,7 +122,7 @@ app.get('/dates', function(req, res) {
         
     });
     
-            }); // 1 table year inferior to current year
+            
     
     console.log("end of dates function, result is ",collected_events)
     res.status(200).send("OK")
