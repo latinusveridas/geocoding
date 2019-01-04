@@ -122,6 +122,9 @@ app.get('/dates', function(req, res) {
         
     });
     
+    console.log("end of dates function, result is ",collected_events)
+    res.status(200).send("OK")
+    
 });
 
 // ================ SERVER LAUNCH ======================
