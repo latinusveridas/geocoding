@@ -71,13 +71,10 @@ app.get('/dates', function(req, res) {
             var tabl_year = elem.substring(0,4);
             console.log("item ", elem, tabl_year)
             
-            var tabl_week = elem.substring(7,8)
+            var tabl_week = elem.substring(7,8);
             console.log("item ", elem, tabl_week)
             
         }
-            
-}
-      
         
     });
     
