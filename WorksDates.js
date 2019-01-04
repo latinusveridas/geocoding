@@ -63,7 +63,7 @@ app.get('/dates', function(req, res) {
     var row = callback[i]
     console.log(row.Tables_in_events)
         
-    res = callback.map(v => v.RowDataPacket[0].Tables_in_events);
+    res = callback.map(v => v.Tables_in_events);
     console.log(res);
 }
     });
