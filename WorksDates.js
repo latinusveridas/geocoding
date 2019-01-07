@@ -108,7 +108,7 @@ function collAllEvents() {
 			    
                     var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                     
-                    await basicquery(selec_query, function (callback) {
+                    basicquery(selec_query, function (callback) {
                     collected_events.push(callback)
                     console.log(callback)
                     }); 
