@@ -231,6 +231,7 @@ function collectTablesInEventsDB() {
     
     promiseBasicQuery(coll_tables).then(results => {
     collection_tables = results.map(v => v.Tables_in_events);
+    console.log("IN COLLECTTABLESOIN EVENTS ", collection_tables)
     return collection_tables
     });
 				    
