@@ -233,7 +233,7 @@ function collectTablesInEventsDB() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    promiseBasicQuery(call_tables).then(results => {
+    promiseBasicQuery(coll_tables).then(results => {
     console.log(results)
     });
 				    
