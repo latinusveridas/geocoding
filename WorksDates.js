@@ -38,7 +38,7 @@ var resMain = {
 
 app.get('/dates', function(req, res) {
    
-async function collAllEvents() {
+function collAllEvents() {
 
     console.log("log : Launch of Date debug for databases")
 
@@ -61,7 +61,7 @@ async function collAllEvents() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    await basicquery(coll_tables, function (callback) {
+    basicquery(coll_tables, function (callback) {
     collection_tables = callback.map(v => v.Tables_in_events);
     console.log(collection_tables);
         
@@ -90,7 +90,7 @@ async function collAllEvents() {
                 // organizer_id = "debug_organizer_id_1"
                 var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
                 
-                await basicquery(selec_query, function (callback) {
+                basicquery(selec_query, function (callback) {
                 collected_events.push(callback)
                 console.log(callback)
                 }); 
@@ -119,7 +119,7 @@ async function collAllEvents() {
                             // = We are in present events tables
                             console.log("We start to check the table because its in the same year and same week")
 
-                        await basicquery(selec_query, function (callback) {
+                        basicquery(selec_query, function (callback) {
                         collected_events.push(callback)
                         console.log(callback)
                         }); 
