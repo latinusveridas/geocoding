@@ -40,7 +40,7 @@ var resMain = {
 
 app.get('/dates2', function (req,res) {
 	
-	var FullCollection = ["AVK","PPK"]
+	var CollectedOrganizedEvents = []
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 	collectTablesInEventsDB().then(collection_tables => {
@@ -58,8 +58,8 @@ app.get('/dates2', function (req,res) {
 	// 3. On recupere les lignes de la tables
 	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 	console.log(obtainedRowResults)
-
-	console.log(FullCollection)
+	CollectedOrganizedEvents.push(obtainedRowResults)
+	console.log(CollectedOrganizedEvents)
 		
 	})
 		
