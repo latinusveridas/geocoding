@@ -183,33 +183,34 @@ app.listen(3002,function(req,res){
 
 // =================== DATABASES FUNCTIONS ==============================
 
-let queryPromise = new Promise(query, function (resolve,reject) {
-	
-    pool_events.getConnection(function (err,con) {
+function promiseBasicQuery(query) {
+	return new Promise((resolve,reject) {
 		
-        if (err) {
-            console.log(err)
-        } else {
-            console.log("Success to retrieve the connection")
-
-		con.query(query, function(err,result,fields){
+		pool_events.getConnection(function (err,con) {
 			
-                if (err) {
-					return reject(err)
-                    console.log(err)
-                } else {
-                    console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
-                    return resolve(result)
-                }
+			if (err) {
+				console.log(err)
+			} else {
+				console.log("Success to retrieve the connection")
 
-            	})
-	    
-        }
+			con.query(query, function(err,result,fields){
+				
+					if (err) {
+						return reject(err)
+						console.log(err)
+					} else {
+						console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
+						return resolve(result)
+					}
 
-        con.release();
-    })
+					})
+			
+			}
+			con.release();
+		})
 
-})
+	})
+}
 
 function collectTablesInEventsDB() {
 
@@ -232,8 +233,8 @@ function collectTablesInEventsDB() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    queryPromise(call_tables).then(result => {
-    console.log(result)
+    promiseBasicQuery(call_tables).then(results => {
+    console.log(results)
     });
 				    
 
