@@ -245,47 +245,36 @@ function collectTablesInEventsDB() {
 
 function tableShouldBeTested(){
 	
-    // Obtain current year
-    let now = new Date();
-    var curr_year = dateModule.format(now, 'YYYY');
-    console.log("Current Year is ", curr_year)
-    
-    // Obtain current week
-    var curr_week = isoWeek();
-    curr_week = 3 // DEBUG <-------------------------------------------
-    console.log("Current week is ", curr_week)
+	var ToBeTested = false	
 	
-	            // Split text pour obtenir Year et Week
-            var tabl_year = elem.substring(0,4);
-            //console.log("item ", elem, tabl_year)
-            
-            var tabl_week = elem.substring(6,8);
-            //console.log("item ", elem, tabl_week)
-            
-            // On loop dans les annees
-            if (parseInt(tabl_year) < curr_year) {
-                // = Paste year, we check all tables
-                console.log("log: We start to check the table because previous year",elem)
-		    
-		      if (parseInt(tabl_year) == curr_year) {
-                    // = Current Year, we check the weeks
-                    console.log("log: We start to check the table because it's the same year",elem)
+	// Obtain current year
+	let now = new Date();
+	var curr_year = dateModule.format(now, 'YYYY');
+	console.log("Current Year is ", curr_year)
 
-                    if (parseInt(tabl_week) < curr_week) {
-                        // = Previous week, we test the table
-                        console.log("We start to check the table because same year but previous week",elem)
-			    
-                    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
-                    
-                    basicquery(selec_query, function (callback) {
-                    collected_events.push(callback)
-                    console.log(callback)
-                    }); 
-			                            
-                    } else {
-						
-                        if (parseInt(tabl_week) == curr_week) {
-                            // = We are in present events tables
-                            console.log("We start to check the table because its in the same year and same week")
+	// Obtain current week
+	var curr_week = isoWeek();
+	curr_week = 3 // DEBUG <-------------------------------------------
+	console.log("Current week is ", curr_week)
+	
+	// Split text du table pour obtenir Year et Week
+	var tabl_year = elem.substring(0,4);
+	//console.log("item ", elem, tabl_year)
+	var tabl_week = elem.substring(6,8);
+	//console.log("item ", elem, tabl_week)
+
+	// On loop dans les annees
+	if (parseInt(tabl_year) < curr_year) {
+	ToBeTested = true
+	return (ToBeTested) else {
+		      
+		if (parseInt(tabl_year) == curr_year) {
+			
+			if (parseInt(tabl_week) < curr_week) {
+			ToBeTested = true
+			return (ToBeTested)
+
+
+if (parseInt(tabl_week) == curr_week) {
 
 }
