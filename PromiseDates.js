@@ -42,7 +42,7 @@ app.get('/dates2', function (req,res) {
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 	collectTablesInEventsDB().then(collection_tables => {
-		
+		console.log("Principal log, result is : ",collection_tables)
 		for (i = 0; i < collection_tables.length; i++) {
 		//On teste chaque element
 			
@@ -244,7 +244,6 @@ function collectTablesInEventsDB() {
 
 	    promiseBasicQuery(coll_tables).then(results => {
 	    collection_tables = results.map(v => v.Tables_in_events);
-	    console.log("IN COLLECTTABLESOIN EVENTS ", collection_tables)
 	    return resolve(collection_tables)
 	    });
 
