@@ -266,15 +266,26 @@ function tableShouldBeTested(){
 	// On loop dans les annees
 	if (parseInt(tabl_year) < curr_year) {
 	ToBeTested = true
-	return (ToBeTested) else {
+	return (ToBeTested) 
+	} else {
 		      
 		if (parseInt(tabl_year) == curr_year) {
+			// Deux cas de figure
 			
 			if (parseInt(tabl_week) < curr_week) {
 			ToBeTested = true
 			return (ToBeTested)
-
-
-if (parseInt(tabl_week) == curr_week) {
-
+			} else {
+				if (parseInt(tabl_week) == curr_week) {
+				ToBeTested = true
+				return (ToBeTested)
+				} else {
+					
+				}
+			}
+		} else {
+			
+		}
+	}
+	
 }
