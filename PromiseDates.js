@@ -201,7 +201,7 @@ function basicquery(query, callback) {
                 } else {
 
                     console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
-                    resolve(result)
+                    return resolve(result)
                 }
 
             	})
