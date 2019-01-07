@@ -61,8 +61,8 @@ app.get('/dates2', function (req,res) {
 				CollectedOrganizedEvents.push(obtainedRowResults)
 				console.log("State of collected events", CollectedOrganizedEvents)
 					console.log("i = ", i)
-					console.log("collenction lenght", collection_tables)
-					if ( i == collection_tables.length ) {
+					console.log("collenction lenght", collection_tables.length)
+					if ( i = collection_tables.length ) {
 						res.status(200).json(CollectedOrganizedEvents)
 					} else {
 						
