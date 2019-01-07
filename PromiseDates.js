@@ -70,16 +70,6 @@ app.get('/dates2', function (req,res) {
 
 })
 
-// =====================================================
-
-function sendResponse() {    
-    res.status(200).send()
-}
-	
-//setTimeout(sendResponse, 3000);
-	
-});
-
 // ================ SERVER LAUNCH ======================
 // Helper on port 3001
 app.listen(3002,function(req,res){
@@ -88,7 +78,10 @@ app.listen(3002,function(req,res){
 
 // ================ HELPERS ==========================
 
-
+function sendResponse(final) {    
+// We just send the response
+    res.status(200).send(final)
+}	
 
 // =================== DATABASES FUNCTIONS ==============================
 
