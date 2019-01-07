@@ -46,7 +46,9 @@ app.get('/dates2', function (req,res) {
 		for (i = 0; i < collection_tables.length; i++) {
 		//On teste chaque element
 			
-			tableShouldBeTested(i)
+			tableShouldBeTested(i).then( ShouldBeTested => {
+			console.log("Element ",i," results is ",ShouldBeTested)
+			})
 			
 		}	
 
