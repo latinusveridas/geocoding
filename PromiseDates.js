@@ -93,7 +93,7 @@ function collAllEvents() {
         
      // We loop through each element of the collection_table to obtain year and week
               
-        for (i = 0; i < collection_tables.length; i++) {
+        for (i = 0; i <= collection_tables.length; i++) {
             
             var elem = collection_tables[i]
             
@@ -272,9 +272,9 @@ function tableShouldBeTested(i) {
 
 		// Split text du table pour obtenir Year et Week
 		var tabl_year = i.substring(0,4);
-		//console.log("item ", elem, tabl_year)
+		console.log("item ", elem, tabl_year)
 		var tabl_week = i.substring(6,8);
-		//console.log("item ", elem, tabl_week)
+		console.log("item ", elem, tabl_week)
 
 		// On loop dans les annees
 		if (parseInt(tabl_year) < curr_year) {
