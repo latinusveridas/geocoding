@@ -180,17 +180,20 @@ function basicquery(query, callback) {
         } else {
             console.log("Success to retrieve the connection")
 
-            con.query(query, function(err,result,fields){
+            return new Promise (function (resolve,reject) {
+		
+		con.query(query, function(err,result,fields){
                 if (err) {
-
+			return reject(err)
                     console.log(err)
                 } else {
 
                     console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
-                    callback(result)
+                    resolve(result)
                 }
 
-            })
+            	})
+	    })
         }
 
         con.release();
