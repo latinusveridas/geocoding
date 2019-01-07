@@ -41,8 +41,15 @@ var resMain = {
 app.get('/dates2', function (req,res) {
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
-	collectTablesInEventsDB().then(resultat => {
-	console.log("PIRNCIPALE ", resultat)
+	collectTablesInEventsDB().then(collection_tables => {
+		
+		for (i = 0; i < collection_tables.length; i++) {
+		//On teste chaque element
+			
+			tableShouldBeTested(i)
+			
+		}	
+
 	})
 
 })
