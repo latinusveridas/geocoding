@@ -234,11 +234,14 @@ function collectTablesInEventsDB() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    return new Promise ( (resolve,reject) => {
+    return new Promise ( (resolve, reject) => {
+	    
 	basicquery(coll_tables, function (callback) {
+		
 	collection_tables = callback.map(v => v.Tables_in_events);
-	//console.log(collection_tables);    
-	resolve(collection_tables)
+		
+	resolve(callback)
+		
 	})
     })
 }
