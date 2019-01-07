@@ -237,7 +237,7 @@ function collectTablesInEventsDB() {
     return new Promise ( (resolve, reject) => {
 	    
 	basicquery(coll_tables, function (callback) {
-		
+		console.log("RAW CALLBACK IS ", callback)
 	collection_tables = callback.map(v => v.Tables_in_events);
 		
 	resolve(callback)
