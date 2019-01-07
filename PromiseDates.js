@@ -240,5 +240,5 @@ function collectTablesInEventsDB() {
 	//console.log(collection_tables);    
 	resolve(collection_tables)
 	})
-    }
+    })
 }
