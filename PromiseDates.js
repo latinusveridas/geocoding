@@ -293,11 +293,11 @@ function tableShouldBeTested(i) {
 					ToBeTested = true
 					return resolve(ToBeTested)
 					} else {
-
+					return resolve(ToBeTested)
 					}
 				}
 			} else {
-
+			return resolve(ToBeTested)
 			}
 		}
 		
