@@ -39,6 +39,8 @@ var resMain = {
 // ====================================================
 
 app.get('/dates2', function (req,res) {
+	
+	var FullCollection = ["AVK","PPK"]
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 	collectTablesInEventsDB().then(collection_tables => {
@@ -57,7 +59,7 @@ app.get('/dates2', function (req,res) {
 	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 	console.log(obtainedRowResults)
 
-	res.status(200).json(obtainedRowResults)
+	console.log(FullCollection)
 		
 	})
 		
