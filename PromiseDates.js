@@ -42,7 +42,7 @@ app.get('/dates2', function (req,res) {
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 	collectTablesInEventsDB().then( collected => {
-		console.log(collected)
+		console.log("AFTER ", collected)
 	})
 
 })
@@ -192,14 +192,12 @@ function promiseBasicQuery(query) {
 				console.log(err)
 			} else {
 				console.log("Success to retrieve the connection")
-
-			con.query(query, function(err,result,fields){
-				
+			con.query(query, function(err,result,fields) {	
 					if (err) {
 						return reject(err)
 						console.log(err)
 					} else {
-						console.log("log: basic/query function success, # of RowDataPacket sent: ", result.length)
+						console.log("log: promiseBasicQuery # of RowDataPacket sent: ", result.length)
 						return resolve(result)
 					}
 
