@@ -56,6 +56,9 @@ app.get('/dates2', function (req,res) {
 	// 3. On recupere les lignes de la tables
 	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 	console.log(obtainedRowResults)
+
+	sendResponse(obtainedRowResults)
+		
 	})
 		
 	} else {
