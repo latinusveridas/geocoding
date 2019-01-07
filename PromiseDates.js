@@ -59,7 +59,6 @@ app.get('/dates2', function (req,res) {
 	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 	console.log(obtainedRowResults)
 	CollectedOrganizedEvents.push(obtainedRowResults)
-	console.log(CollectedOrganizedEvents)
 		
 	})
 		
@@ -69,7 +68,9 @@ app.get('/dates2', function (req,res) {
 		
 	})
 			
-	}	
+	}
+
+	res.status(200).json(CollectedOrganizedEvents)
 
 	})
 
