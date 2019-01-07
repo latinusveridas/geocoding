@@ -210,34 +210,34 @@ function promiseBasicQuery(query) {
 
 function collectTablesInEventsDB() {
 
-return new Promise(function(resolve,reject) => {
-    
+	return new Promise(function(resolve,reject) {
 
-    // PRELIMINARY WORKS
-    var collected_events = [] 
-    var organizer_id = "'debug_organizer_id_1'"
-    
-    // Obtain current year
-    let now = new Date();
-    var curr_year = dateModule.format(now, 'YYYY');
-    console.log("Current Year is ", curr_year)
-    
-    // Obtain current week
-    var curr_week = isoWeek();
-    curr_week = 3 // DEBUG <-------------------------------------------
-    console.log("Current week is ", curr_week)
-    
-    // Collect tables in events db
-    var coll_tables = 'SHOW TABLES'
-    var collection_tables = []
-    
-    promiseBasicQuery(coll_tables).then(results => {
-    collection_tables = results.map(v => v.Tables_in_events);
-    console.log("IN COLLECTTABLESOIN EVENTS ", collection_tables)
-    return resolve(collection_tables)
-    });
-	
-})
+
+	    // PRELIMINARY WORKS
+	    var collected_events = [] 
+	    var organizer_id = "'debug_organizer_id_1'"
+
+	    // Obtain current year
+	    let now = new Date();
+	    var curr_year = dateModule.format(now, 'YYYY');
+	    console.log("Current Year is ", curr_year)
+
+	    // Obtain current week
+	    var curr_week = isoWeek();
+	    curr_week = 3 // DEBUG <-------------------------------------------
+	    console.log("Current week is ", curr_week)
+
+	    // Collect tables in events db
+	    var coll_tables = 'SHOW TABLES'
+	    var collection_tables = []
+
+	    promiseBasicQuery(coll_tables).then(results => {
+	    collection_tables = results.map(v => v.Tables_in_events);
+	    console.log("IN COLLECTTABLESOIN EVENTS ", collection_tables)
+	    return resolve(collection_tables)
+	    });
+
+	})
 				    
 
 }
