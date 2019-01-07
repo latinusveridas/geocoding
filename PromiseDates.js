@@ -43,14 +43,16 @@ app.get('/dates2', function (req,res) {
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 	collectTablesInEventsDB().then(collection_tables => {
 		console.log("Principal log, result is : ",collection_tables)
-		for (i = 0; i < collection_tables.length; i++) {
-		//On teste chaque element
-			console.log("Just for debug, i = ",i)
-			tableShouldBeTested(i).then( ShouldBeTested => {
-			console.log("Element ",i," results is ",ShouldBeTested)
-			})
+
+	for (i = 0; i < collection_tables.length; i++) {
+	//On teste chaque element i
 			
-		}	
+	console.log("Just for debug, i = ",i)
+	tableShouldBeTested(i).then( ShouldBeTested => {
+	console.log("Element ",i," results is ",ShouldBeTested)
+	})
+			
+	}	
 
 	})
 
