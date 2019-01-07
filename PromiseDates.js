@@ -41,9 +41,9 @@ var resMain = {
 app.get('/dates2', function (req,res) {
 
 	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
-	collectTablesInEventsDB().then(collected) => {
+	collectTablesInEventsDB().then( collected => {
 		console.log(collected)
-	}
+	})
 
 }
 
