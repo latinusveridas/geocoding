@@ -46,16 +46,21 @@ app.get('/dates2', function (req,res) {
 
 	for (let i = 0; i < collection_tables.length; i++) {
 	//On teste chaque element i
-		
+	
+	// 2. On teste si la table doit etre teste
 	tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
 	// if result is true, we screen the table
-		if (ShouldBeTested == true) {
-			checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
-			console.log(obtainedRowResults)
-			})
-		} else {
-		// Do nothing
-		}
+		
+	if (ShouldBeTested == true) {
+		
+	// 3. On recupere les lignes de la tables
+	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+	console.log(obtainedRowResults)
+	})
+		
+	} else {
+	// Do nothing
+	}
 		
 	})
 			
