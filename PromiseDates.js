@@ -232,7 +232,10 @@ function collectTablesInEventsDB() {
     var coll_tables = 'SHOW TABLES'
     var collection_tables = []
     
-    queryPromise(call_tables, 
+    queryPromise(call_tables).then(result => {
+    console.log(result)
+    });
+				    
 
 }
 
