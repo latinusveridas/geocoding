@@ -251,49 +251,53 @@ function collectTablesInEventsDB() {
 
 }
 
-function tableShouldBeTested(){
+function tableShouldBeTested(i) {
 	
-	var ToBeTested = false	
+	return new Promise (function (resolve,reject) {
 	
-	// Obtain current year
-	let now = new Date();
-	var curr_year = dateModule.format(now, 'YYYY');
-	console.log("Current Year is ", curr_year)
+		var ToBeTested = false	
 
-	// Obtain current week
-	var curr_week = isoWeek();
-	curr_week = 3 // DEBUG <-------------------------------------------
-	console.log("Current week is ", curr_week)
-	
-	// Split text du table pour obtenir Year et Week
-	var tabl_year = elem.substring(0,4);
-	//console.log("item ", elem, tabl_year)
-	var tabl_week = elem.substring(6,8);
-	//console.log("item ", elem, tabl_week)
+		// Obtain current year
+		let now = new Date();
+		var curr_year = dateModule.format(now, 'YYYY');
+		console.log("Current Year is ", curr_year)
 
-	// On loop dans les annees
-	if (parseInt(tabl_year) < curr_year) {
-	ToBeTested = true
-	return (ToBeTested) 
-	} else {
-		      
-		if (parseInt(tabl_year) == curr_year) {
-			// Deux cas de figure
-			
-			if (parseInt(tabl_week) < curr_week) {
-			ToBeTested = true
-			return (ToBeTested)
-			} else {
-				if (parseInt(tabl_week) == curr_week) {
-				ToBeTested = true
-				return (ToBeTested)
-				} else {
-					
-				}
-			}
+		// Obtain current week
+		var curr_week = isoWeek();
+		curr_week = 3 // DEBUG <-------------------------------------------
+		console.log("Current week is ", curr_week)
+
+		// Split text du table pour obtenir Year et Week
+		var tabl_year = i.substring(0,4);
+		//console.log("item ", elem, tabl_year)
+		var tabl_week = i.substring(6,8);
+		//console.log("item ", elem, tabl_week)
+
+		// On loop dans les annees
+		if (parseInt(tabl_year) < curr_year) {
+		ToBeTested = true
+		return resolve(ToBeTested) 
 		} else {
-			
+
+			if (parseInt(tabl_year) == curr_year) {
+				// Deux cas de figure
+
+				if (parseInt(tabl_week) < curr_week) {
+				ToBeTested = true
+				return resolve(ToBeTested)
+				} else {
+					if (parseInt(tabl_week) == curr_week) {
+					ToBeTested = true
+					return resolve(ToBeTested)
+					} else {
+
+					}
+				}
+			} else {
+
+			}
 		}
-	}
+		
+	})
 	
 }
