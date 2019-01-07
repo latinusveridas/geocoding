@@ -184,7 +184,7 @@ app.listen(3002,function(req,res){
 // =================== DATABASES FUNCTIONS ==============================
 
 function promiseBasicQuery(query) {
-	return new Promise((resolve,reject) {
+	return new Promise(function(resolve,reject) {
 		
 		pool_events.getConnection(function (err,con) {
 			
