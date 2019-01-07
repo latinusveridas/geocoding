@@ -45,7 +45,7 @@ app.get('/dates2', function (req,res) {
 		console.log(collected)
 	})
 
-}
+})
 
 // =====================================================
 
