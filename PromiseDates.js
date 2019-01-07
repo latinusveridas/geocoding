@@ -65,7 +65,7 @@ app.get('/dates2', function (req,res) {
 					if ( i = collection_tables.length - 1 ) {
 						console.log("IN FINAL !!")
 						console.log("i = ", i)
-						res.status(200).json(CollectedOrganizedEvents)
+						res.json(CollectedOrganizedEvents)
 					} else {
 						
 					}
