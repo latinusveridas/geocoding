@@ -57,7 +57,7 @@ app.get('/dates2', function (req,res) {
 	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 	console.log(obtainedRowResults)
 
-	sendResponse(obtainedRowResults)
+	res.status(200).json(obtainedRowResults)
 		
 	})
 		
@@ -81,10 +81,6 @@ app.listen(3002,function(req,res){
 
 // ================ HELPERS ==========================
 
-function sendResponse(final) {    
-// We just send the response
-    res.status(200).send(final)
-}	
 
 // =================== DATABASES FUNCTIONS ==============================
 
