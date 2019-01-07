@@ -46,34 +46,36 @@ app.get('/dates2', function (req,res) {
 	collectTablesInEventsDB().then(collection_tables => {
 		console.log("Principal log, result is : ",collection_tables)
 
-	for (let i = 0; i < collection_tables.length; i++) {
-	//On teste chaque element i
-	
-	// 2. On teste si la table doit etre teste
-	tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
-	// if result is true, we screen the table
+		for (let i = 0; i < collection_tables.length; i++) {
+		//On teste chaque element i
 		
-	if (ShouldBeTested == true) {
-		
-	// 3. On recupere les lignes de la tables
-	checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
-	console.log(obtainedRowResults)
-	CollectedOrganizedEvents.push(obtainedRowResults)
-	console.log("State of collected events", CollectedOrganizedEvents)	
-	})
-		
-	} else {
-	// Do nothing
-	}
-		
-	})
+		// 2. On teste si la table doit etre teste
+		tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
+		// if result is true, we screen the table
 			
-	}
-
-	res.status(200).json(CollectedOrganizedEvents)
+			if (ShouldBeTested == true) {
+				
+				// 3. On recupere les lignes de la tables
+				checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+				console.log(obtainedRowResults)
+				CollectedOrganizedEvents.push(obtainedRowResults)
+				console.log("State of collected events", CollectedOrganizedEvents)
+					if ( i = collection_tables ) {
+						res.status(200).json(CollectedOrganizedEvents)
+					} else {
+						
+					}
+				})
+				
+			} else {
+			// Do nothing
+			}
+				
+			})
+				
+		}
 
 	})
-
 })
 
 // ================ SERVER LAUNCH ======================
