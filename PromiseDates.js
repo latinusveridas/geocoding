@@ -210,8 +210,10 @@ function promiseBasicQuery(query) {
 
 function collectTablesInEventsDB() {
 
-// PRELIMINARY WORKS
+return new Promise(function(resolve,reject) => {
     
+
+    // PRELIMINARY WORKS
     var collected_events = [] 
     var organizer_id = "'debug_organizer_id_1'"
     
@@ -232,8 +234,10 @@ function collectTablesInEventsDB() {
     promiseBasicQuery(coll_tables).then(results => {
     collection_tables = results.map(v => v.Tables_in_events);
     console.log("IN COLLECTTABLESOIN EVENTS ", collection_tables)
-    return collection_tables
+    return resolve(collection_tables)
     });
+	
+})
 				    
 
 }
