@@ -50,6 +50,9 @@ app.get('/dates2', function (req,res) {
 	tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
 	// if result is true, we screen the table
 		if (ShouldBeTested == true) {
+			checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+			console.log(obtainedRowResults)
+			})
 		} else {
 		// Do nothing
 		}
@@ -307,4 +310,23 @@ function tableShouldBeTested(i) {
 		
 	})
 	
+}
+
+function checkEventsInTheTable(elem) {
+
+	return new Promise(function(resolve,reject) {
+		
+	    // PRELIMINARY WORKS
+	    var collected_events = [] 
+	    var organizer_id = "'debug_organizer_id_1'"
+	    
+	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+
+	    promiseBasicQuery(selec_query).then(results => {
+	    return resolve(results)
+	    });
+
+	})
+				    
+
 }
