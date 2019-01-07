@@ -35,6 +35,19 @@ var resMain = {
     "data" : {}
 }
 
+
+// ====================================================
+
+app.get('/dates2', function (req,res) {
+
+	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
+	collectTablesInEventsDB().then
+	
+	
+	
+
+}
+
 // =====================================================
 
 app.get('/dates', function(req, res) {
@@ -199,4 +212,34 @@ function basicquery(query, callback) {
         con.release();
     })
 
+}
+
+function collectTablesInEventsDB() {
+
+// PRELIMINARY WORKS
+    
+    var collected_events = [] 
+    var organizer_id = "'debug_organizer_id_1'"
+    
+    // Obtain current year
+    let now = new Date();
+    var curr_year = dateModule.format(now, 'YYYY');
+    console.log("Current Year is ", curr_year)
+    
+    // Obtain current week
+    var curr_week = isoWeek();
+    curr_week = 3 // DEBUG <-------------------------------------------
+    console.log("Current week is ", curr_week)
+    
+    // Collect tables in events db
+    var coll_tables = 'SHOW TABLES'
+    var collection_tables = []
+    
+    return new Promise ( (resolve,reject) => {
+	basicquery(coll_tables, function (callback) {
+	collection_tables = callback.map(v => v.Tables_in_events);
+	//console.log(collection_tables);    
+	resolve(collection_tables)
+	})
+    }
 }
