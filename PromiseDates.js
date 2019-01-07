@@ -44,7 +44,7 @@ app.get('/dates2', function (req,res) {
 	collectTablesInEventsDB().then(collection_tables => {
 		console.log("Principal log, result is : ",collection_tables)
 
-	for (i = 0; i < collection_tables.length; i++) {
+	for (let i = 0; i < collection_tables.length; i++) {
 	//On teste chaque element i
 		
 	tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
