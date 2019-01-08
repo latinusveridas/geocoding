@@ -50,7 +50,7 @@ app.get('/dates2', function (req,res) {
 				console.log("Principal log, result is : ", collectionOfTables)
 				console.log("Longueur du collectionOfTables: ", collectionOfTables.length)
 				
-				var actionOnTable = collectionOfTables.map(tableShouldBeTested)
+				var actionOnTable = collectionOfTables.map(tableTestAndQuery)
 				
 				var resultsOfTesting = Promise.all(actionOnTable)
 				
@@ -65,6 +65,7 @@ app.get('/dates2', function (req,res) {
 	CollectAllTheEvents()
 	
 })
+
 
 /*
 function delay() {
@@ -158,12 +159,10 @@ function collectTablesInEventsDB() {
 
 }
 
-function tableShouldBeTested(i) {
+function tableTestAndQuery(elem) {
 	
 	return new Promise (function (resolve,reject) {
 	
-		var ToBeTested = false	
-
 		// Obtain current year
 		let now = new Date();
 		var curr_year = dateModule.format(now, 'YYYY');
@@ -182,26 +181,29 @@ function tableShouldBeTested(i) {
 
 		// On loop dans les annees
 		if (parseInt(tabl_year) < curr_year) {
-		ToBeTested = true
-		return resolve(ToBeTested) 
+		checkEventsInTheTable(elem).then(queryResult => {
+			resolve(queryResult)
+		})
 		} else {
 
 			if (parseInt(tabl_year) == curr_year) {
 				// Deux cas de figure
 
 				if (parseInt(tabl_week) < curr_week) {
-				ToBeTested = true
-				return resolve(ToBeTested)
+				checkEventsInTheTable(elem).then(queryResult => {
+				resolve(queryResult)
+				})
 				} else {
 					if (parseInt(tabl_week) == curr_week) {
-					ToBeTested = true
-					return resolve(ToBeTested)
+					checkEventsInTheTable(elem).then(queryResult => {
+					resolve(queryResult)
+					})
 					} else {
-					return resolve(ToBeTested)
+					reject()
 					}
 				}
 			} else {
-			return resolve(ToBeTested)
+			reject()
 			}
 		}
 		
