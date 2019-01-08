@@ -47,11 +47,14 @@ app.get('/dates2', function (req,res) {
 		
 		// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
 		collectTablesInEventsDB().then(collection_tables => {
-			console.log("Principal log, result is : ",collection_tables)
-
+			console.log("Principal log, result is : ", collection_tables)
+			console.log("Longueur du collection_tables: ", collection_tables.length)
+			
 			for (let i = 0; i < collection_tables.length; i++) {
 			//On teste chaque element i
 			
+				console.log("Current i position: ", i)
+				
 			// 2. On teste si la table doit etre teste
 			tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
 			// if result is true, we screen the table
@@ -60,23 +63,24 @@ app.get('/dates2', function (req,res) {
 					
 					// 3. On recupere les lignes de la tables
 					checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
-					console.log(obtainedRowResults)
-					CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
-					console.log("State of collected events", CollectedOrganizedEvents)
-					
-					if (i == (collection_tables.length - 1)) {
-						console.log("EQUAL")
-					} else {
-						console.log("BELOW")
-					}
+					//console.log(obtainedRowResults)
+						
+						CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
+						console.log("State of collected events", CollectedOrganizedEvents)
+
+						if (i == (collection_tables.length - 1)) {
+							console.log("EQUAL")
+						} else {
+							console.log("BELOW")
+						}
 					})
 					
 				} else {
-				// Do nothing
-				if (i == (collection_tables.length - 1)) {
-				console.log("EQUAL")
-				} else {
-				console.log("BELOW")
+				// Do nothing, just counting
+					if (i == (collection_tables.length - 1)) {
+					console.log("EQUAL")
+					} else {
+					console.log("BELOW")
 					}
 					
 				}
