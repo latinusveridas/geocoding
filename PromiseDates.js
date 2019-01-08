@@ -63,6 +63,7 @@ app.get('/dates2', function (req,res) {
 				})
 				
 				console.log("FILTERED!!!", filtered)
+					resolve(filtered)
 				});
 				
 			})
