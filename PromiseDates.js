@@ -253,9 +253,10 @@ function UniqueMapping(basicArray) {
 		} else {
 			
 			var sub_elements_length = basicArray[i].length
+			console.log("sub elements of basicArray length is ", sub_elements_length)
 			
 			for ( j = 0 ; j < sub_elements_length - 1 ; j++) {
-				
+				console.log("basic ", i, j)
 				finalCollection.push(basicArray[i][j])
 			}
 			
