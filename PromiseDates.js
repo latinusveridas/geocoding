@@ -60,17 +60,6 @@ app.get('/dates2', function (req,res) {
 				console.log(obtainedRowResults)
 				CollectedOrganizedEvents.push(obtainedRowResults)
 				console.log("State of collected events", CollectedOrganizedEvents)
-					console.log("i = ", i)
-					console.log("collenction lenght", CollectedOrganizedEvents.length)
-					
-					if ( i == CollectedOrganizedEvents.length - 1 ) {
-						//console.log("IN FINAL !!")
-						//console.log("i = ", i)
-						//res.json(CollectedOrganizedEvents)
-						console.log("EQUAL")
-					} else {
-						console.log("BELOW")
-					}
 				})
 				
 			} else {
