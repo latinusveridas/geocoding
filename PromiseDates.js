@@ -199,11 +199,11 @@ function tableTestAndQuery(elem) {
 					resolve(queryResult)
 					})
 					} else {
-					reject("Nil")
+					resolve("Nil")
 					}
 				}
 			} else {
-			reject("Nil")
+			resolve("Nil")
 			}
 		}
 		
