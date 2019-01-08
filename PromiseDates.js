@@ -42,7 +42,7 @@ app.get('/dates2', function (req,res) {
 	
 	var CollectedOrganizedEvents = []
 	
-	async function CollectAllTheEvents() {
+	function CollectAllTheEvents() {
 		return new Promise(function(resolve,reject) {
 		
 		// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
@@ -54,13 +54,13 @@ app.get('/dates2', function (req,res) {
 			//On teste chaque element elem
 			console.log("ELEM : ", elem)
 			// 2. On teste si la table doit etre teste
-			await tableShouldBeTested(elem).then( ShouldBeTested => {
+			tableShouldBeTested(elem).then( ShouldBeTested => {
 			// if result is true, we screen the table
 				
 				if (ShouldBeTested == true) {
 					
 					// 3. On recupere les lignes de la tables
-					await checkEventsInTheTable(elem).then( obtainedRowResults => {
+					checkEventsInTheTable(elem).then( obtainedRowResults => {
 					//console.log(obtainedRowResults)
 						
 						CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
@@ -136,7 +136,7 @@ app.listen(3002,function(req,res){
 
 // =================== DATABASES FUNCTIONS ==============================
 
-async function promiseBasicQuery(query) {
+function promiseBasicQuery(query) {
 	return new Promise(function(resolve,reject) {
 		
 		pool_events.getConnection(function (err,con) {
@@ -163,7 +163,7 @@ async function promiseBasicQuery(query) {
 	})
 }
 
-async function collectTablesInEventsDB() {
+function collectTablesInEventsDB() {
 
 	return new Promise(function(resolve,reject) {
 
@@ -196,7 +196,7 @@ async function collectTablesInEventsDB() {
 
 }
 
-async function tableShouldBeTested(i) {
+function tableShouldBeTested(i) {
 	
 	return new Promise (function (resolve,reject) {
 	
@@ -247,7 +247,7 @@ async function tableShouldBeTested(i) {
 	
 }
 
-async function checkEventsInTheTable(elem) {
+function checkEventsInTheTable(elem) {
 
 	return new Promise(function(resolve,reject) {
 		
