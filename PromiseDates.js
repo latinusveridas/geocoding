@@ -45,63 +45,25 @@ app.get('/dates2', function (req,res) {
 	function CollectAllTheEvents() {
 		return new Promise(function(resolve,reject) {
 		
-		// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
-		collectTablesInEventsDB().then(collection_tables => {
-			console.log("Principal log, result is : ", collection_tables)
-			console.log("Longueur du collection_tables: ", collection_tables.length)
-			
-			for (const elem of collection_tables ) {
-			//On teste chaque element elem
-			console.log("ELEM : ", elem)
-			// 2. On teste si la table doit etre teste
-			tableShouldBeTested(elem).then( ShouldBeTested => {
-			// if result is true, we screen the table
+			// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
+			collectTablesInEventsDB().then(collectionOfTables => {
+				console.log("Principal log, result is : ", collectionOfTables)
+				console.log("Longueur du collectionOfTables: ", collectionOfTables.length)
 				
-				if (ShouldBeTested == true) {
-					
-					// 3. On recupere les lignes de la tables
-					checkEventsInTheTable(elem).then( obtainedRowResults => {
-					//console.log(obtainedRowResults)
-						
-						CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
-						console.log("State of collected events", CollectedOrganizedEvents)
-
-						if (i == (collection_tables.length - 1)) {
-							console.log("EQUAL")
-							return
-						} else {
-							console.log("BELOW")
-							return
-						}
-					})
-					
-				} else {
-				// Do nothing, just counting
-					if (i == (collection_tables.length - 1)) {
-					console.log("EQUAL")
-					return
-					} else {
-					console.log("BELOW")
-					return
-					}
-					
-				}
-					
-				})
-					
-			}
-			
-			// After loop
-			
-		})
+				var actionOnTable = collectionOfTables.map(tableShouldBeTested)
+				
+				var resultsOfTesting = Promise.all(actionOnTable)
+				
+				resultsOfTesting.then(data => console.log(data));
+				
+			})
 		
 		}) // Promise
 			
 	} // function CollectAllTheEvents
 	
-	CollectAllTheEvents().then( final => {
-		console.log("THE BIG FINAL" , final)
-	}) // Appel de la fonction
+	CollectAllTheEvents()
+	
 })
 
 /*
