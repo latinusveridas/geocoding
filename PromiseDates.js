@@ -246,25 +246,26 @@ function UniqueMapping(basicArray) {
 	
 	var finalCollection = []
 	
-	for ( i = 0 ; i < basicArray.length - 1 ; i++) {
+	basicArray.forEach ( elem => {
 		
-		if (typeof basicArray[i] === 'undefined') {
+		if (typeof elem === 'undefined') {
 			return
 		} else {
 			
-			var sub_elements_length = basicArray[i].length
+			var sub_elements_length = elem.length
 			console.log("sub elements of basicArray length is ", sub_elements_length)
 			
-			for ( j = 0 ; j < sub_elements_length - 1 ; j++) {
-				console.log("basic ", i, j)
-				finalCollection.push(basicArray[i][j])
-			}
+			elem.forEach( subElem => {
+				
+				finalCollection.push(subElem)
+				
+			})
 			
 		}
 		
 		
-		
-	}
+	})
+	
 	
 	console.log("NEW FUNCTION", finalCollection)
 	
