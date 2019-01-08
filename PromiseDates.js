@@ -50,7 +50,7 @@ app.get('/dates2', function (req,res) {
 			console.log("Principal log, result is : ", collection_tables)
 			console.log("Longueur du collection_tables: ", collection_tables.length)
 			
-			for (let i = 0; i < collection_tables.length; i++) {
+			await forEach(collection_tables) {
 			//On teste chaque element i
 			
 				console.log("Current i position: ", i)
