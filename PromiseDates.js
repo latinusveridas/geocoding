@@ -69,15 +69,15 @@ app.get('/dates2', function (req,res) {
 			})
 				
 		}
-		
+
+	})
+	
 		Promise.all(CollectedOrganizedEvents).then((results) => {
-			console.log("ALL DONE !!", results)
+		console.log("ALL DONE !!", results)
 		})
 		.catch ((e) => {
 			console.log("Error handler")
 		})
-
-	})
 })
 
 // ================ SERVER LAUNCH ======================
