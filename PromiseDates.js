@@ -81,7 +81,9 @@ app.get('/dates2', function (req,res) {
 			
 	} // function CollectAllTheEvents
 	
-	CollectAllTheEvents() // Appel de la fonction
+	CollectAllTheEvents().then( final => {
+		console.log("THE BIG FINAL" , final)
+	}) // Appel de la fonction
 })
 
 // ================ SERVER LAUNCH ======================
