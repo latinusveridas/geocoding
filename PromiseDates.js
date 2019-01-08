@@ -73,6 +73,7 @@ app.get('/dates2', function (req,res) {
 	} // function CollectAllTheEvents
 	
 	CollectAllTheEvents().then(obtainedRawData => {
+		console.log("!!!!!!!xxxx!!!!!!!", obtainedRawData)
 	UniqueMapping(obtainedRawData)
 	})
 	
