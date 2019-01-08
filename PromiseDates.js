@@ -174,10 +174,10 @@ function tableTestAndQuery(elem) {
 		console.log("Current week is ", curr_week)
 
 		// Split text du table pour obtenir Year et Week
-		var tabl_year = i.substring(0,4);
-		console.log("item ", i, tabl_year)
-		var tabl_week = i.substring(6,8);
-		console.log("item ", i, tabl_week)
+		var tabl_year = elem.substring(0,4);
+		console.log("item ", elem, tabl_year)
+		var tabl_week = elem.substring(6,8);
+		console.log("item ", elem, tabl_week)
 
 		// On loop dans les annees
 		if (parseInt(tabl_year) < curr_year) {
