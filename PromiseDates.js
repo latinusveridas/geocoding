@@ -61,8 +61,14 @@ app.get('/dates2', function (req,res) {
 					// 3. On recupere les lignes de la tables
 					checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 					console.log(obtainedRowResults)
-					CollectedOrganizedEvents.push(obtainedRowResults)
+					CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
 					console.log("State of collected events", CollectedOrganizedEvents)
+					
+					if (i == (collection_tables.length - 1)) {
+						console.log("EQUAL")
+					} else {
+						console.log("BELOW")
+					}
 					})
 					
 				} else {
@@ -74,7 +80,7 @@ app.get('/dates2', function (req,res) {
 			}
 			
 			// After loop
-			resolve(CollectedOrganizedEvents)
+			
 		})
 		
 		}) // Promise
