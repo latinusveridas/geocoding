@@ -71,7 +71,9 @@ app.get('/dates2', function (req,res) {
 			
 	} // function CollectAllTheEvents
 	
-	CollectAllTheEvents()
+	CollectAllTheEvents().then(obtainedRawData => {
+	UniqueMapping(obtainedRawData)
+	})
 	
 })
 
@@ -236,4 +238,32 @@ function checkEventsInTheTable(elem) {
 	})
 				    
 
+}
+
+function UniqueMapping(basicArray) {
+	
+	var finalCollection = []
+	
+	for ( i = 0 ; i < basicArray.length - 1 ; i++) {
+		
+		if (typeof basicArray[i] === 'undefined') {
+			return
+		} else {
+			
+			var sub_elements_length = basicArray[i].length
+			
+			for ( j = 0 ; j < sub_elements_length - 1 ; j++) {
+				
+				finalCollection.push(basicArray[i][j])
+			}
+			
+		}
+		
+		
+		
+	}
+	
+	console.log("NEW FUNCTION", finalCollection)
+	
+	
 }
