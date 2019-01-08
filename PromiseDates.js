@@ -50,19 +50,17 @@ app.get('/dates2', function (req,res) {
 			console.log("Principal log, result is : ", collection_tables)
 			console.log("Longueur du collection_tables: ", collection_tables.length)
 			
-			await forEach(collection_tables) {
-			//On teste chaque element i
-			
-				console.log("Current i position: ", i)
-				
+			for (const elem of collection_tables ) {
+			//On teste chaque element elem
+			console.log("ELEM : ", elem)
 			// 2. On teste si la table doit etre teste
-			await tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
+			await tableShouldBeTested(elem).then( ShouldBeTested => {
 			// if result is true, we screen the table
 				
 				if (ShouldBeTested == true) {
 					
 					// 3. On recupere les lignes de la tables
-					await checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+					await checkEventsInTheTable(elem).then( obtainedRowResults => {
 					//console.log(obtainedRowResults)
 						
 						CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
