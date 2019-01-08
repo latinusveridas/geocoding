@@ -54,7 +54,7 @@ app.get('/dates2', function (req,res) {
 				
 				var resultsOfTesting = Promise.all(actionOnTable)
 				
-				resultsOfTesting.then(rawData => 
+				resultsOfTesting.then(rawData => {
 				
 				console.log(rawData)
 				
@@ -63,7 +63,7 @@ app.get('/dates2', function (req,res) {
 				})
 				
 				console.log("FILTERED!!!", filtered)
-				);
+				});
 				
 			})
 		
