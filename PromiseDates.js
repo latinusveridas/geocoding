@@ -199,11 +199,11 @@ function tableTestAndQuery(elem) {
 					resolve(queryResult)
 					})
 					} else {
-					reject()
+					reject("Nil")
 					}
 				}
 			} else {
-			reject()
+			reject("Nil")
 			}
 		}
 		
@@ -222,7 +222,7 @@ function checkEventsInTheTable(elem) {
 	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
 
 	    promiseBasicQuery(selec_query).then(results => {
-	    return resolve(results)
+	    resolve(results)
 	    });
 
 	})
