@@ -73,6 +73,12 @@ app.get('/dates2', function (req,res) {
 					
 				} else {
 				// Do nothing
+				if (i == (collection_tables.length - 1)) {
+				console.log("EQUAL")
+				} else {
+				console.log("BELOW")
+					}
+					
 				}
 					
 				})
