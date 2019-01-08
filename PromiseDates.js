@@ -56,13 +56,13 @@ app.get('/dates2', function (req,res) {
 				console.log("Current i position: ", i)
 				
 			// 2. On teste si la table doit etre teste
-			tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
+			await tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
 			// if result is true, we screen the table
 				
 				if (ShouldBeTested == true) {
 					
 					// 3. On recupere les lignes de la tables
-					checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+					await checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
 					//console.log(obtainedRowResults)
 						
 						CollectedOrganizedEvents.push(obtainedRowResults) // On charge CollectedOrganizedEvents
@@ -70,8 +70,10 @@ app.get('/dates2', function (req,res) {
 
 						if (i == (collection_tables.length - 1)) {
 							console.log("EQUAL")
+							return
 						} else {
 							console.log("BELOW")
+							return
 						}
 					})
 					
@@ -79,8 +81,10 @@ app.get('/dates2', function (req,res) {
 				// Do nothing, just counting
 					if (i == (collection_tables.length - 1)) {
 					console.log("EQUAL")
+					return
 					} else {
 					console.log("BELOW")
+					return
 					}
 					
 				}
