@@ -138,7 +138,7 @@ app.listen(3002,function(req,res){
 
 // =================== DATABASES FUNCTIONS ==============================
 
-function promiseBasicQuery(query) {
+async function promiseBasicQuery(query) {
 	return new Promise(function(resolve,reject) {
 		
 		pool_events.getConnection(function (err,con) {
@@ -165,7 +165,7 @@ function promiseBasicQuery(query) {
 	})
 }
 
-function collectTablesInEventsDB() {
+async function collectTablesInEventsDB() {
 
 	return new Promise(function(resolve,reject) {
 
@@ -198,7 +198,7 @@ function collectTablesInEventsDB() {
 
 }
 
-function tableShouldBeTested(i) {
+async function tableShouldBeTested(i) {
 	
 	return new Promise (function (resolve,reject) {
 	
@@ -249,7 +249,7 @@ function tableShouldBeTested(i) {
 	
 }
 
-function checkEventsInTheTable(elem) {
+async function checkEventsInTheTable(elem) {
 
 	return new Promise(function(resolve,reject) {
 		
