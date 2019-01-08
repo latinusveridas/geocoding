@@ -41,43 +41,47 @@ var resMain = {
 app.get('/dates2', function (req,res) {
 	
 	var CollectedOrganizedEvents = []
-
-	// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
-	collectTablesInEventsDB().then(collection_tables => {
-		console.log("Principal log, result is : ",collection_tables)
-
-		for (let i = 0; i < collection_tables.length; i++) {
-		//On teste chaque element i
-		
-		// 2. On teste si la table doit etre teste
-		tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
-		// if result is true, we screen the table
-			
-			if (ShouldBeTested == true) {
-				
-				// 3. On recupere les lignes de la tables
-				checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
-				console.log(obtainedRowResults)
-				CollectedOrganizedEvents.push(obtainedRowResults)
-				console.log("State of collected events", CollectedOrganizedEvents)
-				})
-				
-			} else {
-			// Do nothing
-			}
-				
-			})
-				
-		}
-
-	})
 	
-		Promise.all(CollectedOrganizedEvents).then((results) => {
-		console.log("ALL DONE !!", results)
+	function CollectAllTheEvents() {
+		return new Promise(function(resolve,reject) {
+		
+		// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
+		collectTablesInEventsDB().then(collection_tables => {
+			console.log("Principal log, result is : ",collection_tables)
+
+			for (let i = 0; i < collection_tables.length; i++) {
+			//On teste chaque element i
+			
+			// 2. On teste si la table doit etre teste
+			tableShouldBeTested(collection_tables[i]).then( ShouldBeTested => {
+			// if result is true, we screen the table
+				
+				if (ShouldBeTested == true) {
+					
+					// 3. On recupere les lignes de la tables
+					checkEventsInTheTable(collection_tables[i]).then( obtainedRowResults => {
+					console.log(obtainedRowResults)
+					CollectedOrganizedEvents.push(obtainedRowResults)
+					console.log("State of collected events", CollectedOrganizedEvents)
+					})
+					
+				} else {
+				// Do nothing
+				}
+					
+				})
+					
+			}
+			
+			// After loop
+			resolve(CollectedOrganizedEvents)
 		})
-		.catch ((e) => {
-			console.log("Error handler")
-		})
+		
+		}) // Promise
+			
+	} // function CollectAllTheEvents
+	
+	CollectAllTheEvents() // Appel de la fonction
 })
 
 // ================ SERVER LAUNCH ======================
