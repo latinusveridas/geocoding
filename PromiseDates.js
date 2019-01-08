@@ -54,7 +54,16 @@ app.get('/dates2', function (req,res) {
 				
 				var resultsOfTesting = Promise.all(actionOnTable)
 				
-				resultsOfTesting.then(data => console.log(data));
+				resultsOfTesting.then(rawData => 
+				
+				console.log(rawData)
+				
+				var filtered = rawData.filter(function (el) {
+					return el != null;
+				}
+				
+				console.log("FILTERED!!!", filtered)
+				);
 				
 			})
 		
@@ -65,7 +74,6 @@ app.get('/dates2', function (req,res) {
 	CollectAllTheEvents()
 	
 })
-
 
 /*
 function delay() {
