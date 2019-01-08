@@ -60,7 +60,7 @@ app.get('/dates2', function (req,res) {
 				
 				var filtered = rawData.filter(function (el) {
 					return el != null;
-				}
+				})
 				
 				console.log("FILTERED!!!", filtered)
 				);
