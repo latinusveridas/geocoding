@@ -42,7 +42,7 @@ app.get('/dates2', function (req,res) {
 	
 	var CollectedOrganizedEvents = []
 	
-	function CollectAllTheEvents() {
+	async function CollectAllTheEvents() {
 		return new Promise(function(resolve,reject) {
 		
 		// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
