@@ -70,8 +70,8 @@ app.get('/dates2', function (req,res) {
 				
 		}
 		
-		Promise.all(CollectedOrganizedEvents).then(() => {
-			console.log("END RESULT", CollectedOrganizedEvents)
+		Promise.all(CollectedOrganizedEvents).then((results) => {
+			console.log("ALL DONE !!", results)
 		})
 		.catch ((e) => {
 			console.log("Error handler")
