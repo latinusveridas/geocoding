@@ -47,7 +47,7 @@ app.get('/dates', function (req, res) {
 
 function CollOrganizedEvent() { // Main function 
 	
-	var organizer_id = "'debug_organizer_id_1'"
+	//var organizer_id = "'debug_organizer_id_1'"
 
 	return new Promise ( function (resolve, reject) {
 	
@@ -226,13 +226,13 @@ function FilterCollectedTables(arr){
 	return filteredArray
 }
 
-function QueryTable(elem,organizer_id) {
+function QueryTable(elem) {
 
 	return new Promise(function(resolve,reject) {
 		
 	    // PRELIMINARY WORKS
 	    var collected_events = [] 
-	    //var organizer_id = "'debug_organizer_id_1'"
+	    var organizer_id = "'debug_organizer_id_1'"
 	    
 	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
 
