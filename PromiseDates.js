@@ -132,67 +132,8 @@ function QueryTable(elem) {
 
 // ====================================================
 
-app.get('/dates2', function (req,res) {
-	
-	var CollectedOrganizedEvents = []
-	
-	function CollectAllTheEvents() {
-		return new Promise(function(resolve,reject) {
-		
-			// 1. We collect the name of the tables of the db event through the function collectTablesInEventsDB
-			collectTablesInEventsDB().then(collectionOfTables => {
-				console.log("Principal log, result is : ", collectionOfTables)
-				console.log("Longueur du collectionOfTables: ", collectionOfTables.length)
-				
-				var actionOnTable = collectionOfTables.map(tableTestAndQuery)
-				
-				var resultsOfTesting = Promise.all(actionOnTable)
-				
-				resultsOfTesting.then(rawData => {
-				
-				console.log(rawData)
-				
-				var filtered = rawData.filter(function (el) {
-					return el != null;
-				})
-				
-				console.log("FILTERED!!!", filtered)
-					resolve(filtered)
-				});
-				
-			})
-		
-		}) // Promise
-			
-	} // function CollectAllTheEvents
-	
-	CollectAllTheEvents().then(obtainedRawData => {
-		console.log("!!!!!!!xxxx!!!!!!!", obtainedRawData)
-	UniqueMapping(obtainedRawData)
-	})
-	
-})
 
-/*
-function delay() {
-  return new Promise(resolve => setTimeout(resolve, 300));
-}
 
-async function delayedLog(item) {
-  // notice that we can await a function
-  // that returns a promise
-  await delay();
-  console.log(item);
-}
-async function processArray(array) {
-  array.forEach(async (item) => {
-    await func(item);
-  })
-  console.log('Done!');
-}
-
-processArray([1, 2, 3]);
-*/
 
 // ================ SERVER LAUNCH ======================
 // Helper on port 3001
@@ -263,58 +204,6 @@ function collectTablesInEventsDB() {
 	})
 				    
 
-}
-
-function tableTestAndQuery(elem) {
-	
-	return new Promise (function (resolve,reject) {
-	
-		// Obtain current year
-		let now = new Date();
-		var curr_year = dateModule.format(now, 'YYYY');
-		console.log("Current Year is ", curr_year)
-
-		// Obtain current week
-		var curr_week = isoWeek();
-		curr_week = 3 // DEBUG <-------------------------------------------
-		console.log("Current week is ", curr_week)
-
-		// Split text du table pour obtenir Year et Week
-		var tabl_year = elem.substring(0,4);
-		console.log("item ", elem, tabl_year)
-		var tabl_week = elem.substring(6,8);
-		console.log("item ", elem, tabl_week)
-
-		// On loop dans les annees
-		if (parseInt(tabl_year) < curr_year) {
-		checkEventsInTheTable(elem).then(queryResult => {
-			resolve(queryResult)
-		})
-		} else {
-
-			if (parseInt(tabl_year) == curr_year) {
-				// Deux cas de figure
-
-				if (parseInt(tabl_week) < curr_week) {
-				checkEventsInTheTable(elem).then(queryResult => {
-				resolve(queryResult)
-				})
-				} else {
-					if (parseInt(tabl_week) == curr_week) {
-					checkEventsInTheTable(elem).then(queryResult => {
-					resolve(queryResult)
-					})
-					} else {
-					resolve()
-					}
-				}
-			} else {
-			resolve()
-			}
-		}
-		
-	})
-	
 }
 
 function checkEventsInTheTable(elem) {
