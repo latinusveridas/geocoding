@@ -88,13 +88,13 @@ function promiseBasicQuery(query) {
 			if (err) {
 				console.log(err)
 			} else {
-				console.log("Success to retrieve the connection")
+				console.log("Check connection : OK")
 			con.query(query, function(err,result,fields) {	
 					if (err) {
 						return reject(err)
 						console.log(err)
 					} else {
-						console.log("log: promiseBasicQuery # of RowDataPacket sent: ", result.length)
+						//console.log("log: promiseBasicQuery # of RowDataPacket sent: ", result.length)
 						return resolve(result)
 					}
 
@@ -159,7 +159,7 @@ function UniqueMapping(basicArray) {
 		} else {
 			
 			var sub_elements_length = elem.length
-			console.log("sub elements of basicArray length is ", sub_elements_length)
+			//console.log("sub elements of basicArray length is ", sub_elements_length)
 			
 			elem.forEach( subElem => {
 				
