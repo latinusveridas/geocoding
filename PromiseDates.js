@@ -46,6 +46,8 @@ app.get('/dates', function (req, res) {
 
 
 function CollOrganizedEvent() { // Main function 
+	
+	var organizer_id = "'debug_organizer_id_1'"
 
 	return new Promise ( function (resolve, reject) {
 	
@@ -181,20 +183,20 @@ function FilterCollectedTables(arr){
 	// Obtain current year
 	let now = new Date();
 	var curr_year = dateModule.format(now, 'YYYY');
-	console.log("Current Year is ", curr_year)
+	//console.log("Current Year is ", curr_year)
 
 	// Obtain current week
 	var curr_week = isoWeek();
 	curr_week = 3 // DEBUG <-------------------------------------------
-	console.log("Current week is ", curr_week)
+	//console.log("Current week is ", curr_week)
 	
 	arr.forEach ( elem => {
 
 	// Split text du table pour obtenir Year et Week
 	var tabl_year = elem.substring(0,4);
-	console.log("item ", elem, tabl_year)
+	//console.log("item ", elem, tabl_year)
 	var tabl_week = elem.substring(6,8);
-	console.log("item ", elem, tabl_week)
+	//console.log("item ", elem, tabl_week)
 		
 	switch (true) {
 			
@@ -224,13 +226,13 @@ function FilterCollectedTables(arr){
 	return filteredArray
 }
 
-function QueryTable(elem) {
+function QueryTable(elem,organizer_id) {
 
 	return new Promise(function(resolve,reject) {
 		
 	    // PRELIMINARY WORKS
 	    var collected_events = [] 
-	    var organizer_id = "'debug_organizer_id_1'"
+	    //var organizer_id = "'debug_organizer_id_1'"
 	    
 	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
 
