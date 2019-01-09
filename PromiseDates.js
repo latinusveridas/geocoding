@@ -51,7 +51,11 @@ function CollOrganizedEvent() {
 	return new Promise ( function (resolve, reject) {
 	
 	collectTablesInEventsDB().then( collectedTablesArray => {
-	console.log(FilterCollectedTables(collectedTablesArray))
+		
+		var filteredCollectionTables = FilterCollectedTables(collectedTablesArray)
+
+		var actionOnTable = filteredCollectionTables.map(QueryTable)
+		var resultsOfCollect = Promise.all(actionOnTable)
 	
 	})
 	
@@ -109,6 +113,22 @@ function FilterCollectedTables(arr){
 	return filteredArray
 }
 
+function QueryTable(elem) {
+
+	return new Promise(function(resolve,reject) {
+		
+	    // PRELIMINARY WORKS
+	    var collected_events = [] 
+	    var organizer_id = "'debug_organizer_id_1'"
+	    
+	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+
+	    promiseBasicQuery(selec_query).then(results => {
+	    resolve(results)
+	    });
+
+	})				    
+}
 
 // ====================================================
 
