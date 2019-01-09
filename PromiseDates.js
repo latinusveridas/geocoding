@@ -35,6 +35,18 @@ var resMain = {
     "data" : {}
 }
 
+app.get('/profiling', function (req,res) {
+
+	var profQuery = "SHOW PROFILES"
+	promiseBasicQuery(profQuery).then(result => {
+	console.log(result)
+	})
+	
+
+})
+
+
+
 
 app.get('/dates', function (req, res) {
 	
