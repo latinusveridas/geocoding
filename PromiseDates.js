@@ -37,12 +37,11 @@ var resMain = {
 
 
 app.get('/dates3', function (req, res) {
-
 	
-	 CollOrganizedEvent()
+	 CollOrganizedEvent().then ( result => {
+	 console.log(result)
+	 })
 	
-	
-
 });
 
 
@@ -50,24 +49,21 @@ function CollOrganizedEvent() {
 
 	return new Promise ( function (resolve, reject) {
 	
-	collectTablesInEventsDB().then( collectedTablesArray => {
-		
-		var filteredCollectionTables = FilterCollectedTables(collectedTablesArray)
+		collectTablesInEventsDB().then( collectedTablesArray => {
 
-		var actionOnTable = filteredCollectionTables.map(QueryTable)
-		var resultsOfCollect = Promise.all(actionOnTable)
-		
-		resultsOfCollect.then( arrCollectedEvents => {
-		console.log(arrCollectedEvents)
+			var filteredCollectionTables = FilterCollectedTables(collectedTablesArray)
+
+			var actionOnTable = filteredCollectionTables.map(QueryTable)
+			var resultsOfCollect = Promise.all(actionOnTable)
+
+			resultsOfCollect.then( arrCollectedEvents => {
+			var cleanedListEvents = UniqueMapping(arrCollectedEvents)
+			resolve (cleanedListEvents)
+			})
+
 		})
-	
-	})
-	
-	
-	
-	
-	}) // end of promise
 
+	}) // end of promise
 
 } // end of function
 
