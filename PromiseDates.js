@@ -65,6 +65,8 @@ function CollOrganizedEvent() {
 
 function FilterCollectedTables(arr){
 
+	var filteredArray = []
+	
 	// Obtain current year
 	let now = new Date();
 	var curr_year = dateModule.format(now, 'YYYY');
@@ -83,7 +85,24 @@ function FilterCollectedTables(arr){
 	var tabl_week = elem.substring(6,8);
 	console.log("item ", elem, tabl_week)
 		
-	
+	switch (true) {
+			
+		case (parseInt(tabl_year) < curr_year):
+			filteredArray.push(elem);
+			break;
+		case (parseInt(tabl_year) == curr_year):
+			switch (true) {
+			
+				case (parseInt(tabl_week) < curr_week):
+					filteredArray.push(elem);
+					break;
+				case (parseInt(tabl_week) == curr_week):
+					filteredArray.push(elem);
+					break;	
+				default:
+			} // sub switch 
+		default:
+	} // switch
 		
 	}) // arr.forEach
 }
