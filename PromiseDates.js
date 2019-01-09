@@ -36,7 +36,7 @@ var resMain = {
 }
 
 
-app.get('/dates3', function (req, res) {
+app.get('/dates', function (req, res) {
 	
 	 CollOrganizedEvent().then ( result => {
 	 res.status(200).json(result)
@@ -45,7 +45,7 @@ app.get('/dates3', function (req, res) {
 });
 
 
-function CollOrganizedEvent() {
+function CollOrganizedEvent() { // Main function 
 
 	return new Promise ( function (resolve, reject) {
 	
@@ -66,74 +66,6 @@ function CollOrganizedEvent() {
 	}) // end of promise
 
 } // end of function
-
-function FilterCollectedTables(arr){
-
-	var filteredArray = []
-	
-	// Obtain current year
-	let now = new Date();
-	var curr_year = dateModule.format(now, 'YYYY');
-	console.log("Current Year is ", curr_year)
-
-	// Obtain current week
-	var curr_week = isoWeek();
-	curr_week = 3 // DEBUG <-------------------------------------------
-	console.log("Current week is ", curr_week)
-	
-	arr.forEach ( elem => {
-
-	// Split text du table pour obtenir Year et Week
-	var tabl_year = elem.substring(0,4);
-	console.log("item ", elem, tabl_year)
-	var tabl_week = elem.substring(6,8);
-	console.log("item ", elem, tabl_week)
-		
-	switch (true) {
-			
-		case (parseInt(tabl_year) < curr_year):
-			filteredArray.push(elem);
-			break;
-		case (parseInt(tabl_year) == curr_year):
-			switch (true) {
-			
-				case (parseInt(tabl_week) < curr_week):
-					filteredArray.push(elem);
-					break;
-				case (parseInt(tabl_week) == curr_week):
-					filteredArray.push(elem);
-					break;	
-				default:
-			} // sub switch 
-		default:
-	} // switch
-		
-	}) // arr.forEach
-	
-	return filteredArray
-}
-
-function QueryTable(elem) {
-
-	return new Promise(function(resolve,reject) {
-		
-	    // PRELIMINARY WORKS
-	    var collected_events = [] 
-	    var organizer_id = "'debug_organizer_id_1'"
-	    
-	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
-
-	    promiseBasicQuery(selec_query).then(results => {
-	    resolve(results)
-	    });
-
-	})				    
-}
-
-// ====================================================
-
-
-
 
 // ================ SERVER LAUNCH ======================
 // Helper on port 3001
@@ -177,20 +109,9 @@ function collectTablesInEventsDB() {
 
 	return new Promise(function(resolve,reject) {
 
-
 	    // PRELIMINARY WORKS
 	    var collected_events = [] 
 	    var organizer_id = "'debug_organizer_id_1'"
-
-	    // Obtain current year
-	    let now = new Date();
-	    var curr_year = dateModule.format(now, 'YYYY');
-	    console.log("Current Year is ", curr_year)
-
-	    // Obtain current week
-	    var curr_week = isoWeek();
-	    curr_week = 3 // DEBUG <-------------------------------------------
-	    console.log("Current week is ", curr_week)
 
 	    // Collect tables in events db
 	    var coll_tables = 'SHOW TABLES'
@@ -251,4 +172,71 @@ function UniqueMapping(basicArray) {
 	
 	return finalCollection
 		
+}
+
+function FilterCollectedTables(arr){
+
+	var filteredArray = []
+	
+	// Obtain current year
+	let now = new Date();
+	var curr_year = dateModule.format(now, 'YYYY');
+	console.log("Current Year is ", curr_year)
+
+	// Obtain current week
+	var curr_week = isoWeek();
+	curr_week = 3 // DEBUG <-------------------------------------------
+	console.log("Current week is ", curr_week)
+	
+	arr.forEach ( elem => {
+
+	// Split text du table pour obtenir Year et Week
+	var tabl_year = elem.substring(0,4);
+	console.log("item ", elem, tabl_year)
+	var tabl_week = elem.substring(6,8);
+	console.log("item ", elem, tabl_week)
+		
+	switch (true) {
+			
+		case (parseInt(tabl_year) < curr_year):
+			filteredArray.push(elem);
+			break;
+		case (parseInt(tabl_year) == curr_year):
+			
+			switch (true) {
+			
+				case (parseInt(tabl_week) < curr_week):
+					filteredArray.push(elem);
+					break;
+				case (parseInt(tabl_week) == curr_week):
+					filteredArray.push(elem);
+					break;	
+				default:
+					
+			} // sub switch 
+			
+		default:
+			
+	} // switch
+		
+	}) // arr.forEach
+	
+	return filteredArray
+}
+
+function QueryTable(elem) {
+
+	return new Promise(function(resolve,reject) {
+		
+	    // PRELIMINARY WORKS
+	    var collected_events = [] 
+	    var organizer_id = "'debug_organizer_id_1'"
+	    
+	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+
+	    promiseBasicQuery(selec_query).then(results => {
+	    resolve(results)
+	    });
+
+	})				    
 }
