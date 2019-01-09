@@ -364,8 +364,6 @@ function UniqueMapping(basicArray) {
 		
 	})
 	
-	
-	console.log("NEW FUNCTION", finalCollection)
-	
-	
+	return finalCollection
+		
 }
