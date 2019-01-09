@@ -65,9 +65,27 @@ function CollOrganizedEvent() {
 
 function FilterCollectedTables(arr){
 
+	// Obtain current year
+	let now = new Date();
+	var curr_year = dateModule.format(now, 'YYYY');
+	console.log("Current Year is ", curr_year)
 
+	// Obtain current week
+	var curr_week = isoWeek();
+	curr_week = 3 // DEBUG <-------------------------------------------
+	console.log("Current week is ", curr_week)
+	
+	arr.forEach ( elem => {
 
-
+	// Split text du table pour obtenir Year et Week
+	var tabl_year = elem.substring(0,4);
+	console.log("item ", elem, tabl_year)
+	var tabl_week = elem.substring(6,8);
+	console.log("item ", elem, tabl_week)
+		
+	
+		
+	}) // arr.forEach
 }
 
 
