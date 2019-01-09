@@ -56,7 +56,10 @@ function CollOrganizedEvent() {
 
 		var actionOnTable = filteredCollectionTables.map(QueryTable)
 		var resultsOfCollect = Promise.all(actionOnTable)
-		console.log(resultsOfCollect)
+		
+		resultsOfCollect.then( arrCollectedEvents => {
+		console.log(arrCollectedEvents)
+		})
 	
 	})
 	
@@ -125,7 +128,6 @@ function QueryTable(elem) {
 	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
 
 	    promiseBasicQuery(selec_query).then(results => {
-		console.log("QueryTable results ", results)
 	    resolve(results)
 	    });
 
