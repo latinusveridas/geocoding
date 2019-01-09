@@ -105,6 +105,8 @@ function FilterCollectedTables(arr){
 	} // switch
 		
 	}) // arr.forEach
+	
+	return filteredArray
 }
 
 
