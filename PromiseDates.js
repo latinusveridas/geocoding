@@ -39,7 +39,7 @@ var resMain = {
 app.get('/dates3', function (req, res) {
 
 	
-	// Collect tables
+	 CollOrganizedEvent()
 	
 	
 
@@ -51,7 +51,7 @@ function CollOrganizedEvent() {
 	return new Promise ( function (resolve, reject) {
 	
 	collectTablesInEventsDB().then( collectedTablesArray => {
-	
+	console.log(FilterCollectedTables(collectedTablesArray))
 	
 	})
 	
