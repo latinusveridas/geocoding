@@ -39,7 +39,7 @@ var resMain = {
 app.get('/dates3', function (req, res) {
 	
 	 CollOrganizedEvent().then ( result => {
-	 console.log(result)
+	 res.status(200).json(result)
 	 })
 	
 });
