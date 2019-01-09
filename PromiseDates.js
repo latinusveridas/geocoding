@@ -36,6 +36,41 @@ var resMain = {
 }
 
 
+app.get('/dates3', function (req, res) {
+
+	
+	// Collect tables
+	
+	
+
+});
+
+
+function CollOrganizedEvent() {
+
+	return new Promise ( function (resolve, reject) {
+	
+	collectTablesInEventsDB().then( collectedTablesArray => {
+	
+	
+	})
+	
+	
+	
+	
+	}) // end of promise
+
+
+} // end of function
+
+function FilterCollectedTables(arr){
+
+
+
+
+}
+
+
 // ====================================================
 
 app.get('/dates2', function (req,res) {
