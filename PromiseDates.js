@@ -125,6 +125,7 @@ function QueryTable(elem) {
 	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
 
 	    promiseBasicQuery(selec_query).then(results => {
+		console.log("QueryTable results ", results)
 	    resolve(results)
 	    });
 
