@@ -56,6 +56,7 @@ function CollOrganizedEvent() {
 
 		var actionOnTable = filteredCollectionTables.map(QueryTable)
 		var resultsOfCollect = Promise.all(actionOnTable)
+		console.log(resultsOfCollect)
 	
 	})
 	
