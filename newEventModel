@@ -36,9 +36,37 @@ var resMain = {
     "data" : {}
 }
 
+app.get('/collectevents', function (req,res) {
 
+	var countryCode = "fr" // <--- Debug
+	CollectEvents(countryCode).then(toBeSend => {
+	res.status(200).json(toBeSend)
+	})
 
+});
 
+function CollectEvents(countryCode) {
+
+	return new Promise (resolve,reject) {
+
+		promiseBasicQuery.then(rawResult => {
+		resolve(rawResult)
+		})
+	}
+
+}
+
+function PrepareAndQuery(countryCode) {
+
+	return new Promise(resolve,reject) 
+	
+		var strQuery = "SELECT * from events.events_" + CountryCode
+		promiseBasicQuery(strQuery).then(rawRows => {
+		resolve(rawRows)
+		})
+	
+	}
+}
 
 // ================ SERVER LAUNCH ======================
 // Helper on port 3001
