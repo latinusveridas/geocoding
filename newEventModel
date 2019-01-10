@@ -1,0 +1,94 @@
+//
+//EXPRESS
+var express = require('express');
+var app = express();
+
+//BODYPARSER
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//DATES
+var isoWeek = require('iso-week');
+var dateModule = require('date-and-time');
+
+// DB
+var mysql = require('mysql');
+
+// DEFINE POOLING
+var pool_events = mysql.createPool({
+    connectionLimit: 10,
+    host: "83.217.132.102",
+    port: '3306',
+    user: "root",
+    password: "Miroslava326356$$$$$",
+    database: "events"
+});
+
+module.exports.pool_events = pool_events;
+
+//Structure of the response
+var resMain = {
+    "error": 0,
+    "error_description": "",
+    "success" : "",
+    "type_data" : "",
+    "data" : {}
+}
+
+
+
+
+
+// ================ SERVER LAUNCH ======================
+// Helper on port 3001
+app.listen(3002,function(req,res){
+    console.log('WORKS DATES ON GOING');
+});
+
+// =================== DATABASES FUNCTIONS ==============================
+
+function promiseBasicQuery(query) {
+
+	return new Promise(function(resolve,reject) {
+		
+		pool_events.getConnection(function (err,con) {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log("Check connection : OK")
+			con.query(query, function(err,result,fields) {	
+					if (err) {
+						return reject(err)
+						console.log(err)
+					} else {
+						return resolve(result)
+					}
+
+					})
+			
+			}
+			con.release();
+		})
+
+	})
+}
+
+function checkEventsInTheTable(elem) {
+
+	return new Promise(function(resolve,reject) {
+		
+	    // PRELIMINARY WORKS
+	    var collected_events = [] 
+	    var organizer_id = "'debug_organizer_id_1'"
+	    
+	    var selec_query = "SELECT * FROM " + elem + " WHERE organizer_id = " + organizer_id
+
+	    promiseBasicQuery(selec_query).then(results => {
+	    resolve(results)
+	    });
+
+	})
+				    
+
+}
