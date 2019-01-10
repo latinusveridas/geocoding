@@ -38,8 +38,8 @@ var resMain = {
 
 app.get('/collectevents', function (req,res) {
 
-	var countryCode = "fr" // <--- Debug
-	CollectEvents(countryCode).then(toBeSend => {
+	var Code = "fr" // <--- Debug
+	CollectEvents(Code).then(toBeSend => {
 	res.status(200).json(toBeSend)
 	})
 
