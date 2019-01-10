@@ -47,9 +47,11 @@ app.get('/collectevents', function (req,res) {
 
 function CollectEvents(countryCode) {
 
+	var Code = countryCode
+	console.log("Code is ", Code)
 	return new Promise (function(resolve,reject) {
 
-		PrepareAndQuery(countryCode).then(rawResult => {
+		PrepareAndQuery(Code).then(rawResult => {
 		resolve(rawResult)
 		})
 	})
@@ -60,7 +62,7 @@ function PrepareAndQuery(countryCode) {
 
 	return new Promise(function(resolve,reject) {
 	
-		var strQuery = "SELECT * from events.events_" + CountryCode
+		var strQuery = "SELECT * from events.events_" + countryCode
 		promiseBasicQuery(strQuery).then(rawRows => {
 		resolve(rawRows)
 		})
