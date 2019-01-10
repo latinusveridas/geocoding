@@ -49,7 +49,7 @@ function CollectEvents(countryCode) {
 
 	return new Promise (function(resolve,reject) {
 
-		promiseBasicQuery.then(rawResult => {
+		PrepareAndQuery.then(rawResult => {
 		resolve(rawResult)
 		})
 	})
