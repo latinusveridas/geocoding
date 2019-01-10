@@ -47,29 +47,29 @@ app.get('/collectevents', function (req,res) {
 
 function CollectEvents(countryCode) {
 
-	return new Promise (resolve,reject) {
+	return new Promise (function(resolve,reject) {
 
 		promiseBasicQuery.then(rawResult => {
 		resolve(rawResult)
 		})
-	}
+	})
 
 }
 
 function PrepareAndQuery(countryCode) {
 
-	return new Promise(resolve,reject) {
+	return new Promise(function(resolve,reject) {
 	
 		var strQuery = "SELECT * from events.events_" + CountryCode
 		promiseBasicQuery(strQuery).then(rawRows => {
 		resolve(rawRows)
 		})
 	
-	}
+	})
 }
 
 // ================ SERVER LAUNCH ======================
-// Helper on port 3001
+// Helper on port 3002
 app.listen(3002,function(req,res){
     console.log('WORKS DATES ON GOING');
 });
