@@ -58,7 +58,7 @@ function CollectEvents(countryCode) {
 
 function PrepareAndQuery(countryCode) {
 
-	return new Promise(resolve,reject) 
+	return new Promise(resolve,reject) {
 	
 		var strQuery = "SELECT * from events.events_" + CountryCode
 		promiseBasicQuery(strQuery).then(rawRows => {
