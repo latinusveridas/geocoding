@@ -118,7 +118,7 @@ app.get('/createevent', function (req,res) {
 	sql = mysql.format(sql, inserts);
 	console.log(sql)
 	
-	promiseBasicQuery(trgetQuery).then(QueryResult => {
+	promiseBasicQuery(sql).then(QueryResult => {
 		
 		res.status(200).send("OK")
 		
