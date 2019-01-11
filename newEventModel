@@ -165,18 +165,8 @@ app.post('/createevent', function (req,res) {
             "'" + callback[1][6] + "'",
         ]
 
-        //On sauve la data location dans la table events_location
-        //var resTable = "events_location"
         Pool.insertinto(resTable, locationData, function (callback) {
-
-            if (callback.affectedRows = 1) {
-            isSuccessTableLocation = true
-            } else {
-            isSuccessTableLocation = false
-            }
-            
-        console.log("Success posting of location data : ", isSuccessTableLocation)
-            
+	
                 // Populate location_city for events table
                 var location_city = locationData[4]
                 console.log("Location city is ",location_city)
