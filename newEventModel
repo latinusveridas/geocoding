@@ -169,14 +169,6 @@ app.post('/createevent', function (req,res) {
             "'" + callback[1][6] + "'",
         ]
 
-        Pool.insertinto(resTable, locationData, function (callback) {
-	
-                // Populate location_city for events table
-                var location_city = locationData[4]
-                console.log("Location city is ",location_city)
-
-                // updating data in events table
-                var targetTable = 'sampledb.events'
                 var eventData = [
                 "'" + eventID + "'",
                 "'" + date + "'",
@@ -234,47 +226,46 @@ app.post('/createevent', function (req,res) {
 }); ////// fin de createevent
 
 // GEOCODING
-function geocodeFunction(userRequest,callback) {
+function geocodeFunction(userRequest) {
+	
+	return new Promise(function(resolve,reject) {
 	
 	//on recupere juste le numero de maison car pb en geocoding
     var splitted = userRequest.split(" ");
     var resNumberHome = splitted[0];
 
-    geocoder.geocode(userRequest, function(err,res) {
+		geocoder.geocode(userRequest, function(err,res) {
 
-        //SHOW RESPONSE
-        //console.log(res);
-    
-        // RETURNED RESPONSE IS AN ARRAY WITH ONE JSON OBJECT
-        var resArray = res[0];
+			// RETURNED RESPONSE IS AN ARRAY WITH ONE JSON OBJECT
+			var resArray = res[0];
 
-        console.log(resArray)
-    
-        // SELECT OUR KEYS
-        var resStreet = resArray.streetName;
-        var resCity = resArray.city;
-        var resState = resArray.state;
-        //console.log(resNumberHome,resStreet, resCity,resState);
-    
-        // SELECT LATITUDE & LONGITUDE
-        var resLatitude = resArray.latitude;
-        var resLongitude = resArray.longitude;
+			console.log(resArray)
+		
+			// SELECT OUR KEYS
+			var resStreet = resArray.streetName;
+			var resCity = resArray.city;
+			var resState = resArray.state;
+			//console.log(resNumberHome,resStreet, resCity,resState);
+		
+			// SELECT LATITUDE & LONGITUDE
+			var resLatitude = resArray.latitude;
+			var resLongitude = resArray.longitude;
 
-        var locationData = [
-            eventID,
-            resLatitude.toString(),
-            resLongitude.toString() ,
-            resState ,
-            resCity,
-            resStreet,
-            resNumberHome.toString()
-        ];
+			var locationData = [
+				resLatitude.toString(),
+				resLongitude.toString() ,
+				resState ,
+				resCity,
+				resStreet,
+				resNumberHome.toString()
+			];
 
-        return callback(locationData);
-        
-    });
-
+			resolve(locationData);
+			
+		});
+	
+	}) // Promise
+	
 };
-
 
 
