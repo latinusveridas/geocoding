@@ -60,7 +60,7 @@ function PrepareAndQuery(countryCode) {
 
 	return new Promise(function(resolve,reject) {
 	
-		var strQuery = "SELECT * from events_" + countryCode
+		var strQuery = "SELECT * from 2019_" + countryCode
 		promiseBasicQuery(strQuery).then(rawRows => {
 		resolve(rawRows)
 		})
