@@ -115,8 +115,10 @@ app.get('/createevent', function (req,res) {
 	AddSimpleQuote(dictGeoResult.street_name),
 	AddSimpleQuote(dictGeoResult.street_number)
 	]
-		
-	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES " + valToInsrt
+	
+	console.log(valToInsrt)
+	
+	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES (" + valToInsrt + " )"
 	promiseBasicQuery(trgetQuery).then(QueryResult => {
 		
 		console.log(QueryResult)
