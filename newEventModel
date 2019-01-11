@@ -85,7 +85,7 @@ app.get('/createevent', function (req,res) {
     date = "2019-11-02"
     addressStr = "24 Rue Rameau Clermont Ferrand"
 	
-    var colTarget = "
+    var colTarget = {"
     event_id,
     date,
     sport,
@@ -99,7 +99,7 @@ app.get('/createevent', function (req,res) {
     city,
     street_name,
     street_number
-    "
+    "}
 
     //console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
     
