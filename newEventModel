@@ -249,4 +249,65 @@ function geocodeFunction(userRequest) {
 	
 };
 
+function DBSelectAll(inserts) {
+
+	return new Promise(function(resolve,reject) {
+		
+		pool_events.getConnection(function (err,con) {
+			
+			if (err) {
+				console.log(err)
+				
+			} else {
+				
+			console.log("Check connection : OK")
+			var sql = "SELECT * FROM ?"
+			
+			con.format(sql,inserts, function(err,result,fields) {
+					if (err) {
+						return reject(err)
+						console.log(err)
+					} else {
+						return resolve(result)
+					}
+			})
+			
+			}
+			
+		con.release();
+		})
+
+	})
+}
+
+function DBInsert(inserts) {
+
+	return new Promise(function(resolve,reject) {
+		
+		pool_events.getConnection(function (err,con) {
+			
+			if (err) {
+				console.log(err)
+				
+			} else {
+				
+			console.log("Check connection : OK")
+			var sql = "INSERT INTO ? (?) VALUES (?)"
+			
+			con.format(sql,inserts, function(err,result,fields) {
+					if (err) {
+						return reject(err)
+						console.log(err)
+					} else {
+						return resolve(result)
+					}
+			})
+			
+			}
+			
+		con.release();
+		})
+
+	})
+}
 
