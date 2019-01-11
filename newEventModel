@@ -96,9 +96,7 @@ app.get('/createevent', function (req,res) {
     
     // Geocoding closure to obtain geocoding data which will be saved in the db
     geocodeFunction(addressStr).then(dictGeoResult => {
-    
-    console.log(AddSimpleQuote(sport))
-		
+    		
 	var valToInsrt = [
 	AddSimpleQuote(eventID),
 	AddSimpleQuote(date),
