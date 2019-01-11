@@ -1,4 +1,8 @@
-//
+////GEOCODER
+var NodeGeocoder = require('node-geocoder');
+var Options = {provider: 'openstreetmap'};
+var geocoder = NodeGeocoder(Options);
+
 //EXPRESS
 var express = require('express');
 var app = express();
