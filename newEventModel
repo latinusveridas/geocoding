@@ -35,8 +35,6 @@ var pool_events = mysql.createPool({
     database: "events"
 });
 
-module.exports.pool_events = pool_events;
-
 //Structure of the response
 var resMain = {
     "error": 0,
