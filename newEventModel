@@ -102,18 +102,18 @@ app.get('/createevent', function (req,res) {
 		
 	var valToInsrt = [
 	AddSimpleQuote(eventID),
+	AddSimpleQuote(date),
 	AddSimpleQuote(sport),
 	AddSimpleQuote(0), // <-- nb-part-sub = 0
 	AddSimpleQuote(part_max),
-	AddSimpleQuote(date),
 	AddSimpleQuote(price),
 	AddSimpleQuote(organizer_id),
 	AddSimpleQuote(dictGeoResult.latitude),
 	AddSimpleQuote(dictGeoResult.longitude),
 	AddSimpleQuote(dictGeoResult.state),
 	AddSimpleQuote(dictGeoResult.city),
-	AddSimpleQuote(dictGeoResult.street_name),
-	AddSimpleQuote(dictGeoResult.street_number)
+	AddSimpleQuote(dictGeoResult.street),
+	AddSimpleQuote(dictGeoResult.number)
 	]
 	
 	console.log(valToInsrt)
@@ -122,6 +122,7 @@ app.get('/createevent', function (req,res) {
 	promiseBasicQuery(trgetQuery).then(QueryResult => {
 		
 		console.log(QueryResult)
+		res.status(200).send("OK")
 		
 	})	//BasicQuery
 		
