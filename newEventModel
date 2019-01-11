@@ -114,7 +114,7 @@ app.get('/createevent', function (req,res) {
 	]
 	
 	
-	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES (" + valToInsrt + " )"
+	var trgetQuery = "INSERT INTO 2019_" + country_code_table + " " + colTarget + " VALUES (" + valToInsrt + " )"
 	promiseBasicQuery(trgetQuery).then(QueryResult => {
 		
 		res.status(200).send("OK")
