@@ -122,23 +122,8 @@ app.get('/createevent', function (req,res) {
 	})	//BasicQuery
 	*/
 	
-	var valToInsrt2 = [
-	"2019_fr",
-	AddSimpleQuote(eventID),
-	AddSimpleQuote(date),
-	AddSimpleQuote(sport),
-	AddSimpleQuote(0), // <-- nb-part-sub = 0
-	AddSimpleQuote(part_max),
-	AddSimpleQuote(price),
-	AddSimpleQuote(organizer_id),
-	AddSimpleQuote(dictGeoResult.latitude),
-	AddSimpleQuote(dictGeoResult.longitude),
-	AddSimpleQuote(dictGeoResult.state),
-	AddSimpleQuote(dictGeoResult.city),
-	AddSimpleQuote(dictGeoResult.street),
-	AddSimpleQuote(dictGeoResult.number)
-	]
-	DBInsert(valToInsrt2).then(QueryResult => {
+
+	DBInsert("2019_fr",colTarget,valToInsrt).then(QueryResult => {
 	console.log(QueryResult)
 	})
 		
@@ -302,7 +287,7 @@ function DBSelectAll(inserts) {
 	})
 }
 
-function DBInsert(inserts) {
+function DBInsert(table,col,values) {
 
 	return new Promise(function(resolve,reject) {
 		
@@ -315,7 +300,8 @@ function DBInsert(inserts) {
 				
 			console.log("Check connection : OK")
 			var sql = "INSERT INTO ? (?) VALUES (?)"
-			
+			var inserts = [table,col,values]
+			console.log(inserts)
 			con.format(sql,inserts, function(err,result,fields) {
 					if (err) {
 						return reject(err)
