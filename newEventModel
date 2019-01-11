@@ -85,20 +85,19 @@ app.post('/createevent', function (req,res) {
     geocodeFunction(addressStr).then(dictGeoResult => {
 		
 	var valToInsrt = [
-	eventID,
-	sport,
-	0, // <-- nb-part-sub = 0
-	part_max,
-	date,
-	price,
-	organizer_id,
-	dictGeoResult.latitude,
-	dictGeoResult.longitude,
-	dictGeoResult.state,
-	dictGeoResult.city,
-	dictGeoResult.street_name,
-	dictGeoResult.street_number
-
+	AddSimpleQuote(eventID),
+	AddSimpleQuote(sport),
+	AddSimpleQuote(0), // <-- nb-part-sub = 0
+	AddSimpleQuote(part_max),
+	AddSimpleQuote(date),
+	AddSimpleQuote(price),
+	AddSimpleQuote(organizer_id),
+	AddSimpleQuote(dictGeoResult.latitude),
+	AddSimpleQuote(dictGeoResult.longitude),
+	AddSimpleQuote(dictGeoResult.state),
+	AddSimpleQuote(dictGeoResult.city),
+	AddSimpleQuote(dictGeoResult.street_name),
+	AddSimpleQuote(dictGeoResult.street_number)
 	]
 		
 	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES " + valToInsrt
