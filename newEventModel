@@ -87,13 +87,12 @@ app.get('/createevent', function (req,res) {
 	
     var colTarget = "(event_id,date,sport,nb_part_sub,nb_part_max,price_per_part,organizer_id,latitude,longitude,country,city,street_name,street_number)"
 
-    console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
+    //console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
     
     // Generate the event_id
     var dt = datetime.create();
     var dt = dt.format('Y_m')
     var eventID = dt + '_E_' + rdmString.generate(40) ;
-    //console.log("GENERATED EVENT_ID " + eventID) 
     
     // Geocoding closure to obtain geocoding data which will be saved in the db
     geocodeFunction(addressStr).then(dictGeoResult => {
@@ -116,12 +115,10 @@ app.get('/createevent', function (req,res) {
 	AddSimpleQuote(dictGeoResult.number)
 	]
 	
-	console.log(valToInsrt)
 	
 	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES (" + valToInsrt + " )"
 	promiseBasicQuery(trgetQuery).then(QueryResult => {
 		
-		console.log(QueryResult)
 		res.status(200).send("OK")
 		
 	})	//BasicQuery
