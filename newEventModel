@@ -113,8 +113,8 @@ app.get('/createevent', function (req,res) {
 	dictGeoResult.number
 	]
 		
-	var sql = "INSERT INTO 2019_fr (?) VALUES (?)"
-	var inserts = [colTarget, valToInsrt];
+	var sql = "INSERT INTO 2019_fr (" + colTarget + ") VALUES (?)"
+	var inserts = [valToInsrt];
 	sql = mysql.format(sql, inserts);
 	console.log("BRUT QUERY ",sql)
 	
