@@ -188,6 +188,11 @@ function checkEventsInTheTable(elem) {
 				    
 }
 
+function AddSimpleQuote(elem) {	
+
+	return ("'" + elem + "'")
+}
+
 // GEOCODING
 function geocodeFunction(userRequest) {
 	
