@@ -252,12 +252,12 @@ function geocodeFunction(userRequest) {
 			var resLongitude = resArray.longitude;
 
 			var locationData = [
-				resLatitude.toString(),
-				resLongitude.toString() ,
-				resState ,
-				resCity,
-				resStreet,
-				resNumberHome.toString()
+				"latitude": resLatitude.toString(),
+				"longitude": resLongitude.toString() ,
+				"state": resState ,
+				"city": resCity,
+				"street": resStreet,
+				"number": resNumberHome.toString()
 			];
 
 			resolve(locationData);
