@@ -49,6 +49,70 @@ app.get('/collectevents', function (req,res) {
 
 });
 
+
+app.post('/createevent', function (req,res) {
+
+	var country_code_table = "fr" // <--- DEBUG
+
+        var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+    
+    // Define the variables    
+    var sport = req.body.sport
+    var organizer_id = req.body.organizer_id
+    var price = req.body.price
+    var part_max = req.body.part_max
+    var date = req.body.date
+    var addressStr = req.body.address_string
+    var location_city = "" // Will be feeded during geocoding and sent to events table
+	
+	var colTarget = "(event_id,date,sport,nb_part_sub,nb_part_max,price_per_part,organizer_id,latitude,longitude,country,city,street_name,street_number)"
+
+    console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
+    
+    // Generate the event_id
+    var dt = datetime.create();
+    var dt = dt.format('Y_m')
+    var eventID = dt + '_E_' + rdmString.generate(40) ;
+    //console.log("GENERATED EVENT_ID " + eventID) 
+    
+    // Geocoding closure to obtain geocoding data which will be saved in the db
+    geocodeFunction(addressStr).then(dictGeoResult => {
+		
+	var valToInsrt = [
+	eventID,
+	sport,
+	0, // <-- nb-part-sub = 0
+	part_max,
+	date,
+	price,
+	organizer_id,
+	dictGeoResult.latitude,
+	dictGeoResult.longitude,
+	dictGeoResult.state,
+	dictGeoResult.city,
+	dictGeoResult.street_name,
+	dictGeoResult.street_number
+
+	]
+		
+	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES " + valToInsrt
+	promiseBasicQuery(trgetQuery).then(QueryResult => {
+		
+		console.log(QueryResult)
+		
+	})	//BasicQuery
+		
+		
+	}) // geocoding
+	
+}); // createevent
+
 function CollectEvents(countryCode) {
 
 	return new Promise (function(resolve,reject) {
@@ -123,107 +187,6 @@ function checkEventsInTheTable(elem) {
 	})
 				    
 }
-
-app.post('/createevent', function (req,res) {
-
-	var country_code_table = "fr" // <--- DEBUG
-
-        var resMain = {
-        "error": 0,
-        "error_description": "",
-        "success" : "",
-        "type_data" : "",
-        "data" : {}
-    }
-    
-    // Define the variables    
-    var sport = req.body.sport
-    var organizer_id = req.body.organizer_id
-    var price = req.body.price
-    var part_max = req.body.part_max
-    var date = req.body.date
-    var addressStr = req.body.address_string
-    var location_city = "" // Will be feeded during geocoding and sent to events table
-
-    console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
-    
-    // Generate the event_id
-    var dt = datetime.create();
-    var dt = dt.format('Y_m')
-    var eventID = dt + '_E_' + rdmString.generate(40) ;
-    //console.log("GENERATED EVENT_ID " + eventID) 
-    
-    // Geocoding closure to obtain geocoding data which will be saved in the db
-    geocodeFunction(addressStr, function (callback) {
-
-        //ON DEFINIE targetTable & locationData
-        var resTable = callback[0]
-        var locationData = [
-            // on geocodeFunction, the eventID is put as nil, so now its loaded is the values loaded is the db
-            "'" + eventID + "'",
-            "'" + callback[1][1] + "'",
-            "'" + callback[1][2] + "'",
-            "'" + callback[1][3] + "'",
-            "'" + callback[1][4] + "'",
-            "'" + callback[1][5] + "'",
-            "'" + callback[1][6] + "'",
-        ]
-
-                var eventData = [
-                "'" + eventID + "'",
-                "'" + date + "'",
-                location_city,
-                "'" + sport + "'",
-                "'" + 0 + "'",
-                "'" + part_max + "'",
-                "'" + price + "'",
-                "'" + organizer_id + "'",
-                ]
-
-                var events_col = [
-                    'event_id',
-                    'date',
-                    'location',
-                    'sport',
-                    'nb_part_sub',
-                    'nb_part_max',
-                    'price_per_part',
-                    'organizer_id'
-                ]
-
-                //On sauve la data events dans la table events
-                Pool.insertSpecific(targetTable, events_col, eventData, function (callback2) {
-            
-                    if (callback2.affectedRows = 1) {
-                    isSuccessTableEvents = true
-                    } else {
-                    isSuccessTableEvents = false
-                    }
-
-                    console.log("Success posting of events data : ", isSuccessTableEvents)
-                
-                    // Verification des success et renvoie de la reponse
-                    if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
-                        resMain.success = 1
-                    res.status(200).json(resMain)
-                    } else {
-                        resMain.error = 1
-                        resMain.error_description = "posting failed"
-                    res.status(500).json(resMain)
-                    }
-
-
-
-                }); // Fin de pool.insertinto
-                                
-
-
-        }); // fin de pool.insertinto table_location
-    
-        
-    }); // fin de geocodeFunction
-        
-}); ////// fin de createevent
 
 // GEOCODING
 function geocodeFunction(userRequest) {
