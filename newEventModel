@@ -98,22 +98,22 @@ app.get('/createevent', function (req,res) {
     geocodeFunction(addressStr).then(dictGeoResult => {
     		
 	var valToInsrt = [
-	AddSimpleQuote(eventID),
-	AddSimpleQuote(date),
-	AddSimpleQuote(sport),
-	AddSimpleQuote(0), // <-- nb-part-sub = 0
-	AddSimpleQuote(part_max),
-	AddSimpleQuote(price),
-	AddSimpleQuote(organizer_id),
-	AddSimpleQuote(dictGeoResult.latitude),
-	AddSimpleQuote(dictGeoResult.longitude),
-	AddSimpleQuote(dictGeoResult.state),
-	AddSimpleQuote(dictGeoResult.city),
-	AddSimpleQuote(dictGeoResult.street),
-	AddSimpleQuote(dictGeoResult.number)
+	eventID,
+	date,
+	sport,
+	0, // <-- nb-part-sub = 0
+	part_max,
+	price,
+	organizer_id,
+	dictGeoResult.latitude,
+	dictGeoResult.longitude,
+	dictGeoResult.state,
+	dictGeoResult.city,
+	dictGeoResult.street,
+	dictGeoResult.number
 	]
 		
-	var sql = "INSERT INTO ? (?) VALUES (?)"
+	var sql = "INSERT INTO ? ?? VALUES ?"
 	var inserts = ['2019_fr', colTarget, valToInsrt];
 	sql = mysql.format(sql, inserts);
 	console.log(sql)
