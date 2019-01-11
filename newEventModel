@@ -116,7 +116,7 @@ app.get('/createevent', function (req,res) {
 	var sql = "INSERT INTO ? ?? VALUES ?"
 	var inserts = ['2019_fr', colTarget, valToInsrt];
 	sql = mysql.format(sql, inserts);
-	console.log(sql)
+	console.log("BRUT QUERY ",sql)
 	
 	promiseBasicQuery(sql).then(QueryResult => {
 		
