@@ -113,7 +113,7 @@ app.get('/createevent', function (req,res) {
 	AddSimpleQuote(dictGeoResult.number)
 	]
 		
-	var sql = "INSERT INTO ? (?) VALUES (?)
+	var sql = "INSERT INTO ? (?) VALUES (?)"
 	var inserts = ['2019_fr', colTarget, valToInsrt];
 	sql = mysql.format(sql, inserts);
 	console.log(sql)
