@@ -92,7 +92,7 @@ app.post('/createevent', function (req,res) {
     // Geocoding closure to obtain geocoding data which will be saved in the db
     geocodeFunction(addressStr).then(dictGeoResult => {
 		
-	var valToInsrt = [
+	var valToInsrt = {
 	AddSimpleQuote(eventID),
 	AddSimpleQuote(sport),
 	AddSimpleQuote(0), // <-- nb-part-sub = 0
@@ -106,7 +106,7 @@ app.post('/createevent', function (req,res) {
 	AddSimpleQuote(dictGeoResult.city),
 	AddSimpleQuote(dictGeoResult.street_name),
 	AddSimpleQuote(dictGeoResult.street_number)
-	]
+	}
 		
 	var trgetQuery = "INSERT INTO 2019_fr " + colTarget + " VALUES " + valToInsrt
 	promiseBasicQuery(trgetQuery).then(QueryResult => {
