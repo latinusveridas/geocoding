@@ -89,7 +89,7 @@ app.get('/createevent', function (req,res) {
     'event_id',
     'date',
     'sport',
-    'nb_part_su'b,
+    'nb_part_sub',
     'nb_part_max',
     'price_per_part',
     'organizer_id',
