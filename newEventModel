@@ -22,6 +22,9 @@ var dateModule = require('date-and-time');
 // DB
 var mysql = require('mysql');
 
+//RANDOM STRING
+var rdmString = require('randomstring');
+
 // DEFINE POOLING
 var pool_events = mysql.createPool({
     connectionLimit: 10,
