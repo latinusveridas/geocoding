@@ -125,6 +125,10 @@ router.post('/login', function (req, res) {
                             resMain.error = 0;
                             resMain.data["JWT1"] = token1;
                             var org_id = rows[0].organizer_id
+                            var user_id = rows[0].user_id
+                            var first_name = rows[0].first_name
+                            var last_name = rows[0].last_name
+                            var pic_name = rows[0].picture_link
                             //resMain.data["JWT2"] = token2;
 
                             // Preparation of the query in the database
@@ -146,6 +150,10 @@ router.post('/login', function (req, res) {
                                     resMain.data["JWT1"] = token1
                                     resMain.data["JWT2"] = "" 
                                     resMain.data["organizer_id"] = org_id
+                                    resMain.data["user_id"] = user_id
+                                    resMain.data["first_name"] = first_name
+                                    resMain.data["last_name"] = last_name
+                                    resMain.data["pic_name"] = pic_name
                                     resMain.type_data = "RowDataPackets + data"
                                     res.status(200).json(resMain);
                                 }
