@@ -114,8 +114,8 @@ app.get('/postrating', function(req,res) {
 			var sql = mysql.format(baseStr,inserts)
 			
 			GoQuery(currCon,sql).then(collectedRatings => {
-			
-			
+			var arrRat = JSON.stringify(collectedRatings)
+			console.log(arrRat)
 			})
 
 		})
