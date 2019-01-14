@@ -93,7 +93,11 @@ app.get('/postrating', function(req,res) {
     
 	CreatePool(location).then(currPool => {
 	ConnectToDB(currPool).then(currCon => {
-
+		
+		var columns = "(organizer_id,user_comment,user_single_rating)"
+		var baseStr = "INSERT INTO " + columns + " VALUES ?"
+		
+		
 		query = "SHOW TABLES"
 
 		GoQuery(currCon,query).then(result => {
