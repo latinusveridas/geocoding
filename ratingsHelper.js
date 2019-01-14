@@ -24,6 +24,47 @@ var pool_rat = mysql.createPool({
 module.exports.pool_rat = pool_rat;
 
 // =====================================================
+//    BRAND NEW
+// =====================================================
+
+function CreatePool(loc) {
+
+    return new Promise(function (resolve,reject) {
+    
+        var pool_rat = mysql.createPool({
+        connectionLimit: 10,
+        host: "83.217.132.102",
+        port: '3306',
+        user: "root",
+        password: "Miroslava326356$$$$$",
+        database: loc 
+        })    
+        
+        resolve(pool_rat)
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/ratings', function(req, res) {
     console.log("in ratings !")
