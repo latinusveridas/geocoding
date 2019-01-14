@@ -97,9 +97,6 @@ app.get('/postrating', function(req,res) {
 		var columns = " (organizer_id,user_comment,user_single_rating)"
 		var baseStr = "INSERT INTO " + tableRat + columns + " VALUES (?)"
 		
-		console.log(baseStr)
-		console.log(organizer_id)
-		
 		var val = [
 			organizer_id,
 			user_comment,
@@ -107,13 +104,19 @@ app.get('/postrating', function(req,res) {
 			  ]
 		
 		var inserts = [val]
-		var sql = mysql.format(baseStr, inserts);
+		var sql = mysql.format(baseStr, inserts)
+				
+		GoQuery(currCon,sql).then(resultPost => {
 		
-		console.log(sql)
-		
-		GoQuery(currCon,sql).then(result => {
-		currCon.release()
-		res.status(200).send(result)
+			// on query pour obtenir tous les ratings
+			var baseStr = " SELECT user_single_rating from tableRat WHERE organizer_id = ? "
+			var insert = [organizer_id]
+			var sql = mysql.format(baseStr,inserts)
+			
+			GoQuery(currCon,sql).then(collectedRatings => {
+			
+			
+			})
 
 		})
 
