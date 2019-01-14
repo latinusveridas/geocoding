@@ -81,17 +81,15 @@ function GoQuery(connection, query) {
 
 function CalcGlobalRating(array) {
 	
-	console.log("inside Calc function", array)
 	// Counting elements in array
         var count = array.length
-	console.log(count)
         // Sum of elements
         var sumMarks = sum(array)
-	console.log(sumMarks)
         // Calcul of rating
         var global_rat = sumMarks/count
-	console.log(global_rat)
-	return(global_rat)
+	DecimalFormat df = new DecimalFormat("#.##");
+	var rddRsl = df.format(global_rat)
+	return(rddRsl)
 }
 
 app.get('/postrating', function(req,res) {
