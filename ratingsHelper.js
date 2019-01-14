@@ -111,7 +111,7 @@ app.get('/postrating', function(req,res) {
 			// on query pour obtenir tous les ratings
 			var baseStr = " SELECT user_single_rating FROM " + tableRat + " WHERE organizer_id = ? "
 			var insert = [organizer_id]
-			var sql = mysql.format(baseStr,inserts)
+			var sql = mysql.format(baseStr,insert)
 			console.log(sql)
 			GoQuery(currCon,sql).then(collectedRatings => {
 			currCon.release()
