@@ -101,7 +101,9 @@ app.get('/postrating', function(req,res) {
 		console.log(organizer_id)
 		
 		var inserts = [organizer_id,user_comment,user_single_rating]
-		sql = mysql.format(baseStr, inserts);
+		var sql = mysql.format(baseStr, inserts);
+		
+		console.log(sql)
 		
 		GoQuery(currCon,sql).then(result => {
 		currCon.release()
