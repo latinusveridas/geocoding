@@ -94,13 +94,13 @@ app.get('/postrating', function(req,res) {
 	CreatePool(location).then(currPool => {
 	ConnectToDB(currPool).then(currCon => {
 		
-		var columns = "(organizer_id,user_comment,user_single_rating)"
-		var baseStr = "INSERT INTO " + columns + " VALUES ?"
+		var columns = " (organizer_id,user_comment,user_single_rating)"
+		var baseStr = "INSERT INTO " + tableRat + columns + " VALUES ?"
 		
+		var inserts = [organizer_id,user_comment,user_single_rating]
+		sql = mysql.format(baseStr, inserts);
 		
-		query = "SHOW TABLES"
-
-		GoQuery(currCon,query).then(result => {
+		GoQuery(currCon,sql).then(result => {
 		currCon.release()
 		res.status(200).send(result)
 
