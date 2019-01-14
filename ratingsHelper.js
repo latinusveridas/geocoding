@@ -89,7 +89,7 @@ app.get('/postrating', function(req,res) {
 
     // We split the org_id to select the correct ratings table type 01_ratings_fr
     var month = organizer_id.split("_")
-    var tableRat = month + "_ratings_" + location
+    var tableRat = month[1] + "_ratings_" + location
     
 	CreatePool(location).then(currPool => {
 	ConnectToDB(currPool).then(currCon => {
