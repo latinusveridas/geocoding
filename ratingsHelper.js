@@ -79,6 +79,17 @@ function GoQuery(connection, query) {
 
 }
 
+function CalcGlobalRating(array) {
+	
+	// Counting elements in array
+        var count = array.lenght
+        // Sum of elements
+        var sumMarks = sum(array)
+        // Calcul of rating
+        var global_rat = sumMarks/count
+	return(global_rat)
+}
+
 app.get('/postrating', function(req,res) {
 
 //Debug
@@ -116,10 +127,13 @@ app.get('/postrating', function(req,res) {
 			GoQuery(currCon,sql).then(collectedRatings => {
 
 			var arrRat = JSON.stringify(collectedRatings)
-			var arr2 = JSON.parse(arrRat)
-			console.log(arr2)
-			var mapped = arr2.map(curr => curr.user_single_rating);
-			console.log(mapped)
+			arrRat = JSON.parse(arrRat)
+			var onlyRatings = arrRat.map(curr => curr.user_single_rating);
+			
+			// Calcule de la note
+			var GlobalNote = CalcGlobalRating(onlyRatings)
+				
+				
 			currCon.release()
 			res.status(200).send(arrRat)
 			})
