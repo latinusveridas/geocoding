@@ -95,7 +95,7 @@ app.get('/postrating', function(req,res) {
 	ConnectToDB(currPool).then(currCon => {
 		
 		var columns = " (organizer_id,user_comment,user_single_rating)"
-		var baseStr = "INSERT INTO " + tableRat + columns + " VALUES ?"
+		var baseStr = "INSERT INTO " + tableRat + columns + " VALUES (?)"
 		
 		console.log(baseStr)
 		console.log(organizer_id)
