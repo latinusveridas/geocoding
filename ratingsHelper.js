@@ -57,6 +57,7 @@ function ConnectToDB(argPool) {
         resolve(con)
         }
             
+	})
     })
 }
                         
