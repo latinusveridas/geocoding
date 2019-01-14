@@ -59,6 +59,24 @@ function ConnectToDB(argPool) {
             
     })
 }
+                        
+function GoQuery(connection, query) {
+
+	return new Promise(function(resolve,reject) {
+		
+			connection.query(query, function(err,result,fields) {	
+					if (err) {
+						return reject(err)
+						console.log(err)
+					} else {
+						return resolve(result)
+					}
+
+					})
+			
+	})
+
+}
 
 app.get('/postrating', function(req,res) {
 
