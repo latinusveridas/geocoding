@@ -100,12 +100,13 @@ app.get('/postrating', function(req,res) {
 		console.log(baseStr)
 		console.log(organizer_id)
 		
-		var inserts = [
+		var val = [
 			organizer_id,
 			user_comment,
 			user_single_rating
-			      ]
-		console.log(user_comment)
+			  ]
+		
+		var inserts = [val]
 		var sql = mysql.format(baseStr, inserts);
 		
 		console.log(sql)
