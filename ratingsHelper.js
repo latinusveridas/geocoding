@@ -91,12 +91,21 @@ app.get('/postrating', function(req,res) {
     var month = organizer_id.split("_")
     var tableRat = month + "_ratings_" + location
     
-    
-    
-    
-    
-    
-    
+	CreatePool(loc).then(currPool => {
+	ConnectToDB(currPool).then(currCon => {
+
+		query = "SHOW TABLES"
+
+		GoQuery(currCon,query).then(result => {
+		currCon.release()
+		res.status(200).send(result)
+
+		})
+
+	})
+
+	})
+     
 })
 
 
