@@ -82,10 +82,10 @@ function GoQuery(connection, query) {
 app.get('/postrating', function(req,res) {
 
 //Debug
-    location = "fr"
-    organizer_id = "2019_01_O_bernard_organizer_id"
-    user_single_rating = "7"
-    user_comment = "Pas en forme Bernard"
+    var location = "fr"
+    var organizer_id = "2019_01_O_bernard_organizer_id"
+    var user_single_rating = "7"
+    var user_comment = "Pas en forme Bernard"
 
     // We split the org_id to select the correct ratings table type 01_ratings_fr
     var month = organizer_id.split("_")
@@ -96,6 +96,9 @@ app.get('/postrating', function(req,res) {
 		
 		var columns = " (organizer_id,user_comment,user_single_rating)"
 		var baseStr = "INSERT INTO " + tableRat + columns + " VALUES ?"
+		
+		console.log(baseStr)
+		console.log(organizer_id)
 		
 		var inserts = [organizer_id,user_comment,user_single_rating]
 		sql = mysql.format(baseStr, inserts);
