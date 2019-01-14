@@ -118,8 +118,8 @@ app.get('/postrating', function(req,res) {
 			var arrRat = JSON.stringify(collectedRatings)
 			var arr2 = JSON.stringify(arrRat)
 			console.log(arr2)
-			//var mapped = arrRat.map(x => x.user_single_rating);
-			//console.log(mapped)
+			var mapped = arr2.map(curr => curr.user_single_rating);
+			console.log(mapped)
 			currCon.release()
 			res.status(200).send(arrRat)
 			})
