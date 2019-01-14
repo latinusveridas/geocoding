@@ -87,7 +87,7 @@ function CalcGlobalRating(array) {
         var sumMarks = sum(array)
         // Calcul of rating
         var global_rat = sumMarks/count
-	DecimalFormat df = new DecimalFormat("#.##");
+	var df = new DecimalFormat("#.##");
 	var rddRsl = df.format(global_rat)
 	return(rddRsl)
 }
