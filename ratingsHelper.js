@@ -55,7 +55,7 @@ app.get('/postrating', function(req,res) {
     // We split the org_id to select the correct ratings table type 01_ratings_fr
     String[] split = organizer_id.split("_", 2);
     var month = split[1]
-
+    console.log(month)
 })
 
 
