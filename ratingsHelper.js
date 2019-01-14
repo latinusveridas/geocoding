@@ -133,9 +133,8 @@ app.get('/postrating', function(req,res) {
 			// Calcule de la note
 			var GlobalNote = CalcGlobalRating(onlyRatings)
 				
-				
 			currCon.release()
-			res.status(200).send(arrRat)
+			res.status(200).send(GlobalNote)
 			})
 
 		})
