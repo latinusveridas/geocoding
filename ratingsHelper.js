@@ -44,7 +44,19 @@ function CreatePool(loc) {
     })
 }
 
+app.get('/postrating', function(req,res) {
 
+//Debug
+    location = "fr"
+    organizer_id = "2019_01_O_bernard_organizer_id"
+    user_single_rating = "7"
+    user_comment = "Pas en forme Bernard"
+
+    // We split the org_id to select the correct ratings table type 01_ratings_fr
+    String[] split = organizer_id.split("_", 2);
+    var month = split[1]
+
+})
 
 
 
