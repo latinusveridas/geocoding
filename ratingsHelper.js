@@ -53,8 +53,7 @@ app.get('/postrating', function(req,res) {
     user_comment = "Pas en forme Bernard"
 
     // We split the org_id to select the correct ratings table type 01_ratings_fr
-    String[] split = organizer_id.split("_", 2);
-    var month = split[1]
+    var month = organizer_id.split("_", 2);
     console.log(month)
 })
 
