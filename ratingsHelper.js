@@ -114,10 +114,12 @@ app.get('/postrating', function(req,res) {
 			var sql = mysql.format(baseStr,insert)
 			console.log(sql)
 			GoQuery(currCon,sql).then(collectedRatings => {
-			currCon.release()
+
 			var arrRat = JSON.stringify(collectedRatings)
+			var mapped = []
 			var mapped = arrRat.map(x => x.user_single_rating);
 			console.log(mapped)
+			currCon.release()
 			res.status(200).send(arrRat)
 			})
 
