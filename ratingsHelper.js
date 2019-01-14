@@ -81,12 +81,16 @@ function GoQuery(connection, query) {
 
 function CalcGlobalRating(array) {
 	
+	console.log(array)
 	// Counting elements in array
         var count = array.lenght
+	console.log(count)
         // Sum of elements
         var sumMarks = sum(array)
+	console.log(sumMarks)
         // Calcul of rating
         var global_rat = sumMarks/count
+	console.log(global_rat)
 	return(global_rat)
 }
 
