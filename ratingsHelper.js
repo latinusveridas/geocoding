@@ -44,6 +44,22 @@ function CreatePool(loc) {
     })
 }
 
+function ConnectToDB(argPool) {
+    
+    return new Promise (function (resolve,reject) {
+
+        argPool.getConnection(function (err, con) {
+
+        if (err) {
+        console.log(err)
+        } else {
+        console.log("Success to retrieve the connection")
+        resolve(con)
+        }
+            
+    })
+}
+
 app.get('/postrating', function(req,res) {
 
 //Debug
