@@ -60,8 +60,14 @@ app.get('/postrating', function(req,res) {
 			var inserts = [GlobalNote,organizer_id]
 			var sql = mysql.format(baseStr,inserts)
 			console.log(sql)
-			GoQuery(currCon,sql).then(resultUpdate => {
-			console.log(resultUpdate)
+			GoQuery(currCon,sql).then(receivedPacket => {
+			console.log(receivedPacket)
+			var packetStr = JSON.stringify(receivedPacket)
+			console.log(packetStr)
+			var parsed = JSON.parse(packetStr)
+			console.log(parsed)
+			var str = parsed.map(curr => curr.affectedRows)
+			console.log(str)
 				
 			currCon.release()
 			res.status(200).send("OK")				
