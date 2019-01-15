@@ -54,7 +54,10 @@ app.get('/postrating', function(req,res) {
 			
 			// Calcule de la note
 			var GlobalNote = CalcGlobalRating(onlyRatings)
-			console.log(GlobalNote)	
+			console.log(GlobalNote)
+				
+			var baseStr = "UPDATE users_" + loc + " set organizer_rating = ? WHERE organizer_id = ?" 
+				
 			currCon.release()
 			res.status(200).send("OK")
 			})
