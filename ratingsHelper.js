@@ -64,7 +64,7 @@ app.get('/postrating', function(req,res) {
 			console.log(receivedPacket)
 			var packetStr = JSON.stringify(receivedPacket)
 			console.log(packetStr)
-			var str = packetStr.map(curr => curr.affectedRows)
+			var str = packetStr.affectedRows
 			console.log(str)
 				
 			currCon.release()
