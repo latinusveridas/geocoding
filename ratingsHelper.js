@@ -43,8 +43,8 @@ app.get('/postrating', function(req,res) {
 		
 			// on query pour obtenir tous les ratings
 			var baseStr = " SELECT user_single_rating FROM " + tableRat + " WHERE organizer_id = ? "
-			var insert = [organizer_id]
-			var sql = mysql.format(baseStr,insert)
+			var inserts = [organizer_id]
+			var sql = mysql.format(baseStr,inserts)
 			console.log(sql)
 			GoQuery(currCon,sql).then(collectedRatings => {
 
@@ -56,10 +56,18 @@ app.get('/postrating', function(req,res) {
 			var GlobalNote = CalcGlobalRating(onlyRatings)
 			console.log(GlobalNote)
 				
-			var baseStr = "UPDATE users_" + loc + " set organizer_rating = ? WHERE organizer_id = ?" 
+			var baseStr = "UPDATE users_" + loc + " set organizer_rating = ? WHERE organizer_id = ?"
+			var inserts = [GlobalNote,organizer_id]
+			var sql = mysql.format(baseStr,inserts)
+			console.log(sql)
+			GoQuery(currCon,sql).then(resultUpdate => {
+			console.log(resultUpdate)
 				
 			currCon.release()
-			res.status(200).send("OK")
+			res.status(200).send("OK")				
+			})
+			
+
 			})
 
 		})
