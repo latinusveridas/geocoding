@@ -56,7 +56,7 @@ app.get('/postrating', function(req,res) {
 			var GlobalNote = CalcGlobalRating(onlyRatings)
 			console.log(GlobalNote)
 				
-			var baseStr = "UPDATE users_" + loc + " set organizer_rating = ? WHERE organizer_id = ?"
+			var baseStr = "UPDATE users_" + location + " set organizer_rating = ? WHERE organizer_id = ?"
 			var inserts = [GlobalNote,organizer_id]
 			var sql = mysql.format(baseStr,inserts)
 			console.log(sql)
