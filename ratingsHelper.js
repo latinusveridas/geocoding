@@ -17,7 +17,7 @@ app.get('/postrating', function(req,res) {
 //Debug
     var location = "fr"
     var organizer_id = "2019_01_O_bernard_organizer_id"
-    var user_single_rating = "7"
+    var user_single_rating = "0"
     var user_comment = "Pas en forme Bernard"
 
     // We split the org_id to select the correct ratings table type 01_ratings_fr
