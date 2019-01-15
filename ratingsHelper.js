@@ -63,6 +63,7 @@ app.get('/postrating', function(req,res) {
 			GoQuery(currCon,sql).then(receivedPacket => {
 			console.log(receivedPacket)
 			var packetStr = JSON.stringify(receivedPacket)
+			var packetStr = JSON.parse(packetStr)
 			console.log(packetStr)
 			var str = packetStr.affectedRows
 			console.log(str)
