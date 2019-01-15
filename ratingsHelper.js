@@ -133,7 +133,7 @@ function CalcGlobalRating(array) {
 	// Counting elements in array
         var count = array.length
         // Sum of elements
-        var sumMarks = sum(array)
+        var sumMarks = mathjs.sum(array)
         // Calcul of rating
         var global_rat = sumMarks/count
 	var rddRsl = mathjs.round(global_rat)
