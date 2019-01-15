@@ -67,34 +67,32 @@ app.get('/postrating', function(req,res) {
 
 			var finalConf = packetStr.affectedRows
 			
-			switch (finalConf) {
-			
-				case 1: 
-					//success
-					console.log("Success on rating")
-					res.status(200).send("OK")
-					currCon.release()
-					break;
-				default :
-					res.status(200).send("Problem")
-					currCon.release()
-						
-			}
-				
-			currCon.release()
-			res.status(200).send("OK")				
-			})
+				switch (finalConf) {
+
+					case 1: 
+						//success
+						console.log("Success on rating")
+						res.status(200).send("OK")
+						currCon.release()
+						break;
+					default :
+						res.status(200).send("Problem")
+						currCon.release()
+
+				}
+							
+			}) // GoQuery Update
 			
 
-			})
+			}) // GoQuery Collect Ratings
 
-		})
+		}) //GoQuery Insert in ratings table
 
-	})
+	}) // GetConnection
 
-	})
+	}) // CreatePool
      
-})
+}) // App.get
 
 //=====SERVER LAUNCH========
 // Helper on port 3001
