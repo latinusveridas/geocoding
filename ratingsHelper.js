@@ -41,13 +41,13 @@ app.get('/postrating', function(req,res) {
 		console.log(sql)		
 		GoQuery(currCon,sql).then(resultPost => {
 		
-			// on query pour obtenir tous les ratings
+			// On query pour obtenir tous les ratings
 			var baseStr = " SELECT user_single_rating FROM " + tableRat + " WHERE organizer_id = ? "
 			var inserts = [organizer_id]
 			var sql = mysql.format(baseStr,inserts)
 			console.log(sql)
 			GoQuery(currCon,sql).then(collectedRatings => {
-
+			// On clean la reponse pour avoir un array avec des integers
 			var arrRat = JSON.stringify(collectedRatings)
 			arrRat = JSON.parse(arrRat)
 			var onlyRatings = arrRat.map(curr => curr.user_single_rating);
@@ -55,18 +55,31 @@ app.get('/postrating', function(req,res) {
 			// Calcule de la note
 			var GlobalNote = CalcGlobalRating(onlyRatings)
 			console.log(GlobalNote)
-				
+			// On update la note globale dans user_location	
 			var baseStr = "UPDATE users_" + location + " set organizer_rating = ? WHERE organizer_id = ?"
 			var inserts = [GlobalNote,organizer_id]
 			var sql = mysql.format(baseStr,inserts)
-			console.log(sql)
+
 			GoQuery(currCon,sql).then(receivedPacket => {
-			console.log(receivedPacket)
+			// On convertie en string pour virer le OkPacket et on retransforme en JSON
 			var packetStr = JSON.stringify(receivedPacket)
 			var packetStr = JSON.parse(packetStr)
-			console.log(packetStr)
-			var str = packetStr.affectedRows
-			console.log(str)
+
+			var finalConf = packetStr.affectedRows
+			
+			switch (finalConf) {
+			
+				case 1: 
+					//success
+					console.log("Success on rating")
+					res.status(200).send("OK")
+					currCon.release()
+					break;
+				default :
+					res.status(200).send("Problem")
+					currCon.release()
+						
+			}
 				
 			currCon.release()
 			res.status(200).send("OK")				
