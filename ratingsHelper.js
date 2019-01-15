@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // VARIABLES
 var mysql = require('mysql');
+var mathjs = require('mathjs');
 
 app.get('/postrating', function(req,res) {
 
@@ -135,8 +136,7 @@ function CalcGlobalRating(array) {
         var sumMarks = sum(array)
         // Calcul of rating
         var global_rat = sumMarks/count
-	var df = new DecimalFormat("#.##");
-	var rddRsl = df.format(global_rat)
+	var rddRsl = mathjs.round(global_rat)
 	return(rddRsl)
 }
 
