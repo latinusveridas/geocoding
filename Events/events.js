@@ -50,7 +50,7 @@ router.get('/all2', function(req,res) {
 		
 		var packetStr = JSON.stringify(resultPost)
 		var packetStr = JSON.parse(packetStr)
-			
+			res.status(200).send(packetStr)
 			
 
 
