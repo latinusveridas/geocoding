@@ -40,13 +40,11 @@ router.get('/all2', function(req,res) {
 
 //Debug
     var location = "fr"
-
-    var tableRat = month[1] + "_ratings_" + location
     
 	CreatePool(location).then(currPool => {
 	ConnectToDB(currPool).then(currCon => {
 		
-		var baseStr = 'SELECT events_${location}.*, users_${location}.first_name,users_${location}.organizer_id FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id'
+		var baseStr = 'SELECT events_${location}.*, users_${location}.first_name,users_${location}.organizer_id,users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id'
 		var sql = mysql.format(baseStr, inserts)
 		
 		GoQuery(currCon,sql).then(resultPost => {
