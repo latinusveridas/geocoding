@@ -35,6 +35,8 @@ var resMain = {
     "data" : {}
 }
 
+var DB = require('../Database/database');
+
 app.get('/all', function (req,res) {
 
 	//Debug
