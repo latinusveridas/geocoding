@@ -19,6 +19,8 @@ function CreatePool(db_loc) {
     })
 }
 
+module.exports.CreatePool = CreatePool;
+
 function ConnectToDB(argPool) {
     
     return new Promise (function (resolve,reject) {
@@ -35,6 +37,8 @@ function ConnectToDB(argPool) {
 	})
     })
 }
+
+module.exports.ConnectToDB = ConnectToDB;
                         
 function GoQuery(connection, query) {
 
@@ -54,6 +58,7 @@ function GoQuery(connection, query) {
 
 }
 
+module.exports.GoQuery = GoQuery;
 
 // ============================== NEW =====================================
 
