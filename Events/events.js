@@ -38,72 +38,30 @@ var TypeOf = require('type-of-is');
 
 router.get('/all2', function(req,res) {
 
-//Debug
+	//Debug
     var location = "fr"
     
 	CreatePool(location).then(currPool => {
 	ConnectToDB(currPool).then(currCon => {
 		
-		var baseStr = 'SELECT events_${location}.*, users_${location}.first_name,users_${location}.organizer_id,users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id'
-		var sql = mysql.format(baseStr, inserts)
+		var sql = 'SELECT events_${location}.*, users_${location}.first_name, users_${location}.organizer_id, users_${location}.organizer_rating FROM events_${location} INNER JOIN users_${location} ON users_${location}.organizer_id = events_${location}.organizer_id'
 		
 		GoQuery(currCon,sql).then(resultPost => {
 		
-			// On query pour obtenir tous les ratings
-			var baseStr = " SELECT user_single_rating FROM " + tableRat + " WHERE organizer_id = ? "
-			var inserts = [organizer_id]
-			var sql = mysql.format(baseStr,inserts)
-			console.log(sql)
-			GoQuery(currCon,sql).then(collectedRatings => {
-			// On clean la reponse pour avoir un array avec des integers
-			var arrRat = JSON.stringify(collectedRatings)
-			arrRat = JSON.parse(arrRat)
-			var onlyRatings = arrRat.map(curr => curr.user_single_rating);
+		var packetStr = JSON.stringify(resultPost)
+		var packetStr = JSON.parse(packetStr)
 			
-			// Calcule de la note
-			var GlobalNote = CalcGlobalRating(onlyRatings)
-			console.log(GlobalNote)
-			// On update la note globale dans user_location	
-			var baseStr = "UPDATE users_" + location + " set organizer_rating = ? WHERE organizer_id = ?"
-			var inserts = [GlobalNote,organizer_id]
-			var sql = mysql.format(baseStr,inserts)
-
-			GoQuery(currCon,sql).then(receivedPacket => {
-			// On convertie en string pour virer le OkPacket et on retransforme en JSON
-			var packetStr = JSON.stringify(receivedPacket)
-			var packetStr = JSON.parse(packetStr)
-
-			var finalConf = packetStr.affectedRows
-			
-				switch (finalConf) {
-
-					case 1: 
-						//success
-						console.log("Success on rating")
-						res.status(200).send("OK")
-						currCon.release()
-						break;
-					default :
-						res.status(200).send("Problem")
-						currCon.release()
-
-				}
-							
-			}) // GoQuery Update
 			
 
-			}) // GoQuery Collect Ratings
 
-		}) //GoQuery Insert in ratings table
+		}) //GoQuery Select
 
 	}) // GetConnection
 
 	}) // CreatePool
 
 
-
-
-})
+}) // Appget
 
 
 
