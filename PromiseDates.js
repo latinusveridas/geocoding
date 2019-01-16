@@ -51,14 +51,13 @@ app.get('/all', function (req,res) {
 		
 		var packetStr = JSON.stringify(resultPost)
 		var packetStr = JSON.parse(packetStr)
-			res.status(200).send(packetStr)
-			
-
-
+		currCon.release()
+		res.status(200).send(packetStr)
+	
 		}) //GoQuery Select
 
 	}) // GetConnection
-
+	
 	}) // CreatePool
 
 })
