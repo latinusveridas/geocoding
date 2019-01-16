@@ -25,7 +25,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
 // COMPONENTS
-var Pool = require('../Database/database');
+var DB = require('../Database/database');
 var Geo = require('../Events/events');
 
 //====DEBUG MODULES
@@ -54,7 +54,7 @@ router.get('/all',function(req,res) {
 
     var targetTable = 'sampledb.events';
 
-    Pool.selectall(targetTable, function (callback) {
+    DB.selectall(targetTable, function (callback) {
         res.send(callback)
     })
 
@@ -66,7 +66,7 @@ router.get('/innerjoin', function(req,res) {
 
     var targetQuery = 'SELECT events.*, users.first_name, events_location.latitude, events_location.longitude FROM events INNER JOIN users ON users.organizer_id = events.organizer_id INNER JOIN events_location ON events_location.event_id = events.event_id'
 
-    Pool.innerjoin(targetQuery, function (callback) {
+    DB.innerjoin(targetQuery, function (callback) {
         res.send(callback)
     })
 
@@ -122,7 +122,7 @@ router.post('/createevent', function (req,res) {
 
         //On sauve la data location dans la table events_location
         //var resTable = "events_location"
-        Pool.insertinto(resTable, locationData, function (callback) {
+        DB.insertinto(resTable, locationData, function (callback) {
 
             if (callback.affectedRows = 1) {
             isSuccessTableLocation = true
@@ -161,7 +161,7 @@ router.post('/createevent', function (req,res) {
                 ]
 
                 //On sauve la data events dans la table events
-                Pool.insertSpecific(targetTable, events_col, eventData, function (callback2) {
+                DB.insertSpecific(targetTable, events_col, eventData, function (callback2) {
             
                     if (callback2.affectedRows = 1) {
                     isSuccessTableEvents = true
@@ -183,11 +183,11 @@ router.post('/createevent', function (req,res) {
 
 
 
-                }); // Fin de pool.insertinto
+                }); // Fin de DB.insertinto
                                 
 
 
-        }); // fin de pool.insertinto table_location
+        }); // fin de DB.insertinto table_location
     
         
     }); // fin de geocodeFunction
@@ -231,7 +231,7 @@ router.post('/geo', function (req, res) {
         //console.dir(locationData)
 
         //#2 CALL DATABASE INSERTION
-        Pool.insertinto(resTable, locationData, function(callback) {
+        DB.insertinto(resTable, locationData, function(callback) {
 
             resMain.success = 1
             resMain.data = callback
