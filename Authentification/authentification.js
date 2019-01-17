@@ -398,12 +398,12 @@ router.post('/refresh', function(req,res){
 
     DB.GoQuery(currCon,sql).then(rawRes => {
 
-        if (rows.length > 0) {
-            if (rows[0].jwt1 == JWT1) {
+        if (rawRes.length > 0) {
+            if (rawRes[0].jwt1 == JWT1) {
                 console.log("in success") /////////////
                 //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                 //CREATION OF token2 (SHORT)
-                var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
+                var token2 = jwt.sign({ "password": rawRes[0].password }, 'test', { expiresIn: "120000" });
                 console.log("CONSOLE TOKEN 2 IS ", token2)
                 resMain.success = 1
                 resMain.data["JWT2"] = token2;
@@ -416,7 +416,7 @@ router.post('/refresh', function(req,res){
                 res.status(204).json(resMain)
             }
         } else {
-            console.log("Rows < 0")
+            console.log("rawRes < 0")
             resMain.error = 1
             resMain.error_description = "No token found in the DB"
             res.status(401).json(resMain)
