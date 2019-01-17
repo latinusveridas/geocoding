@@ -230,10 +230,11 @@ router.post('/login', function (req,res) {
                 var last_name = rawRes[0].last_name
                 var pic_name = rawRes[0].picture_link
 
-                var bas = `UPDATE users_${location} SET jwt1 = ? WHERE password = ? AND email = ?`
+                var bas = `UPDATE ${location}.users_${location} SET jwt1 = ? WHERE password = ? AND email = ?`
                 var inserts = [token1,pwreq,emailreq]
                 var sql = mysql.format(bas,inserts)
                 console.log(sql)
+
                 DB.GoQuery(currCon,sql).then(rawRes => {
 
                 resMain["error"] = 0;
