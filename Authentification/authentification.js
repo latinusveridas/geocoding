@@ -235,11 +235,11 @@ router.post('/login', function (req,res) {
                 var sql = mysql.format(bas,inserts)
                 console.log(sql)
 
-                DB.GoQuery(currCon,sql).then(rawRes2 => {
-                console.log(rawRes2)
+                DB.GoQuery(currCon,sql).then(rawRes => {
+
                 resMain["error"] = 0;
                 resMain["success"] = 1
-                resMain.data = rows
+                resMain.data = rawRes
                 resMain.data["JWT1"] = token1
                 resMain.data["JWT2"] = "" 
                 resMain.data["organizer_id"] = org_id
@@ -249,6 +249,7 @@ router.post('/login', function (req,res) {
                 resMain.data["pic_name"] = pic_name
                 resMain.type_data = "RowDataPackets + data"
                 res.status(200).json(resMain);
+                
                 })
 
 
