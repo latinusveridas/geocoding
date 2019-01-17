@@ -81,112 +81,6 @@ router.post('/register', function (req, res) {
 });
 
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
-/*router.post('/login', function (req, res) {
-
-    var emailreq = req.body.email;
-    var pwreq = req.body.password;
-
-    var resMain = {
-        "error": 0,
-        "error_description": "",
-        "success" : "",
-        "type_data" : "",
-        "data" : {}
-    }
-
-   DB.DB.getConnection(function (err, conn) {
-        if (err) {
-            appData["error"] = 1;
-            appData["error_description"] = "Internal Server Error";
-            res.status(500).json(resMain);
-        } else {
-            conn.query('SELECT * FROM sampledb.users WHERE email = ?', [emailreq], function (err, rows, fields) {
-                console.log("log: Request for login for email: ", emailreq);
-                if (err) {
-                    resMain["error"] = 1;
-                    resMain["error_description"] = "Error occured";
-                    res.status(400).json(resMain);
-                } else {
-                    if (rows.length > 0) {
-                        console.log("log: Email founded in the DB OK");
-                        if (rows[0].password == pwreq) {
-
-                           console.log("log: Password verification OK");
-                           // console.log("ORGANIZER_ID IS ", rows[0].organizer_id)
-
-                            //CREATION TOKEN2 = SHORT TOKEN USED FOR THE CONNECTION
-                            //var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" }); //SHORT //BASIC VALUE IN MS SO 1min = 60 000 AND 2MIN = 2*60 000
-                            //console.log("token2 short generated correctly");
-
-                            // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
-                            var salt = { "password": rows[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
-                            var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
-                            console.log("log: Token1 long generated correctly");
-
-                            resMain.error = 0;
-                            resMain.data["JWT1"] = token1;
-                            var org_id = rows[0].organizer_id
-                            var user_id = rows[0].user_id
-                            var first_name = rows[0].first_name
-                            var last_name = rows[0].last_name
-                            var pic_name = rows[0].picture_link
-                            //resMain.data["JWT2"] = token2;
-
-                            // Preparation of the query in the database
-                            SQLtoken1 = "'" + token1 + "'"
-                            SQLpwreq = "'" + pwreq+ "'"
-                            SQLemailreq = "'" + emailreq + "'"
-                            var strQuery = 'UPDATE sampledb.users SET jwt1 = ' + SQLtoken1 + ' WHERE password = ' + SQLpwreq + ' AND email = ' + SQLemailreq
-
-                            conn.query(strQuery, function (err, rows, fields) {
-                                if (err) {
-                                    resMain.error = 1
-                                    resMain.error_description = err
-                                    res.json(resMain);
-                                } else {
-                                   console.log("log: Update JWT1 OK");
-                                    resMain["error"] = 0;
-                                    resMain["success"] = 1
-                                    resMain.data = rows
-                                    resMain.data["JWT1"] = token1
-                                    resMain.data["JWT2"] = "" 
-                                    resMain.data["organizer_id"] = org_id
-                                    resMain.data["user_id"] = user_id
-                                    resMain.data["first_name"] = first_name
-                                    resMain.data["last_name"] = last_name
-                                    resMain.data["pic_name"] = pic_name
-                                    resMain.type_data = "RowDataPackets + data"
-                                    res.status(200).json(resMain);
-                                }
-                            });
-
-                            
-
-                        } else {
-                            resMain["error"] = 1;
-                            resMain.error_description = "PW does not match";
-                            res.status(204).json(resMain);
-                        }
-                    }
-                    else {
-                        resMain["error"] = 1;
-                        resMain.error_description = "email does not exists";
-                        res.status(204).json(resMain);
-                    }
-                }
-            }); //END OF QUERY SELECT EMAIL TO FIND THE USER
-
-
-            conn.release();
-
-        }
-
-        
-
-    }); 
-
-});*/
-
 router.post('/login', function (req,res) {
 
     // Debug
@@ -214,13 +108,13 @@ router.post('/login', function (req,res) {
     DB.GoQuery(currCon,sql).then(rawRes => {
 
         if (rawRes.length > 0) {
-            console.log("log: Email founded in the DB OK");
+            //console.log("log: Email founded in the DB OK");
             if (rawRes[0].password == pwreq) { 
 
                 // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
                 var salt = { "password": rawRes[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
                 var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
-                console.log("log: Token1 long generated correctly");
+                //console.log("log: Token1 long generated correctly");
 
                 resMain.error = 0;
                 resMain.data["JWT1"] = token1;
@@ -233,7 +127,7 @@ router.post('/login', function (req,res) {
                 var bas = `UPDATE ${location}.users_${location} SET jwt1 = ? WHERE password = ? AND email = ?`
                 var inserts = [token1,pwreq,emailreq]
                 var sql = mysql.format(bas,inserts)
-                console.log(sql)
+                //console.log(sql)
 
                 DB.GoQuery(currCon,sql).then(rawRes => {
 
@@ -276,94 +170,6 @@ router.post('/login', function (req,res) {
 
 
 // ============================REFRESH THE JWT 2 THROUGH THE JWT 1 POSTED AND COMPARED TO THOSE STORED IN THE DATABASE============================================================
-/*router.post('/refresh', function (req, res) {
-
-    //==========DATABASE INFORMATION=============
-    //      jwt1 field name is : jwt1
-
-    // COLLECT THE JWT1
-    var JWT1 = req.body.token1 || req.headers['jwt1'];
-
-    // == DEBUG
-    console.log("RECEIVED JWT1: ",JWT1)
-
-    // PREPARE THE RESULT
-    var result = {
-        "error": 0,
-        "errorDescription": "",
-        "jwt1": ""
-    };
-
-    var resMain = {
-        "error": 0,
-        "error_description": "",
-        "success" : "",
-        "type_data" : "",
-        "data" : {}
-    }
-
-    //console.log("AFTER THE RESULT")
-
-    // GO IN THE DATABASE
-    DB.DB.getConnection(function (err, conn) {
-        if (err) {
-            console.log("IN error 0")
-            resMain.error = 1
-            resMain.error_description = err
-            res.status(500).json(resMain);
-        } else {
-            // LAUNCH THE QUERY
-            console.log("Connection retrieved !")
-            var targetQuery = 'SELECT * FROM sampledb.users WHERE jwt1 = ' + JWT1
-            console.log("CONSOLE; TargetQuery is", targetQuery)
-            conn.query('SELECT * FROM sampledb.users WHERE jwt1 = ?', [JWT1], function (err, rows, field) {
-                if (err) {
-                    console.log("in err 1")
-                    resMain.error = 1
-                    resMain.error_description = err
-                    // ERROR ON QUERY
-                    res.status(400).json(resMain);
-                } else {
-                    // SUCCESS ON QUERY
-                    if (rows.length > 0) {
-                        if (rows[0].jwt1 == JWT1) {
-                            console.log("in success") /////////////
-                            //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
-                            //CREATION OF token2 (SHORT)
-                            var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
-                            console.log("CONSOLE TOKEN 2 IS ", token2)
-                            resMain.success = 1
-                            resMain.data["JWT2"] = token2;
-                            res.status(200).json(resMain);
-                        } else {
-                            // FAIL ON THE SEARCH OF JWT1
-                            console.log("in err 2 (fail of search")
-                            resMain["error"] = 1;
-                            resMain.data["JWT2"] = "";
-                            resMain.error_description = "No token JWT found in the DB";
-                            res.status(204).json(resMain)
-                        } 
-                    } else { 
-                        console.log("Rows < 0")
-                        resMain.error = 1
-                        resMain.error_description = "No token found in the DB"
-                        res.status(401).json(resMain)
-                    }
-
-                }
-
-
-            });
-
-            conn.release();
-
-        }
-
-
-    });
-
-});*/
-
 router.post('/refresh', function(req,res){
 
     // COLLECT THE JWT1
@@ -400,23 +206,23 @@ router.post('/refresh', function(req,res){
 
         if (rawRes.length > 0) {
             if (rawRes[0].jwt1 == JWT1) {
-                console.log("in success") /////////////
+                //console.log("in success") /////////////
                 //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
                 //CREATION OF token2 (SHORT)
                 var token2 = jwt.sign({ "password": rawRes[0].password }, 'test', { expiresIn: "120000" });
-                console.log("CONSOLE TOKEN 2 IS ", token2)
+                //console.log("CONSOLE TOKEN 2 IS ", token2)
                 resMain.success = 1
                 resMain.data["JWT2"] = token2;
                 res.status(200).json(resMain);
             } else {
-                console.log("in err 2 (fail of search")
+                //console.log("in err 2 (fail of search")
                 resMain["error"] = 1;
                 resMain.data["JWT2"] = "";
                 resMain.error_description = "No token JWT found in the DB";
                 res.status(204).json(resMain)
             }
         } else {
-            console.log("rawRes < 0")
+            //console.log("rawRes < 0")
             resMain.error = 1
             resMain.error_description = "No token found in the DB"
             res.status(401).json(resMain)
