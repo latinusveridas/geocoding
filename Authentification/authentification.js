@@ -236,7 +236,7 @@ router.post('/login', function (req,res) {
                 console.log(sql)
 
                 DB.GoQuery(currCon,sql).then(rawRes => {
-
+/////////
                 resMain["error"] = 0;
                 resMain["success"] = 1
                 resMain.data = rows
