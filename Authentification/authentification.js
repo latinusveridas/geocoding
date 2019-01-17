@@ -251,17 +251,21 @@ router.post('/login', function (req,res) {
                 console.log("here")
                 res.status(200).json(resMain);
 
-                })
+                }) // Go query
 
 
             } else {
                 resMain["error"] = 1;
                 resMain.error_description = "PW does not match";
                 res.status(204).json(resMain);
-            }
+                } 
+             }   
+            else {
             resMain["error"] = 1;
             resMain.error_description = "Email does not exists";
             res.status(204).json(resMain);
+            }
+            
         }
 
 
