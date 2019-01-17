@@ -36,10 +36,10 @@ var TypeOf = require('type-of-is');
 
 // ========================================== NEW ========================================
 
-router.get('/all2', function(req,res) {
+router.get('/innerjoin', function(req,res) {
 
 	//Debug
-    var location = "fr"
+    	var location = "fr"
     
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
@@ -48,25 +48,20 @@ router.get('/all2', function(req,res) {
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
 		
-		var packetStr = JSON.stringify(resultPost)
-		var packetStr = JSON.parse(packetStr)
-			res.status(200).send(packetStr)
-			
-
+		//var packetStr = JSON.stringify(resultPost)
+		//var packetStr = JSON.parse(packetStr)
+		res.status(200).send(resultPost)
 
 		}) //GoQuery Select
-
+	currCon.release()
 	}) // GetConnection
 
 	}) // CreatePool
 
-
 }) // Appget
 
-
-
 // ====================================================== MAIN FUNCTIONS ======================================================
-
+/*
 router.get('/all',function(req,res) {
 
     var targetTable = 'sampledb.events';
@@ -75,8 +70,8 @@ router.get('/all',function(req,res) {
         res.send(callback)
     })
 
-});
-
+});*/
+/*
 router.get('/innerjoin', function(req,res) {
 
     //var targetQuery = 'SELECT events.*,users.first_name FROM events INNER JOIN users ON users.organizer_id = events.organizer_id'
@@ -87,7 +82,7 @@ router.get('/innerjoin', function(req,res) {
         res.send(callback)
     })
 
-});
+});*/
 
 
 router.post('/createevent', function (req,res) {
