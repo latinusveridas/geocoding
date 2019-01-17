@@ -50,7 +50,7 @@ router.get('/innerjoin', function(req,res) {
 		
 		//var packetStr = JSON.stringify(resultPost)
 		//var packetStr = JSON.parse(packetStr)
-		console.log(resultPost)
+		//console.log(resultPost)
 		res.status(200).send(resultPost)
 
 		}) //GoQuery Select
