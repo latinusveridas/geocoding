@@ -8,7 +8,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 
 // COMPONENTS
-var Pool = require('../Database/database');
+var DB = require('../Database/database');
 
 //JSON WEB TOKEN
 var jwt = require('jsonwebtoken');
@@ -52,7 +52,7 @@ router.post('/register', function (req, res) {
         "data" : {}
     }
 
-    Pool.pool.getConnection(function (err, conn) {
+    DB.DB.getConnection(function (err, conn) {
         if (err) {
             resMain.error = 1;
             resMain.error_description = "Internal Server Error";
@@ -80,7 +80,7 @@ router.post('/register', function (req, res) {
 });
 
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
-router.post('/login', function (req, res) {
+/*router.post('/login', function (req, res) {
 
     var emailreq = req.body.email;
     var pwreq = req.body.password;
@@ -93,7 +93,7 @@ router.post('/login', function (req, res) {
         "data" : {}
     }
 
-   Pool.pool.getConnection(function (err, conn) {
+   DB.DB.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["error_description"] = "Internal Server Error";
@@ -184,7 +184,91 @@ router.post('/login', function (req, res) {
 
     }); 
 
-});
+});*/
+
+router.post('/login', function (req,res) {
+
+    // Debug
+    location = "fr"
+
+    var emailreq = req.body.email;
+    var pwreq = req.body.password;
+
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+    DB.CreatePool(location).then(currPool => {
+    DB.ConnectToDB(currPool).then(currCon => {
+
+    var bas = `SELECT * FROM users_${location} WHERE email = ?`
+    var inserts = [emailreq]
+    var sql = mysql.format(bas,inserts)
+    console.log(sql)
+
+    DB.GoQuery(currCon,sql).then(rawRes => {
+
+        if (rawRes.length > 0) {
+            console.log("log: Email founded in the DB OK");
+            if (rawRes[0].password == pwreq) { 
+
+                // CREATION OF TOKEN1 = LONG TOKEN USED FOR THE CONNECTION
+                var salt = { "password": rawRes[0].password + "salt" }; //SALT ADDED TO DIFFERENTIATE THE TOKEN 1 OF THE TOKEN 2
+                var token1 = jwt.sign(salt, 'test', { expiresIn: '12h' }); //LONG
+                console.log("log: Token1 long generated correctly");
+
+                resMain.error = 0;
+                resMain.data["JWT1"] = token1;
+                var org_id = rawRes[0].organizer_id
+                var user_id = rawRes[0].user_id
+                var first_name = rawRes[0].first_name
+                var last_name = rawRes[0].last_name
+                var pic_name = rawRes[0].picture_link
+
+                var bas = `UPDATE users_${location} SET jwt1 = ? WHERE password = ? AND email = ?`
+                var inserts = [token1,pwreq,emailreq]
+                var sql = mysql.format(bas,inserts)
+
+                DB.GoQuery(currCon,sql).then(rawRes => {
+
+                resMain["error"] = 0;
+                resMain["success"] = 1
+                resMain.data = rows
+                resMain.data["JWT1"] = token1
+                resMain.data["JWT2"] = "" 
+                resMain.data["organizer_id"] = org_id
+                resMain.data["user_id"] = user_id
+                resMain.data["first_name"] = first_name
+                resMain.data["last_name"] = last_name
+                resMain.data["pic_name"] = pic_name
+                resMain.type_data = "RowDataPackets + data"
+                res.status(200).json(resMain);
+                })
+
+
+            } else {
+                resMain["error"] = 1;
+                resMain.error_description = "PW does not match";
+                res.status(204).json(resMain);
+            }
+            resMain["error"] = 1;
+            resMain.error_description = "Email does not exists";
+            res.status(204).json(resMain);
+        }
+
+
+    }) // Go Query
+    currCon.release()
+    }) // Connect DB
+    }) // Create Pool
+
+
+
+})
 
 
 
@@ -218,7 +302,7 @@ router.post('/refresh', function (req, res) {
     //console.log("AFTER THE RESULT")
 
     // GO IN THE DATABASE
-    Pool.pool.getConnection(function (err, conn) {
+    DB.DB.getConnection(function (err, conn) {
         if (err) {
             console.log("IN error 0")
             resMain.error = 1
@@ -343,7 +427,7 @@ router.get('/getUsers', function (req, res) {
 
     var appData = {};
 
-    pool.getConnection(function (err, conn) {
+    DB.getConnection(function (err, conn) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
@@ -369,7 +453,7 @@ router.get('/all',function(req,res) {
 
     var targetTable = 'sampledb.events';
 
-    Pool.selectall(targetTable, function (callback) {
+    DB.selectall(targetTable, function (callback) {
         res.send(callback)
     })
 
