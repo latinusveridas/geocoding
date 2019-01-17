@@ -248,7 +248,6 @@ router.post('/login', function (req,res) {
                 resMain.data["last_name"] = last_name
                 resMain.data["pic_name"] = pic_name
                 resMain.type_data = "RowDataPackets + data"
-                console.log("here")
                 res.status(200).json(resMain);
 
                 }) // Go query
@@ -277,7 +276,7 @@ router.post('/login', function (req,res) {
 
 
 // ============================REFRESH THE JWT 2 THROUGH THE JWT 1 POSTED AND COMPARED TO THOSE STORED IN THE DATABASE============================================================
-router.post('/refresh', function (req, res) {
+/*router.post('/refresh', function (req, res) {
 
     //==========DATABASE INFORMATION=============
     //      jwt1 field name is : jwt1
@@ -363,7 +362,75 @@ router.post('/refresh', function (req, res) {
 
     });
 
-});
+});*/
+
+router.post('/refresh', function(req,res){
+
+    // COLLECT THE JWT1
+    var JWT1 = req.body.token1 || req.headers['jwt1'];
+
+    // == DEBUG
+    console.log("RECEIVED JWT1: ",JWT1)
+    var location = "fr"
+
+
+    // PREPARE THE RESULT
+    var result = {
+        "error": 0,
+        "errorDescription": "",
+        "jwt1": ""
+    };
+
+    var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    }
+
+    DB.CreatePool(location).then(currPool => {
+    DB.ConnectToDB(currPool).then(currCon => {
+
+    var bas = `SELECT * FROM users_${location} WHERE jwt1 = ?`
+    var inserts = [JWT1]
+    var sql = mysql.format(bas,inserts)
+
+    DB.GoQuery(currCon,sql).then(rawRes => {
+
+        if (rows.length > 0) {
+            if (rows[0].jwt1 == JWT1) {
+                console.log("in success") /////////////
+                //SUCCESS ON THE SEARCH OF THE TOKEN JWT1
+                //CREATION OF token2 (SHORT)
+                var token2 = jwt.sign({ "password": rows[0].password }, 'test', { expiresIn: "120000" });
+                console.log("CONSOLE TOKEN 2 IS ", token2)
+                resMain.success = 1
+                resMain.data["JWT2"] = token2;
+                res.status(200).json(resMain);
+            } else {
+                console.log("in err 2 (fail of search")
+                resMain["error"] = 1;
+                resMain.data["JWT2"] = "";
+                resMain.error_description = "No token JWT found in the DB";
+                res.status(204).json(resMain)
+            }
+        } else {
+            console.log("Rows < 0")
+            resMain.error = 1
+            resMain.error_description = "No token found in the DB"
+            res.status(401).json(resMain)
+        }
+
+    })
+    currCon.release()
+    })
+    })
+
+
+})
+
+
 
 
 ///////////////////////////////////////////////////////////////////////// PROTECTED AREA//////////////////////////////////////////////////////////////////////////////////////////
