@@ -248,8 +248,9 @@ router.post('/login', function (req,res) {
                 resMain.data["last_name"] = last_name
                 resMain.data["pic_name"] = pic_name
                 resMain.type_data = "RowDataPackets + data"
+                console.log("here")
                 res.status(200).json(resMain);
-                
+
                 })
 
 
