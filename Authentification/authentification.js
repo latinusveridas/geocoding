@@ -17,6 +17,7 @@ var cors = require('cors');
 
 var events = require('../Events/events');
 
+var mysql = require('mysql');
 
 var token;
 
