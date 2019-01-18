@@ -183,7 +183,7 @@ app.get('/book', function (req,res) {
 				
 				var packetStr = JSON.stringify(rawRes)
 				var packetStr = JSON.parse(rawRes)
-				console.log(rawRes)
+				console.log(packetStr)
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
 				console.log(onlyBoolean)
 				res.status(200).send("ok")
