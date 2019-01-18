@@ -25,7 +25,7 @@ var mysql = require('mysql');
 //RANDOM STRING
 var rdmString = require('randomstring');
 
-var DB = require('./Database/database.js')
+var DB = require('./Database/database')
 
 // DEFINE POOLING
 var pool_events = mysql.createPool({
