@@ -175,7 +175,7 @@ app.get('/book', function (req,res) {
 		console.log(resultPost)
 			if (resultPost.affectedRows == 1) {
 			
-				var bas = `SELECT still_booked FROM 01_bookings_${location} WHEN event_id = ?`
+				var bas = `SELECT still_booked FROM 01_bookings_${location} WHERE event_id = ?`
 				var inserts = [event_id]
 				var sql = mysql.format(bas,inserts)
 				console.log(sql)
