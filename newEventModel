@@ -199,7 +199,6 @@ app.get('/book', function (req,res) {
 				var bas = `UPDATE events_${location} SET nb_part_sub = ? WHERE event_id = ?` 
 				var inserts = [totalBooked, event_id]
 				var sql = mysql.format(bas,inserts)
-				console.log(sql)
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
 					if (rawRes.affectedRows == 1) {
