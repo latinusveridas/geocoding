@@ -207,6 +207,7 @@ app.get('/book', function (req,res) {
 					res.status(200).send(resMain)
 					} else {
 					resMain.error = 1
+					res.status(500).send(resMain)
 					}
 				
 				})
