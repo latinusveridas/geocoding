@@ -114,7 +114,7 @@ router.post('/orgidview', function (req,res) {
     DB.CreatePool(location).then(currPool => {
     DB.CreateConnection(currPool).then (currCon => {
         
-    var bas = `SELECT first_name, user_single_rating from users_${location} WHERE organizer_id = ?`
+    var bas = `SELECT users_${location}.first_name, users_${location}.organizer_rating, 01_ratings_users_${location}.user_comment, 01_ratings_users_${location}.single_rating FROM users_${location} WHERE organizer_id = ?`
     var inserts = [org_id]
     var sql = mysql.format(bas,inserts)
         
