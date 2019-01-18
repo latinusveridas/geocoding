@@ -88,6 +88,10 @@ router.get('/innerjoin', function(req,res) {
 
 router.post('/createevent', function (req,res) {
 
+ app.get('/createevent', function (req,res) {
+
+	var country_code_table = "fr" // <--- DEBUG
+
         var resMain = {
         "error": 0,
         "error_description": "",
@@ -104,110 +108,61 @@ router.post('/createevent', function (req,res) {
     var date = req.body.date
     var addressStr = req.body.address_string
     var location_city = "" // Will be feeded during geocoding and sent to events table
+    
+    //debug
+    sport = "sailing"
+    organizer_id = "debug_organizer_id2"
+    price = 5
+    part_max = 10
+    date = "2019-11-02"
+    addressStr = "24 Rue Rameau Clermont Ferrand"
+	
+    var colTarget = "event_id,date,sport,nb_part_sub,nb_part_max,price_per_part,organizer_id,latitude,longitude,country,city,street_name,street_number"
 
-    console.log(sport,organizer_id,price,part_max,date,addressStr,location_city)
+    //console.log("Collected from the client:",sport,organizer_id,price,part_max,date,addressStr,location_city)
     
     // Generate the event_id
     var dt = datetime.create();
     var dt = dt.format('Y_m')
     var eventID = dt + '_E_' + rdmString.generate(40) ;
-    //console.log("GENERATED EVENT_ID " + eventID) 
     
-    // Define boolean value to assess the success of each query
-    var isSuccessTableEvents = false
-    var isSuccessTableLocation = false
-
     // Geocoding closure to obtain geocoding data which will be saved in the db
-    geocodeFunction(addressStr, function (callback) {
+    geocodeFunction(addressStr).then(dictGeoResult => {
+    		
+	var valToInsrt = [
+	eventID,
+	date,
+	sport,
+	0, // <-- nb-part-sub = 0
+	part_max,
+	price,
+	organizer_id,
+	dictGeoResult.latitude,
+	dictGeoResult.longitude,
+	dictGeoResult.state,
+	dictGeoResult.city,
+	dictGeoResult.street,
+	dictGeoResult.number
+	]
+		
+	var sql = "INSERT INTO 2019_fr (" + colTarget + ") VALUES (?)"
+	var inserts = [valToInsrt];
+	sql = mysql.format(sql, inserts);
+	
+	promiseBasicQuery(sql).then(QueryResult => {
+		
+		res.status(200).send("OK")
+		
+	})	//BasicQuery
+	
 
-        //ON DEFINIE targetTable & locationData
-        var resTable = callback[0]
-        var locationData = [
-            // on geocodeFunction, the eventID is put as nil, so now its loaded is the values loaded is the db
-            "'" + eventID + "'",
-            "'" + callback[1][1] + "'",
-            "'" + callback[1][2] + "'",
-            "'" + callback[1][3] + "'",
-            "'" + callback[1][4] + "'",
-            "'" + callback[1][5] + "'",
-            "'" + callback[1][6] + "'",
-        ]
-
-        //On sauve la data location dans la table events_location
-        //var resTable = "events_location"
-        DB.insertinto(resTable, locationData, function (callback) {
-
-            if (callback.affectedRows = 1) {
-            isSuccessTableLocation = true
-            } else {
-            isSuccessTableLocation = false
-            }
-            
-        console.log("Success posting of location data : ", isSuccessTableLocation)
-            
-                // Populate location_city for events table
-                var location_city = locationData[4]
-                console.log("Location city is ",location_city)
-
-                // updating data in events table
-                var targetTable = 'sampledb.events'
-                var eventData = [
-                "'" + eventID + "'",
-                "'" + date + "'",
-                location_city,
-                "'" + sport + "'",
-                "'" + 0 + "'",
-                "'" + part_max + "'",
-                "'" + price + "'",
-                "'" + organizer_id + "'",
-                ]
-
-                var events_col = [
-                    'event_id',
-                    'date',
-                    'location',
-                    'sport',
-                    'nb_part_sub',
-                    'nb_part_max',
-                    'price_per_part',
-                    'organizer_id'
-                ]
-
-                //On sauve la data events dans la table events
-                DB.insertSpecific(targetTable, events_col, eventData, function (callback2) {
-            
-                    if (callback2.affectedRows = 1) {
-                    isSuccessTableEvents = true
-                    } else {
-                    isSuccessTableEvents = false
-                    }
-
-                    console.log("Success posting of events data : ", isSuccessTableEvents)
-                
-                    // Verification des success et renvoie de la reponse
-                    if (isSuccessTableLocation == true && isSuccessTableEvents == true) {
-                        resMain.success = 1
-                    res.status(200).json(resMain)
-                    } else {
-                        resMain.error = 1
-                        resMain.error_description = "posting failed"
-                    res.status(500).json(resMain)
-                    }
-
-
-
-                }); // Fin de DB.insertinto
-                                
-
-
-        }); // fin de DB.insertinto table_location
-    
-        
-    }); // fin de geocodeFunction
+		
+		
+	}) // geocoding
+	
+}); // createevent
         
 }); ////// fin de createevent
-
-
 
 router.post('/geo', function (req, res) {
 
