@@ -66,10 +66,25 @@ router.post('/book', function (req,res) {
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
 		
+			if (resultPost.affectedRows == 1) {
+			
+				var bas = `SELECT still_booked FROM 01_bookings_${location} WHEN event_id = ?`
+				var inserts = [event_id]
+				var sql = mysql.format(bas,inserts)
+				
+				DB.GoQuery(currCon,sql).then(rawRes => {
+				
+				console.log(rawRes)
+				res.status(200).send("ok")
+				})
+				
+			} else {
+			
+			}
 		//var packetStr = JSON.stringify(resultPost)
 		//var packetStr = JSON.parse(packetStr)
 		//console.log(resultPost)
-		res.status(200).send(resultPost)
+		
 
 		}) //GoQuery Select
 	currCon.release()
