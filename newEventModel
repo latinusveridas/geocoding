@@ -182,7 +182,7 @@ app.get('/book', function (req,res) {
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
 				var packetStr = JSON.stringify(rawRes)
-				var packetStr = JSON.parse(rawRes)
+				var packetStr = JSON.parse(packetStr)
 				console.log(packetStr)
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
 				console.log(onlyBoolean)
