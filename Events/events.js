@@ -88,7 +88,6 @@ router.get('/innerjoin', function(req,res) {
 
 router.post('/createevent', function (req,res) {
 
-
 	var country_code_table = "fr" // <--- DEBUG
 
         var resMain = {
@@ -143,26 +142,34 @@ router.post('/createevent', function (req,res) {
 	dictGeoResult.street,
 	dictGeoResult.number
 	]
-		
-	var sql = "INSERT INTO 2019_fr (" + colTarget + ") VALUES (?)"
-	var inserts = [valToInsrt];
-	sql = mysql.format(sql, inserts);
 	
-	promiseBasicQuery(sql).then(QueryResult => {
+	DB.CreatePool(country_code_table).then(currPool => {
+	DB.ConnectToDB(currPool).then(currCon => {
 		
-		res.status(200).send("OK")
-		
-	})	//BasicQuery
-	
+		var sql = `INSERT INTO events_${country_code_table}(${country_code_table}) VALUES (?)`
+		var inserts = [valToInsrt];
+		sql = mysql.format(sql, inserts);
 
+		DB.GoQuery(sql).then(QueryResult => {
+
+			if (QueryResult.affectedRows = 1) {
+			resMain.success = 1
+			res.status(200).send(resMain)
+			} else {
+			resMain.error = 1
+			resMain.error_description = "posting failed"
+			res.status(500).json(resMain)
+			}
+
+		})	// Go Query
 		
-		
+	})	 // DB con
+	currCon.release()
+	}) // DB POol
+
 	}) // geocoding
 	
-}); // createevent
-        
-}); ////// fin de createevent
-
+}) ////// fin de createevent
 router.post('/geo', function (req, res) {
 
     var resMain = {
