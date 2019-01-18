@@ -88,7 +88,6 @@ router.get('/innerjoin', function(req,res) {
 
 router.post('/createevent', function (req,res) {
 
- app.get('/createevent', function (req,res) {
 
 	var country_code_table = "fr" // <--- DEBUG
 
