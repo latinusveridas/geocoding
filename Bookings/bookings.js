@@ -18,6 +18,8 @@ router.use(bodyParser.urlencoded({ extended: false }));
 // COMPONENTS
 var DB = require('../Database/database');
 
+var mysql = require('mysql')
+
 // ================================================================================================================================
 
 router.get('/listbooking', function(req,res) {
@@ -28,7 +30,9 @@ router.get('/listbooking', function(req,res) {
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
 		
-		var sql = `SELECT * FROM 01_bookings_${location} WHERE event_id = ?`
+		var bas = `SELECT * FROM 01_bookings_${location} WHERE event_id = ?`
+		var inserts = [event_id]
+		var sql = mysql.format(bas,inserts)
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
 		
@@ -40,7 +44,5 @@ router.get('/listbooking', function(req,res) {
 		}) //GoQuery Select
 	currCon.release()
 	}) // GetConnection
-
 	}) // CreatePool
-
 }) // Appget
