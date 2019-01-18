@@ -62,29 +62,6 @@ router.get('/innerjoin', function(req,res) {
 }) // Appget
 
 // ====================================================== MAIN FUNCTIONS ======================================================
-/*
-router.get('/all',function(req,res) {
-
-    var targetTable = 'sampledb.events';
-
-    DB.selectall(targetTable, function (callback) {
-        res.send(callback)
-    })
-
-});*/
-/*
-router.get('/innerjoin', function(req,res) {
-
-    //var targetQuery = 'SELECT events.*,users.first_name FROM events INNER JOIN users ON users.organizer_id = events.organizer_id'
-
-    var targetQuery = 'SELECT events.*, users.first_name, events_location.latitude, events_location.longitude FROM events INNER JOIN users ON users.organizer_id = events.organizer_id INNER JOIN events_location ON events_location.event_id = events.event_id'
-
-    DB.innerjoin(targetQuery, function (callback) {
-        res.send(callback)
-    })
-
-});*/
-
 
 router.post('/createevent', function (req,res) {
 
@@ -170,6 +147,7 @@ router.post('/createevent', function (req,res) {
 	}) // geocoding
 	
 }) ////// fin de createevent
+
 router.post('/geo', function (req, res) {
 
     var resMain = {
