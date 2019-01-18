@@ -172,33 +172,28 @@ app.get('/book', function (req,res) {
 		var inserts = [event_id,user_id,date_booking,still_booked]
 		var inserts = [inserts]
 		var sql = mysql.format(bas,inserts)
-		console.log(sql)
+		
 		DB.GoQuery(currCon,sql).then(resultPost => {
-		console.log(resultPost)
+		
 			if (resultPost.affectedRows == 1) {
 			
 				var bas = `SELECT still_booked FROM 01_bookings_${location} WHERE event_id = ?`
 				var inserts = [event_id]
 				var sql = mysql.format(bas,inserts)
-				console.log(sql)
+				
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
 				var packetStr = JSON.stringify(rawRes)
 				var packetStr = JSON.parse(packetStr)
-				console.log(packetStr)
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
-				console.log(onlyBoolean)
 				var totalBooked = mathjs.sum(onlyBoolean)
-				console.log(totalBooked)
 				res.status(200).send("OK")
+				
 				})
 				
 			} else {
 			
 			}
-		//var packetStr = JSON.stringify(resultPost)
-		//var packetStr = JSON.parse(packetStr)
-		
 
 		}) //GoQuery Select
 	currCon.release()
