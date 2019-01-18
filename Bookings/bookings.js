@@ -47,14 +47,23 @@ router.get('/listbooking', function(req,res) {
 	}) // CreatePool
 }) // Router listbooking
 
-router.post('/book', function (req,res) {
+
+router.get('/book', function (req,res) { // <-- TO BE MOVED TO POST
 
 	//Debug
 	var location = "fr"
-	var event_id = ""
-	var user_id = ""
-	var date_booking = ""
+	var event_id = "2019_01_E_6FtMoLT1NtWL45kfnOVW3iIbpjYLmlFIGG6sdA43"
+	var user_id = "2019_01_U_quentin"
+	var date_booking = "2019-05-17 20:00:00"
 	var still_booked = 1
+	
+	var resMain = {
+        "error": 0,
+        "error_description": "",
+        "success" : "",
+        "type_data" : "",
+        "data" : {}
+    	}
 	
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
@@ -62,29 +71,46 @@ router.post('/book', function (req,res) {
 		var columns = "event_id,user_id,date_booking,still_booked"
 		var bas = `INSERT INTO 01_bookings_${location} (${columns}) VALUES (?)`
 		var inserts = [event_id,user_id,date_booking,still_booked]
+		var inserts = [inserts]
 		var sql = mysql.format(bas,inserts)
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
 		
 			if (resultPost.affectedRows == 1) {
 			
-				var bas = `SELECT still_booked FROM 01_bookings_${location} WHEN event_id = ?`
+				var bas = `SELECT still_booked FROM 01_bookings_${location} WHERE event_id = ?`
 				var inserts = [event_id]
 				var sql = mysql.format(bas,inserts)
 				
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
-				console.log(rawRes)
-				res.status(200).send("ok")
+				var packetStr = JSON.stringify(rawRes)
+				var packetStr = JSON.parse(packetStr)
+				var onlyBoolean = packetStr.map(curr => curr.still_booked);
+				var totalBooked = mathjs.sum(onlyBoolean)
+				
+				var bas = `UPDATE events_${location} SET nb_part_sub = ? WHERE event_id = ?` 
+				var inserts = [totalBooked, event_id]
+				var sql = mysql.format(bas,inserts)
+				DB.GoQuery(currCon,sql).then(rawRes => {
+				
+					if (rawRes.affectedRows == 1) {
+					resMain.success = 1
+					res.status(200).send(resMain)
+					} else {
+					resMain.error = 1
+					res.status(500).send(resMain)
+					}
+				
+				})
+				
+				
+				
 				})
 				
 			} else {
 			
 			}
-		//var packetStr = JSON.stringify(resultPost)
-		//var packetStr = JSON.parse(packetStr)
-		//console.log(resultPost)
-		
 
 		}) //GoQuery Select
 	currCon.release()
