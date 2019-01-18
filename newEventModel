@@ -189,7 +189,8 @@ app.get('/book', function (req,res) {
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
 				console.log(onlyBoolean)
 				var totalBooked = mathjs.sum(onlyBoolean)
-				res.status(200).send(totalBooked)
+				console.log(totalBooked)
+				res.status(200).send("OK")
 				})
 				
 			} else {
