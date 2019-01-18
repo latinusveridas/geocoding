@@ -187,6 +187,16 @@ app.get('/book', function (req,res) {
 				var packetStr = JSON.parse(packetStr)
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
 				var totalBooked = mathjs.sum(onlyBoolean)
+				
+				var bas = `UPDATE events_${location} SET nb_part_sub = ? WHERE event_id = ?` 
+				var inserts = [totalBooked, event_id]
+				var sql = mysql.format(bas,inserts)
+				console.log(sql)
+				DB.GoQuery(currCon,sql).then(rawRes => {
+				console.log(rawRes)
+				
+				})
+				
 				res.status(200).send("OK")
 				
 				})
