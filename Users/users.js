@@ -13,6 +13,9 @@ var datetime = require('node-datetime');
 var express = require('express');
 var router = express.Router();
 
+// MYSQL
+var mysql = require('mysql');
+
 // ====================================================== MAIN FUNCTIONS ======================================================
 
 router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
@@ -115,6 +118,10 @@ router.post('/orgidview', function (req,res) {
     var inserts = [org_id]
     var sql = mysql.format(bas,inserts)
         
+        DB.GoQuery(currCon,sql).then(rawRes => {
+        
+        
+        })
         
     })
     currCon.release()
