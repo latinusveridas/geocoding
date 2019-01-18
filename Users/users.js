@@ -1,7 +1,7 @@
 // ====================================================== MODULES & VARIABLES ======================================================
 
 //DATABASE
-var db = require('../Database/database');
+var DB = require('../Database/database');
 
 //RANDOM STRING
 var rdmString = require('randomstring');
@@ -73,7 +73,7 @@ router.get('/register', function (req, res) { //TO BE MODIFIED TO POST
     //console.dir(values)
 
     // # Launch the database insertion 
-    db.insertSpecific(table, columns, values, function(callback) {
+    DB.insertSpecific(table, columns, values, function(callback) {
         res.send(callback);
 
     });
@@ -92,7 +92,7 @@ router.get('/view', function (req, res) {
 
     var column = 'user_id';
 
-    db.selectonerow(table,column,user_id,function(callback){
+    DB.selectonerow(table,column,user_id,function(callback){
         res.send(callback)
     });
 
@@ -101,3 +101,12 @@ router.get('/view', function (req, res) {
 });
 
 module.exports = router;
+
+router.post('/orgidview', function (req,res) {
+
+    //DEBUG
+    var location = "fr"
+    var org_id = ""
+    
+    
+})
