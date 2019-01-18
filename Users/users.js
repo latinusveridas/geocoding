@@ -108,5 +108,16 @@ router.post('/orgidview', function (req,res) {
     var location = "fr"
     var org_id = ""
     
+    DB.CreatePool(location).then(currPool => {
+    DB.CreateConnection(currPool).then (currCon => {
+        
+    var bas = `SELECT first_name, user_single_rating from users_${location} WHERE organizer_id = ?`
+    var inserts = [org_id]
+    var sql = mysql.format(bas,inserts)
+        
+        
+    })
+    currCon.release()
+    })
     
 })
