@@ -172,13 +172,13 @@ app.get('/book', function (req,res) {
 		var sql = mysql.format(bas,inserts)
 		console.log(sql)
 		DB.GoQuery(currCon,sql).then(resultPost => {
-		
+		console.log(resultPost)
 			if (resultPost.affectedRows == 1) {
 			
 				var bas = `SELECT still_booked FROM 01_bookings_${location} WHEN event_id = ?`
 				var inserts = [event_id]
 				var sql = mysql.format(bas,inserts)
-				
+				console.log(sql)
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
 				console.log(rawRes)
