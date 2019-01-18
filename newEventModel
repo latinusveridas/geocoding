@@ -21,11 +21,13 @@ var dateModule = require('date-and-time');
 
 // DB
 var mysql = require('mysql');
+var DB = require('./Database/database')
 
 //RANDOM STRING
 var rdmString = require('randomstring');
 
-var DB = require('./Database/database')
+// MATH 
+var mathjs = require('mathjs');
 
 // DEFINE POOLING
 var pool_events = mysql.createPool({
@@ -186,7 +188,8 @@ app.get('/book', function (req,res) {
 				console.log(packetStr)
 				var onlyBoolean = packetStr.map(curr => curr.still_booked);
 				console.log(onlyBoolean)
-				res.status(200).send("ok")
+				var totalBooked = mathjs.sum(onlyBoolean)
+				res.status(200).send(totalBooked)
 				})
 				
 			} else {
