@@ -29,7 +29,7 @@ router.get('/listbooking', function(req,res) {
     
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
-		
+
 		var bas = `SELECT * FROM 01_bookings_${location} WHERE event_id = ?`
 		var inserts = [event_id]
 		var sql = mysql.format(bas,inserts)
@@ -51,12 +51,16 @@ router.post('/book', function (req,res) {
 
 	//Debug
 	var location = "fr"
+	var event_id = ""
+	var user_id = ""
+	var date_booking = ""
 	
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
 		
-		var bas = `INSERT INTO 01_bookings_${location} (?) VALUES (?)`
-		var inserts = [event_id]
+		var columns = "event_id,user_id,date_booking"
+		var bas = `INSERT INTO 01_bookings_${location} (${columns}) VALUES (?)`
+		var inserts = [event_id,user_id,date_booking]
 		var sql = mysql.format(bas,inserts)
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
