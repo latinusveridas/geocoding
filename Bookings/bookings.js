@@ -54,13 +54,14 @@ router.post('/book', function (req,res) {
 	var event_id = ""
 	var user_id = ""
 	var date_booking = ""
+	var still_booked = 1
 	
 	DB.CreatePool(location).then(currPool => {
 	DB.ConnectToDB(currPool).then(currCon => {
 		
-		var columns = "event_id,user_id,date_booking"
+		var columns = "event_id,user_id,date_booking,still_booked"
 		var bas = `INSERT INTO 01_bookings_${location} (${columns}) VALUES (?)`
-		var inserts = [event_id,user_id,date_booking]
+		var inserts = [event_id,user_id,date_booking,still_booked]
 		var sql = mysql.format(bas,inserts)
 		
 		DB.GoQuery(currCon,sql).then(resultPost => {
