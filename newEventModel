@@ -169,7 +169,7 @@ app.get('/book', function (req,res) {
 		var bas = `INSERT INTO 01_bookings_${location} (${columns}) VALUES (?)`
 		var inserts = [event_id,user_id,date_booking,still_booked]
 		var sql = mysql.format(bas,inserts)
-		
+		console.log(sql)
 		DB.GoQuery(currCon,sql).then(resultPost => {
 		
 			if (resultPost.affectedRows == 1) {
