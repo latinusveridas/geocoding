@@ -181,7 +181,10 @@ app.get('/book', function (req,res) {
 				console.log(sql)
 				DB.GoQuery(currCon,sql).then(rawRes => {
 				
+				var packetStr = JSON.stringify(rawRes)
+				var packetStr = JSON.parse(rawRes)
 				console.log(rawRes)
+				
 				res.status(200).send("ok")
 				})
 				
@@ -190,7 +193,6 @@ app.get('/book', function (req,res) {
 			}
 		//var packetStr = JSON.stringify(resultPost)
 		//var packetStr = JSON.parse(packetStr)
-		//console.log(resultPost)
 		
 
 		}) //GoQuery Select
