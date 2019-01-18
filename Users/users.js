@@ -119,7 +119,7 @@ router.post('/orgidview', function (req,res) {
     var sql = mysql.format(bas,inserts)
         
         DB.GoQuery(currCon,sql).then(rawRes => {
-        
+        console.log(rawRes)
         
         })
         
