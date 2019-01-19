@@ -16,7 +16,7 @@ var jwt = require('jsonwebtoken');
 var cors = require('cors');
 
 var events = require('../Events/events');
-var bookings = require('../Bookings/bookings')
+//var bookings = require('../Bookings/bookings')
 
 var mysql = require('mysql');
 
@@ -278,29 +278,10 @@ router.use(function (req, res, next) {
         res.status(401).json(resMain);
         console.log("No token provided")
     }
-});
-///////
-router.get('/protectedpage', function (req,res) {
-
-    var resMain = {
-        "error": 0,
-        "error_description": "",
-        "success" : "",
-        "type_data" : "",
-        "data" : {}
-    }
-
-resMain.success = 1
-resMain.data = {}
-
-    res.json(resMain)
-
 })
 
-
 router.use('/experlogin', events)
-router.use('/bookings', bookings)
-
+//router.use('/bookings', bookings)
 
 router.get('/getUsers', function (req, res) {
 
