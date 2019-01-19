@@ -16,6 +16,7 @@ var jwt = require('jsonwebtoken');
 var cors = require('cors');
 
 var events = require('../Events/events');
+var bookings = require('../Bookings/bookings')
 
 var mysql = require('mysql');
 
@@ -298,6 +299,7 @@ resMain.data = {}
 
 
 router.use('/experlogin', events)
+router.use('/bookings', bookings)
 
 
 router.get('/getUsers', function (req, res) {

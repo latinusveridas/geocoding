@@ -48,6 +48,36 @@ var resMain = {
     "data" : {}
 }
 
+app.get('/debug',function(req,res){
+
+	var location = "fr"
+	var event_id = "2019_01_E_6FtMoLT1NtWL45kfnOVW3iIbpjYLmlFIGG6sdA43"
+
+	DB.CreatePool(location).then(currPool => {
+	DB.ConnectToDB(currPool).then(currCon => {
+
+		// 1 . Test si booking possible
+		var bas = `SELECT nb_part_sub,nb_part_max FROM events_${location} WHERE event_id = ?`
+		var inserts = [event_id]
+		var sql = mysql.format(bas,inserts)
+
+		DB.GoQuery(currCon,sql).then(rawRes => {
+
+			if (rawRes.nb_part_sub == rawRes.nb_part_max) {
+				console.log("EGAL")
+			} else {
+				resMain.error = 1
+				resMain.error_description = "event already full"
+			}
+
+
+		})
+	})
+	})
+
+})
+
+
 app.get('/collectevents', function (req,res) {
 
 	var Code = "fr" // <--- Debug

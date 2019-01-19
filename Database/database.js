@@ -30,7 +30,7 @@ function ConnectToDB(argPool) {
         if (err) {
         console.log(err)
         } else {
-        console.log("Success to retrieve the connection")
+        //console.log("Success to retrieve the connection")
         resolve(con)
         }
             
@@ -46,8 +46,8 @@ function GoQuery(connection, query) {
 		
 		connection.query(query, function(err,result,fields) {	
 				if (err) {
+                    console.log(err)
 					return reject(err)
-					console.log(err)
 				} else {
 					return resolve(result)
 				}
