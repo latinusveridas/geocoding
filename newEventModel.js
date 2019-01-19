@@ -64,10 +64,10 @@ app.get('/debug',function(req,res){
 		DB.GoQuery(currCon,sql).then(rawRes => {
 
 			if (rawRes.nb_part_sub == rawRes.nb_part_max) {
-				console.log("EGAL")
-			} else {
 				resMain.error = 1
 				resMain.error_description = "event already full"
+			} else {
+
 			}
 
 
@@ -184,7 +184,7 @@ function PrepareAndQuery(countryCode) {
 	
 	})
 }
-
+/*
 app.get('/book', function (req,res) {
 
 	//Debug
@@ -254,7 +254,7 @@ app.get('/book', function (req,res) {
 	}) // GetConnection
 	}) // CreatePool
 
-})
+})*/
 
 // ================ SERVER LAUNCH ======================
 // Helper on port 3002

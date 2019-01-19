@@ -15,8 +15,8 @@ var jwt = require('jsonwebtoken');
 
 var cors = require('cors');
 
-var events = require('../Events/events');
-//var bookings = require('../Bookings/bookings')
+var events = require('../Events/events')
+var bookings = require('../Bookings/bookings')
 
 var mysql = require('mysql');
 
@@ -82,6 +82,7 @@ router.post('/register', function (req, res) {
 });
 
 // ======================================LOGIN WILL GENERATE TOKEN 1 & TOKEN 2 ==============================================================
+
 router.post('/login', function (req,res) {
 
     // Debug
@@ -264,24 +265,24 @@ router.use(function (req, res, next) {
     if (token) {
         jwt.verify(token, process.env.SECRET_KEY, function (err) {
             if (err) {
-                resMain.error = 1;
+                resMain.error = 1
                 resMain.error_description = "Token is invalid";
                 res.status(401).json(resMain);
                 console.log("Invalid Token, access refused")
             } else {
-                next();
+                next()
             }
         });
     } else {
-        resMain.error = 1;
-        resMain.error_description = "No token";
-        res.status(401).json(resMain);
+        resMain.error = 1
+        resMain.error_description = "No token"
+        res.status(401).json(resMain)
         console.log("No token provided")
     }
 })
 
 router.use('/experlogin', events)
-//router.use('/bookings', bookings)
+router.use('/bookings', bookings)
 
 router.get('/getUsers', function (req, res) {
 
@@ -291,33 +292,34 @@ router.get('/getUsers', function (req, res) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
-            res.status(500).json(appData);
+            res.status(500).json(appData)
         } else {
             conn.query('SELECT * FROM users', function (err, rows, field) {
                 if (!err) {
                     appData["error"] = 0;
-                    appData["data"] = rows;
-                    res.status(200).json(appData);
+                    appData["data"] = rows
+                    res.status(200).json(appData)
                 } else {
                     appData["data"] = "No data found";
-                    res.status(204).json(appData);
+                    res.status(204).json(appData)
                 }
-            });
+            })
             conn.release();
         }
-    });
+    })
 
-});
+})
 
 router.get('/all',function(req,res) {
 
-    var targetTable = 'sampledb.events';
+    var targetTable = 'sampledb.events'
 
     DB.selectall(targetTable, function (callback) {
         res.send(callback)
     })
 
-});
+})
+
+
 
 module.exports = router;
-

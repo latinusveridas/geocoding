@@ -78,6 +78,7 @@ router.get('/book', function (req,res) { // <-- TO BE MOVED TO POST
 			if (rawRes.nb_part_sub == rawRes.nb_part_max) {
 				resMain.error = 1
 				resMain.error_description = "event already full"
+				res.status(200).send(resMain)
 			} else {
 					// 2. Insertion table MONTH_bookings_LOCATION
 					var columns = "event_id,user_id,date_booking,still_booked"
@@ -106,17 +107,18 @@ router.get('/book', function (req,res) { // <-- TO BE MOVED TO POST
 							var bas = `UPDATE events_${location} SET nb_part_sub = ? WHERE event_id = ?` 
 							var inserts = [totalBooked, event_id]
 							var sql = mysql.format(bas,inserts)
-							DB.GoQuery(currCon,sql).then(rawRes => {
-							
-								if (rawRes.affectedRows == 1) {
-								resMain.success = 1
-								res.status(200).send(resMain)
-								} else {
-								resMain.error = 1
-								res.status(500).send(resMain)
-								}
-							
-							}) // Update events_LOCATION
+
+								DB.GoQuery(currCon,sql).then(rawRes => {
+								
+									if (rawRes.affectedRows == 1) {
+									resMain.success = 1
+									res.status(200).send(resMain)
+									} else {
+									resMain.error = 1
+									res.status(500).send(resMain)
+									}
+								
+								}) // Update events_LOCATION
 
 							}) // Recalc nb bookings
 							
@@ -139,3 +141,5 @@ router.get('/book', function (req,res) { // <-- TO BE MOVED TO POST
 	}) // CreatePool
 
 })
+
+module.exports = router;

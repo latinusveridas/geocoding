@@ -1,19 +1,19 @@
 // ====================================================== MODULES & VARIABLES ======================================================
 
 //GEOCODER
-var NodeGeocoder = require('node-geocoder');
+var NodeGeocoder = require('node-geocoder')
 
 //RANDOM STRING
-var rdmString = require('randomstring');
+var rdmString = require('randomstring')
 
 //DATE & TIME
-var datetime = require('node-datetime');
+var datetime = require('node-datetime')
 
 // GEOCODER - OPTIONS
 var Options = {
     provider: 'openstreetmap'
-    };
-var geocoder = NodeGeocoder(Options);
+    }
+var geocoder = NodeGeocoder(Options)
 
 // BODYPARSE
 var bodyParser = require('body-parser')
@@ -196,10 +196,6 @@ router.post('/geo', function (req, res) {
 
 });
 
-
-module.exports = router;
-
-
 // ======================================================SUB FUNCTIONS======================================================
 
 // GEOCODING
@@ -248,3 +244,6 @@ function geocodeFunction(userRequest,callback) {
 
 
 module.exports.geocodeFunction = geocodeFunction;
+
+
+module.exports = router;

@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 //BODYPARSER
-var bodyParser = require("body-parser");
+var bodyParser = require('body-parser');
 
 // EVENTS
 var events = require('./Events/events');
@@ -25,11 +25,9 @@ app.use(express.static('Public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//BOOKINGS
-var bookings = require('./Bookings/bookings')
-app.use('/bookings', bookings)
 
 //=====SERVER LAUNCH========
 app.listen(3000,function(req,res){
     console.log('SERVER ON GOING');
 });
+

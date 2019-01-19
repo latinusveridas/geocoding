@@ -103,8 +103,6 @@ router.get('/view', function (req, res) {
 
 });
 
-module.exports = router;
-
 router.post('/orgidview', function (req,res) {
 
     //DEBUG
@@ -128,3 +126,5 @@ router.post('/orgidview', function (req,res) {
     })
     
 })
+
+module.exports = router;
