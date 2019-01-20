@@ -81,7 +81,7 @@ router.post('/book', function (req,res) { // <-- TO BE MOVED TO POST
 		DB.GoQuery(currCon,sql).then(rawRes => {
 			console.log(rawRes)
 			var rawRes = JSON.stringify(rawRes)
-			var rawRes = JSON.parse(rawRes)
+			//var rawRes = JSON.parse(rawRes)
 			console.log(rawRes)
 			console.log("nb_part_sub", rawRes["nb_part_sub"])
 			console.log("nb_part_max",rawRes["nb_part_max"])
