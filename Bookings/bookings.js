@@ -109,7 +109,7 @@ router.post('/book', function (req,res) { // <-- TO BE MOVED TO POST
 							var sql = mysql.format(bas,inserts)
 							
 							DB.GoQuery(currCon,sql).then(rawRes => {
-							
+							console.log(rawRes)
 							// 4. UPDATE Table events_LOCATION
 							var packetStr = JSON.stringify(rawRes)
 							var packetStr = JSON.parse(packetStr)
