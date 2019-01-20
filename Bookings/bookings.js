@@ -83,6 +83,7 @@ router.post('/book', function (req,res) { // <-- TO BE MOVED TO POST
 			rawRes = JSON.stringify(rawRes)
 			rawRes = JSON.parse(rawRes)
 			console.log(rawRes)
+			console.log(rawRes[0])
 			console.log("nb_part_sub", rawRes.nb_part_sub)
 			console.log("nb_part_max",rawRes["nb_part_max"])
 
