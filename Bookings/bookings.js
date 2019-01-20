@@ -48,12 +48,17 @@ router.get('/listbooking', function(req,res) {
 }) // Router listbooking
 
 
-router.get('/book', function (req,res) { // <-- TO BE MOVED TO POST
+router.post('/book', function (req,res) { // <-- TO BE MOVED TO POST
 
 	//Debug
 	var location = "fr"
-	var event_id = "2019_01_E_6FtMoLT1NtWL45kfnOVW3iIbpjYLmlFIGG6sdA43"
-	var user_id = "2019_01_U_quentin"
+	//var event_id = "2019_01_E_6FtMoLT1NtWL45kfnOVW3iIbpjYLmlFIGG6sdA43"
+	//var user_id = "2019_01_U_quentin"
+	//var date_booking = "2019-05-17 20:00:00"
+	//var still_booked = 1
+
+	var event_id = req.body.event_id
+	var user_id  = req.body.user_id
 	var date_booking = "2019-05-17 20:00:00"
 	var still_booked = 1
 	
