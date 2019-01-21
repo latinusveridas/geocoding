@@ -67,7 +67,7 @@ router.post('/book', function (req,res) { // <-- TO BE MOVED TO POST
 	var resMain = {
         "error": 0,
         "error_description": "",
-        "success" : "",
+        "success" : 0,
         "type_data" : "",
         "data" : {}
     	}
