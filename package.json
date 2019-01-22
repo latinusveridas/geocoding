@@ -28,6 +28,8 @@
     "cors": "2.8.5",
     "iso-week": "0.1.2",
     "date-and-time": "0.6.3",
-    "mathjs": "5.4.1"
+    "mathjs": "5.4.1",
+    "multer": "1.4.1",
+    "path": "0.12.7"
   }
 }
