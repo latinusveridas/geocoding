@@ -31,7 +31,6 @@ var mathjs = require('mathjs');
 
 // UPLOAD
 const multer = require('multer');
-const path = require('path');
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -43,14 +42,15 @@ const storage = multer.diskStorage({
 
 // UPLOADS 
 
-// Init Upload
+// Definition of Multer options
+// We use define storage options, filefilter function et mode single
 const upload = multer({
   storage: storage,
   limits:{fileSize: 1000000},
   fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
+    checkFileType(file, cb)
   }
-}).single('myImage');
+}).single('myImage')
 
 // Check File Type
 function checkFileType(file, cb){
@@ -60,17 +60,9 @@ function checkFileType(file, cb){
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check mime
   const mimetype = filetypes.test(file.mimetype);
-
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
-  }
+  // Return value	
+  if(mimetype && extname) {return cb(null,true) } else {cb('Error: Images Only!')}
 }
-
-app.use(express.static('./public'));
-
-
 
 // DEFINE POOLING
 var pool_events = mysql.createPool({
