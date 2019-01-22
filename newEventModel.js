@@ -88,6 +88,10 @@ var resMain = {
 app.post('/upload', function (req,res) {
 
   upload(req, res, (err) => {
+  
+  var user_id = req.body.user_id
+  var file
+	  
     if(err){
       res.render('index', {
         msg: err
